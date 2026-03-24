@@ -101,7 +101,7 @@ export default function SpotlyLanding() {
       <nav className={`fixed w-full top-0 z-50 transition-all duration-500 ${scrollY > 50 ? 'bg-[#0A0A0A]/90 backdrop-blur-xl border-b border-[#333]' : 'bg-transparent'}`}>
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
           <div className="flex items-center gap-3 group cursor-pointer" onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}>
-            {/* ΝΕΟ: Λογότυπο Spotly σε στυλ App Icon (Διόρθωση padding) */}
+            {/* Λογότυπο Spotly σε στυλ App Icon */}
             <div className="w-10 h-10 rounded-[10px] overflow-hidden border border-white/10 bg-[#0a0a0a] shadow-[0_0_15px_rgba(0,230,118,0.3)] group-hover:shadow-[0_0_25px_rgba(0,230,118,0.6)] transition-all duration-300 shrink-0">
               <img 
                 src="/logo.png" 
@@ -109,13 +109,13 @@ export default function SpotlyLanding() {
                 className="w-full h-full object-cover scale-[1.02]"
               />
             </div>
-            <span className="text-2xl font-black tracking-tighter">Spotly</span>
+            <span className="text-2xl font-black tracking-tighter">Spotly<sup className="text-[10px] text-gray-500 font-bold ml-0.5">™</sup></span>
           </div>
           <div className="hidden md:flex items-center gap-8 text-sm font-bold text-gray-400">
             <a href="#how-it-works" className="hover:text-white transition-colors">Η Εμπειρία</a>
             <a href="#hosts" className="hover:text-white transition-colors">Για Ιδιοκτήτες</a>
             
-            {/* ΑΛΛΑΓΗ: Αντί για a href, βάζουμε κουμπί που ανοίγει το "Coming Soon" */}
+            {/* Κουμπί που ανοίγει το "Coming Soon" */}
             <button 
               onClick={() => setShowComingSoon(true)}
               className="bg-white/5 text-white px-6 py-2.5 rounded-full border border-white/10 hover:bg-white/10 hover:border-[#00E676]/50 transition-all active:scale-95 shadow-lg"
@@ -141,7 +141,7 @@ export default function SpotlyLanding() {
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#00E676]/20 to-transparent border border-[#00E676]/30 text-[#00E676] text-xs font-black tracking-widest uppercase mb-8 shadow-[0_0_20px_rgba(0,230,118,0.15)] relative overflow-hidden">
               <div className="absolute inset-0 bg-[#00E676] opacity-20 scanner"></div>
               <Zap className="w-4 h-4 fill-current animate-pulse relative z-10" /> 
-              {/* ΣΛΟΓΚΑΝ ΑΝΤΙ ΓΙΑ "The Parking Revolution" */}
+              {/* ΣΛΟΓΚΑΝ */}
               <span className="relative z-10">Park Smart. Earn Easy.</span>
             </div>
             
@@ -258,7 +258,7 @@ export default function SpotlyLanding() {
                     </div>
 
                     <div className="mt-auto">
-                      {/* Κουμπί που ανοίγει και αυτό το Coming Soon Modal */}
+                      {/* Κουμπί που ανοίγει το Coming Soon Modal */}
                       <button 
                         onClick={() => setShowComingSoon(true)}
                         className="w-full bg-[#00E676] text-black py-4 rounded-2xl font-black flex justify-between items-center px-5 shadow-[0_10px_20px_rgba(0,230,118,0.25)]"
@@ -423,7 +423,6 @@ export default function SpotlyLanding() {
                 </li>
               </ul>
 
-              {/* ΑΛΛΑΓΗ: Αντί για a href, βάζουμε κουμπί που ανοίγει το "Coming Soon" */}
               <button 
                 onClick={() => setShowComingSoon(true)}
                 className="inline-flex bg-white hover:bg-gray-200 text-black px-8 py-4 rounded-2xl font-black items-center gap-3 transition-transform active:scale-95 shadow-[0_0_30px_rgba(255,255,255,0.2)]"
@@ -501,7 +500,7 @@ export default function SpotlyLanding() {
                className="w-full h-full object-cover scale-[1.02]"
              />
            </div>
-           <span className="font-black tracking-tighter text-3xl text-white">Spotly</span>
+           <span className="font-black tracking-tighter text-3xl text-white">Spotly<sup className="text-sm text-gray-500 font-bold ml-1">™</sup></span>
            
            {/* ΣΛΟΓΚΑΝ ΣΤΟ FOOTER */}
            <span className="text-[#00E676] text-[10px] font-bold uppercase tracking-[0.25em] mt-2">Park Smart. Earn Easy.</span>
@@ -510,7 +509,7 @@ export default function SpotlyLanding() {
           Η στάθμευση δεν χρειάζεται να είναι πρόβλημα. Ελάτε στην κοινότητα του Spotly και ανακαλύψτε τον έξυπνο τρόπο.
         </p>
         <p className="relative z-10 text-[#444] text-[10px] font-bold uppercase tracking-widest flex items-center justify-center gap-1.5">
-          <CheckCircle2 className="w-3 h-3" /> SECURED BY STRIPE • © {new Date().getFullYear()} SPOTLY APP
+          <CheckCircle2 className="w-3 h-3" /> SECURED BY STRIPE • © {new Date().getFullYear()} SPOTLY. ALL RIGHTS RESERVED.
         </p>
       </footer>
 
@@ -525,7 +524,7 @@ export default function SpotlyLanding() {
               <X className="w-5 h-5" />
             </button>
 
-            {/* Logo με Floating & Pulse Animations & App Icon styling (Διόρθωση padding) */}
+            {/* Logo με Floating & Pulse Animations & App Icon styling */}
             <div className="relative w-28 h-28 mx-auto mb-8 animate-float">
               <div className="absolute inset-0 bg-[#00E676] opacity-20 blur-[30px] rounded-full animate-pulse"></div>
               <div className="relative z-10 w-full h-full rounded-[28px] overflow-hidden border border-white/10 bg-[#0a0a0a] shadow-[0_0_30px_rgba(0,230,118,0.4)]">
