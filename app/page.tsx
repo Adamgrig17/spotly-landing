@@ -101,12 +101,12 @@ export default function SpotlyLanding() {
       <nav className={`fixed w-full top-0 z-50 transition-all duration-500 ${scrollY > 50 ? 'bg-[#0A0A0A]/90 backdrop-blur-xl border-b border-[#333]' : 'bg-transparent'}`}>
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
           <div className="flex items-center gap-3 group cursor-pointer" onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}>
-            {/* ΝΕΟ: Λογότυπο Spotly σε στυλ App Icon */}
-            <div className="w-10 h-10 rounded-[10px] overflow-hidden border border-white/10 bg-[#121212] flex items-center justify-center p-1 shadow-[0_0_15px_rgba(0,230,118,0.3)] group-hover:shadow-[0_0_25px_rgba(0,230,118,0.6)] transition-all duration-300">
+            {/* ΝΕΟ: Λογότυπο Spotly σε στυλ App Icon (Διόρθωση padding) */}
+            <div className="w-10 h-10 rounded-[10px] overflow-hidden border border-white/10 bg-[#0a0a0a] shadow-[0_0_15px_rgba(0,230,118,0.3)] group-hover:shadow-[0_0_25px_rgba(0,230,118,0.6)] transition-all duration-300 shrink-0">
               <img 
                 src="/logo.png" 
                 alt="Spotly App Icon" 
-                className="w-full h-full object-contain"
+                className="w-full h-full object-cover scale-[1.02]"
               />
             </div>
             <span className="text-2xl font-black tracking-tighter">Spotly</span>
@@ -492,12 +492,12 @@ export default function SpotlyLanding() {
         <div className="absolute inset-0 bg-grid z-0 opacity-30 pointer-events-none"></div>
         
         <div className="relative z-10 flex flex-col items-center justify-center mb-8">
-           {/* ΝΕΟ: Λογότυπο Spotly σε στυλ App Icon στο Footer */}
-           <div className="w-16 h-16 rounded-2xl overflow-hidden border border-white/10 bg-[#121212] flex items-center justify-center p-1.5 shadow-[0_0_20px_rgba(0,230,118,0.3)] mb-4">
+           {/* ΝΕΟ: Λογότυπο Spotly σε στυλ App Icon στο Footer (Διόρθωση padding) */}
+           <div className="w-16 h-16 rounded-2xl overflow-hidden border border-white/10 bg-[#0a0a0a] shadow-[0_0_20px_rgba(0,230,118,0.3)] mb-4">
              <img 
                src="/logo.png" 
                alt="Spotly App Icon" 
-               className="w-full h-full object-contain"
+               className="w-full h-full object-cover scale-[1.02]"
              />
            </div>
            <span className="font-black tracking-tighter text-3xl text-white">Spotly</span>
@@ -521,14 +521,14 @@ export default function SpotlyLanding() {
               <X className="w-5 h-5" />
             </button>
 
-            {/* Logo με Floating & Pulse Animations & App Icon styling */}
+            {/* Logo με Floating & Pulse Animations & App Icon styling (Διόρθωση padding) */}
             <div className="relative w-28 h-28 mx-auto mb-8 animate-float">
               <div className="absolute inset-0 bg-[#00E676] opacity-20 blur-[30px] rounded-full animate-pulse"></div>
-              <div className="relative z-10 w-full h-full rounded-[28px] overflow-hidden border border-white/10 bg-[#121212] shadow-[0_0_30px_rgba(0,230,118,0.4)] flex items-center justify-center p-2.5">
+              <div className="relative z-10 w-full h-full rounded-[28px] overflow-hidden border border-white/10 bg-[#0a0a0a] shadow-[0_0_30px_rgba(0,230,118,0.4)]">
                 <img 
                   src="/logo.png" 
                   alt="Spotly App Icon" 
-                  className="w-full h-full object-contain"
+                  className="w-full h-full object-cover scale-[1.02]"
                 />
               </div>
             </div>
