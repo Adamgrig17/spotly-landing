@@ -141,7 +141,8 @@ export default function SpotlyLanding() {
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#00E676]/20 to-transparent border border-[#00E676]/30 text-[#00E676] text-xs font-black tracking-widest uppercase mb-8 shadow-[0_0_20px_rgba(0,230,118,0.15)] relative overflow-hidden">
               <div className="absolute inset-0 bg-[#00E676] opacity-20 scanner"></div>
               <Zap className="w-4 h-4 fill-current animate-pulse relative z-10" /> 
-              <span className="relative z-10">The Parking Revolution</span>
+              {/* ΣΛΟΓΚΑΝ ΑΝΤΙ ΓΙΑ "The Parking Revolution" */}
+              <span className="relative z-10">Park Smart. Earn Easy.</span>
             </div>
             
             <h1 className="text-6xl md:text-8xl font-black leading-[1.1] tracking-tighter mb-6 drop-shadow-2xl">
@@ -492,7 +493,7 @@ export default function SpotlyLanding() {
         <div className="absolute inset-0 bg-grid z-0 opacity-30 pointer-events-none"></div>
         
         <div className="relative z-10 flex flex-col items-center justify-center mb-8">
-           {/* ΝΕΟ: Λογότυπο Spotly σε στυλ App Icon στο Footer (Διόρθωση padding) */}
+           {/* Λογότυπο Spotly σε στυλ App Icon στο Footer */}
            <div className="w-16 h-16 rounded-2xl overflow-hidden border border-white/10 bg-[#0a0a0a] shadow-[0_0_20px_rgba(0,230,118,0.3)] mb-4">
              <img 
                src="/logo.png" 
@@ -501,8 +502,11 @@ export default function SpotlyLanding() {
              />
            </div>
            <span className="font-black tracking-tighter text-3xl text-white">Spotly</span>
+           
+           {/* ΣΛΟΓΚΑΝ ΣΤΟ FOOTER */}
+           <span className="text-[#00E676] text-[10px] font-bold uppercase tracking-[0.25em] mt-2">Park Smart. Earn Easy.</span>
         </div>
-        <p className="relative z-10 text-gray-500 text-sm max-w-md mx-auto mb-8 font-medium px-4">
+        <p className="relative z-10 text-gray-500 text-sm max-w-md mx-auto mb-8 font-medium px-4 mt-4">
           Η στάθμευση δεν χρειάζεται να είναι πρόβλημα. Ελάτε στην κοινότητα του Spotly και ανακαλύψτε τον έξυπνο τρόπο.
         </p>
         <p className="relative z-10 text-[#444] text-[10px] font-bold uppercase tracking-widest flex items-center justify-center gap-1.5">
