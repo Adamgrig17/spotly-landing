@@ -61,7 +61,7 @@ export async function POST(request: Request) {
           
           <p style="font-size: 14px; color: #888;">
             Φιλικά,<br>
-            <strong style="color: #fff;">Άγγελος Γρηγορόπουλος</strong><br>
+            <strong style="color: #fff;">Aδαμάντιος Γρηγορόπουλος</strong><br>
             Founder, Spotly
           </p>
           
