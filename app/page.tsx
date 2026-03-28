@@ -205,19 +205,35 @@ export default function SpotlyLanding() {
                 </button>
               </div>
 
-              {/* Μηνύματα Επιτυχίας / Σφάλματος */}
-              <div className="h-6 text-left mt-1 pl-2">
+              {/* --- ΝΕΟ PREMIUM ΜΗΝΥΜΑ ΕΠΙΤΥΧΙΑΣ (GLASSMORPHISM) --- */}
+              <div className="mt-5 h-16 w-full flex justify-center lg:justify-start">
                 {status === 'success' && (
-                  <p className="text-[#00E676] text-sm font-bold animate-fadeIn">
-                    ✅ Τέλεια! Μόλις σου στείλαμε email επιβεβαίωσης.
-                  </p>
+                  <div className="inline-flex items-center gap-4 bg-[#1A1A1A]/80 backdrop-blur-md border border-[#00E676]/30 p-3 pr-6 rounded-2xl shadow-[0_10px_30px_rgba(0,230,118,0.15)] animate-in fade-in slide-in-from-bottom-4 duration-500">
+                    <div className="relative w-10 h-10 flex items-center justify-center shrink-0">
+                      {/* Κύκλος που πάλλεται από πίσω (Ping Effect) */}
+                      <div className="absolute inset-0 bg-[#00E676] opacity-20 rounded-full animate-ping"></div>
+                      
+                      {/* Κεντρικό Icon με Λάμψη */}
+                      <div className="w-8 h-8 bg-gradient-to-tr from-[#00E676] to-[#00b35c] rounded-full flex items-center justify-center relative z-10 shadow-[0_0_15px_rgba(0,230,118,0.5)]">
+                        <CheckCircle2 className="w-5 h-5 text-black" />
+                      </div>
+                    </div>
+                    <div className="flex flex-col text-left">
+                      <span className="text-white font-black text-sm tracking-tight">Η θέση σου κατοχυρώθηκε! 🚀</span>
+                      <span className="text-[#00E676] text-[10px] font-bold uppercase tracking-widest mt-0.5">Ελεγξε τα εισερχομενα σου</span>
+                    </div>
+                  </div>
                 )}
+                
+                {/* ΝΕΟ ΜΗΝΥΜΑ ΣΦΑΛΜΑΤΟΣ */}
                 {status === 'error' && (
-                  <p className="text-red-500 text-sm font-bold animate-fadeIn">
-                    ❌ Υπήρξε ένα σφάλμα. Δοκίμασε ξανά.
-                  </p>
+                  <div className="inline-flex items-center gap-3 bg-red-500/10 border border-red-500/20 py-2 px-4 rounded-xl animate-in fade-in slide-in-from-bottom-2 duration-300">
+                    <X className="w-4 h-4 text-red-500" />
+                    <span className="text-red-500 text-sm font-bold">Κάτι πήγε στραβά. Ξαναδοκίμασε.</span>
+                  </div>
                 )}
               </div>
+
             </form>
             
             {/* Social Proof */}
