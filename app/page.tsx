@@ -1,14 +1,13 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from 'react';
-import { Car, MapPin, Zap, ShieldCheck, ArrowRight, Smartphone, Key, Navigation, Clock, Star, Wifi, Wallet, CheckCircle2, User, X } from 'lucide-react';
+import { Car, MapPin, Zap, ShieldCheck, ArrowRight, Smartphone, Key, Navigation, Clock, Star, Wifi, Wallet, CheckCircle2, User, X, Loader2 } from 'lucide-react';
 
 export default function SpotlyLanding() {
   const [email, setEmail] = useState('');
   const [scrollY, setScrollY] = useState(0);
   const [hostEarnings, setHostEarnings] = useState(0);
   const [isHoveringPhone, setIsHoveringPhone] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
   
   // ΝΕΟ STATE: Για το αναδυόμενο παράθυρο "Coming Soon"
   const [showComingSoon, setShowComingSoon] = useState(false);
@@ -48,18 +47,36 @@ export default function SpotlyLanding() {
     window.requestAnimationFrame(step);
   };
 
+  // ΝΕΟ STATE ΓΙΑ ΤΗΝ ΚΑΤΑΣΤΑΣΗ ΑΠΟΣΤΟΛΗΣ
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+
+  // Η ΣΥΝΑΡΤΗΣΗ ΠΟΥ ΚΑΛΕΙ ΤΟ API ΜΑΣ
+  const handleEarlyAccessSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus('loading');
+
+    try {
+      const res = await fetch('/api/early-access', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+
+      if (res.ok) {
+        setStatus('success');
+        setEmail(''); // Καθαρίζουμε το πεδίο
+      } else {
+        setStatus('error');
+      }
+    } catch (error) {
+      setStatus('error');
+    }
+  };
+
   // 3D Υπολογισμοί: Ομαλό, ανεπαίσθητο κούνημα με βάση το scroll.
   const phoneRotateX = Math.sin(scrollY * 0.003) * 8; 
   const phoneRotateY = Math.cos(scrollY * 0.003) * 8;
 
-  const handleWaitlistSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if(email) {
-        // Εδώ στο μέλλον μπορείς να το συνδέσεις με Supabase ή Resend για να σώζεις τα emails
-        setIsSubmitted(true);
-        setEmail('');
-    }
-  };
 
   return (
     <div className="min-h-screen bg-[#050505] text-white font-sans selection:bg-[#00E676] selection:text-black overflow-x-hidden relative">
@@ -160,30 +177,48 @@ export default function SpotlyLanding() {
               Η πρώτη και μοναδική πλατφόρμα που μετατρέπει τα κλειστά ιδιωτικά γκαράζ σε δικές σου θέσεις στάθμευσης. Κλείσε θέση εκ των προτέρων, άνοιξε την πόρτα με ένα πάτημα στο κινητό σου και ξέχασε το άγχος.
             </p>
 
-            {/* WAITLIST FORM */}
-            {!isSubmitted ? (
-                <form onSubmit={handleWaitlistSubmit} className="flex flex-col sm:flex-row items-center gap-3 max-w-md mx-auto lg:mx-0 group">
+            {/* ΝΕΑ ΦΟΡΜΑ ΠΟΥ ΚΑΛΕΙ ΤΗΝ API */}
+            <form onSubmit={handleEarlyAccessSubmit} className="flex flex-col gap-2 max-w-md mx-auto lg:mx-0 group">
+              <div className="flex flex-col sm:flex-row items-center gap-3 w-full">
                 <div className="relative w-full">
-                    <div className="absolute -inset-0.5 bg-gradient-to-r from-[#00E676] to-[#00b35c] rounded-2xl blur opacity-0 group-focus-within:opacity-30 transition duration-500"></div>
-                    <input 
+                  <div className="absolute -inset-0.5 bg-gradient-to-r from-[#00E676] to-[#00b35c] rounded-2xl blur opacity-0 group-focus-within:opacity-30 transition duration-500"></div>
+                  <input 
                     type="email" 
-                    placeholder="Το email σου..." 
                     required
-                    className="relative w-full bg-[#121212] border border-[#333] rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-[#00E676] transition-colors"
+                    disabled={status === 'loading' || status === 'success'}
+                    placeholder="Το email σου..." 
+                    className="relative w-full bg-[#121212] border border-[#333] rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-[#00E676] transition-colors disabled:opacity-50"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    />
+                  />
                 </div>
-                <button type="submit" className="w-full sm:w-auto bg-[#00E676] text-black px-8 py-4 rounded-2xl font-black whitespace-nowrap hover:bg-[#00c968] transition-all shadow-[0_0_20px_rgba(0,230,118,0.3)] hover:shadow-[0_0_40px_rgba(0,230,118,0.6)] active:scale-95 flex items-center justify-center gap-2">
-                    EARLY ACCESS <ArrowRight className="w-5 h-5" />
+                <button 
+                  type="submit"
+                  disabled={status === 'loading' || status === 'success'}
+                  className="w-full sm:w-auto bg-[#00E676] text-black px-8 py-4 rounded-2xl font-black whitespace-nowrap hover:bg-[#00c968] transition-all shadow-[0_0_20px_rgba(0,230,118,0.3)] hover:shadow-[0_0_40px_rgba(0,230,118,0.6)] active:scale-95 flex items-center justify-center gap-2 disabled:opacity-50 disabled:active:scale-100"
+                >
+                  {status === 'loading' ? (
+                    <Loader2 className="w-5 h-5 animate-spin" />
+                  ) : (
+                    <>EARLY ACCESS <ArrowRight className="w-5 h-5" /></>
+                  )}
                 </button>
-                </form>
-            ) : (
-                <div className="bg-[#00E676]/10 border border-[#00E676]/30 p-4 rounded-2xl max-w-md mx-auto lg:mx-0 flex items-center gap-3 animate-fadeIn">
-                    <CheckCircle2 className="w-6 h-6 text-[#00E676] shrink-0" />
-                    <p className="text-[#00E676] font-bold text-sm">Ευχαριστούμε! Το email σου προστέθηκε στη λίστα προτεραιότητας.</p>
-                </div>
-            )}
+              </div>
+
+              {/* Μηνύματα Επιτυχίας / Σφάλματος */}
+              <div className="h-6 text-left mt-1 pl-2">
+                {status === 'success' && (
+                  <p className="text-[#00E676] text-sm font-bold animate-fadeIn">
+                    ✅ Τέλεια! Μόλις σου στείλαμε email επιβεβαίωσης.
+                  </p>
+                )}
+                {status === 'error' && (
+                  <p className="text-red-500 text-sm font-bold animate-fadeIn">
+                    ❌ Υπήρξε ένα σφάλμα. Δοκίμασε ξανά.
+                  </p>
+                )}
+              </div>
+            </form>
             
             {/* Social Proof */}
             <div className="flex items-center justify-center lg:justify-start gap-4 mt-8">
