@@ -844,14 +844,34 @@ export default function SpotlyLanding() {
       {/* --- ΝΕΟ FAQ SECTION --- */}
       <FAQSection />
       {/* --- ΝΕΟ ULTRA-PREMIUM FOOTER --- */}
-      <footer className="relative bg-[#050505] pt-24 pb-12 overflow-hidden">
+      <footer 
+        className="relative bg-[#050505] pt-24 pb-12 overflow-hidden group"
+        onMouseMove={(e) => {
+          const rect = e.currentTarget.getBoundingClientRect();
+          e.currentTarget.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+          e.currentTarget.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+        }}
+      >
         
         {/* Εντυπωσιακό Neon Border στο πάνω μέρος που σβήνει στις άκρες */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-[1px] bg-gradient-to-r from-transparent via-[#00E676]/60 to-transparent"></div>
         
-        {/* Γιγάντιο Αχνό Watermark στο Background */}
+        {/* Γιγάντιο Αχνό Watermark στο Background (Βάση) */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[18vw] font-black text-white/[0.02] tracking-tighter pointer-events-none select-none z-0">
           SPOTLY
+        </div>
+
+        {/* ΝΕΟ: Interactive Spotlight Overlay (Ο Φακός που ακολουθεί το ποντίκι) */}
+        <div 
+          className="absolute inset-0 pointer-events-none z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700"
+          style={{
+            WebkitMaskImage: 'radial-gradient(400px circle at var(--mouse-x) var(--mouse-y), black 10%, transparent 70%)',
+            maskImage: 'radial-gradient(400px circle at var(--mouse-x) var(--mouse-y), black 10%, transparent 70%)'
+          }}
+        >
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[18vw] font-black text-[#00E676] tracking-tighter drop-shadow-[0_0_40px_rgba(0,230,118,0.5)]">
+            SPOTLY
+          </div>
         </div>
         
         {/* Background Ambient Glow */}
