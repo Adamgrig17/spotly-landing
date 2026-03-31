@@ -448,15 +448,16 @@ export default function SpotlyLanding() {
         </div>
       </nav>
 
-      {/* --- HERO SECTION --- */}
-      <section className="pt-32 pb-16 px-6 relative min-h-[90vh] flex items-center">
+      {/* --- HERO SECTION --- Responsive Padding */}
+      <section className="pt-24 sm:pt-32 pb-16 px-6 relative min-h-[90vh] flex items-center">
         {/* Dynamic Glow */}
         <div 
           className="absolute top-1/2 left-1/2 w-[800px] h-[800px] bg-[#00E676] opacity-[0.06] blur-[150px] rounded-full pointer-events-none"
           style={{ transform: `translate(-50%, -50%) translateY(${scrollY * 0.2}px)` }}
         ></div>
 
-        <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-16 relative z-10 w-full">
+        {/* Container - Reduced gap on mobile */}
+        <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-12 lg:gap-16 relative z-10 w-full">
           
           {/* Left Text */}
           <div className="flex-1 text-center lg:text-left z-20">
@@ -556,101 +557,99 @@ export default function SpotlyLanding() {
             </div>
           </div>
 
-          {/* Right Mockup (3D Smooth Floating App Preview) */}
-          <div className="flex-1 w-full max-w-md relative perspective-1000 hidden md:block">
-            {/* Radar Pulse Effect πίσω από το κινητό */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 border border-[#00E676]/30 rounded-full radar-ring"></div>
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 border border-[#00E676]/20 rounded-full radar-ring"></div>
+          {/* Right Mockup (Interactive 3D Perspective) - Responsive */}
+          <div className="flex-1 w-full max-w-[280px] sm:max-w-sm md:max-w-md relative perspective-1000 mt-16 lg:mt-0 mx-auto lg:mx-0 z-20">
+            {/* Radar Pulse Effect πίσω από το κινητό - Προσαρμοσμένο μέγεθος */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 sm:w-64 sm:h-64 border border-[#00E676]/30 rounded-full radar-ring"></div>
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 sm:w-64 sm:h-64 border border-[#00E676]/20 rounded-full radar-ring"></div>
             
-            {/* Smooth floating & scroll parallax */}
-            <div 
-              className="magnetic-mockup relative mx-auto transition-transform ease-out preserve-3d duration-1000 floating"
-              style={{ transform: `rotateX(${phoneRotateX}deg) rotateY(${phoneRotateY}deg)` }}
-            >
+            {/* ΝΕΟ: Interactive magnetic effect (X-Y Tilt) - Responsive μέγεθος */}
+            <div className="magnetic-mockup relative mx-auto preserve-3d floating transition-transform duration-200 ease-out will-change-transform">
               
-              <div className="border-gray-800 bg-[#0a0a0a] border-[12px] rounded-[3rem] h-[650px] w-[320px] shadow-[0_30px_60px_rgba(0,0,0,0.8)] overflow-hidden ring-1 ring-white/10 relative">
-                <div className="absolute top-0 inset-x-0 h-6 bg-[#0a0a0a] rounded-b-[1.5rem] w-32 mx-auto z-50"></div>
+              {/* Το Κινητό (App Preview) - Responsive Ύψος */}
+              <div className="border-gray-800 bg-[#0a0a0a] border-[8px] sm:border-[12px] rounded-[2rem] sm:rounded-[3rem] h-[500px] sm:h-[600px] md:h-[650px] w-full shadow-[0_30px_60px_rgba(0,0,0,0.8)] overflow-hidden ring-1 ring-white/10 relative mx-auto">
+                <div className="absolute top-0 inset-x-0 h-4 sm:h-6 bg-[#0a0a0a] rounded-b-[1rem] sm:rounded-b-[1.5rem] w-24 sm:w-32 mx-auto z-50"></div>
 
-                <div className="w-full h-full bg-[#121212] relative flex flex-col pt-12 px-4">
-                  <div className="absolute left-0 right-0 h-32 bg-gradient-to-b from-transparent to-[#00E676]/20 border-b border-[#00E676]/50 scanner z-40 pointer-events-none"></div>
+                <div className="w-full h-full bg-[#121212] relative flex flex-col pt-8 sm:pt-12 px-3 sm:px-4">
+                  <div className="absolute left-0 right-0 h-24 sm:h-32 bg-gradient-to-b from-transparent to-[#00E676]/20 border-b border-[#00E676]/50 scanner z-40 pointer-events-none"></div>
 
-                  {/* UI: Map Area */}
-                  <div className="w-full h-[280px] bg-[#1A1A1A] rounded-[24px] mb-4 relative overflow-hidden border border-[#222]">
-                     <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'linear-gradient(#333 1px, transparent 1px), linear-gradient(90deg, #333 1px, transparent 1px)', backgroundSize: '20px 20px' }}></div>
-                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 bg-[#00E676]/20 rounded-full blur-2xl animate-pulse"></div>
-                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#00E676] text-black font-black px-4 py-2 rounded-full text-sm flex items-center gap-1.5 shadow-[0_10px_20px_rgba(0,230,118,0.4)] transform hover:scale-110 transition-transform cursor-pointer">
-                       <Car className="w-4 h-4"/> 1.50€/30'
-                     </div>
-                     <div className="absolute bottom-10 left-10 w-4 h-4 bg-blue-500 rounded-full border-2 border-white shadow-[0_0_15px_rgba(59,130,246,0.8)]"></div>
+                  {/* UI: Map Area - Responsive Ύψος */}
+                  <div className="w-full h-[200px] sm:h-[280px] bg-[#1A1A1A] rounded-[20px] sm:rounded-[24px] mb-3 sm:mb-4 relative overflow-hidden border border-[#222]">
+                      <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'linear-gradient(#333 1px, transparent 1px), linear-gradient(90deg, #333 1px, transparent 1px)', backgroundSize: '20px 20px' }}></div>
+                      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 sm:w-40 sm:h-40 bg-[#00E676]/20 rounded-full blur-2xl animate-pulse"></div>
+                      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#00E676] text-black font-black px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm flex items-center gap-1 sm:gap-1.5 shadow-[0_10px_20px_rgba(0,230,118,0.4)] transform hover:scale-110 transition-transform cursor-pointer">
+                        <Car className="w-3.5 h-3.5 sm:w-4 sm:h-4"/> 1.50€/30'
+                      </div>
+                      <div className="absolute bottom-8 left-8 w-3 h-3 sm:w-4 sm:h-4 bg-blue-500 rounded-full border-2 border-white shadow-[0_0_15px_rgba(59,130,246,0.8)]"></div>
                   </div>
                   
-                  {/* UI: Booking Sheet */}
-                  <div className="bg-[#161616]/95 backdrop-blur-2xl rounded-[32px] border border-white/10 flex-1 p-5 shadow-2xl relative z-30 flex flex-col mb-4">
-                    <div className="w-12 h-1.5 bg-white/20 rounded-full mx-auto mb-5"></div>
+                  {/* UI: Booking Sheet - Responsive Padding & Text */}
+                  <div className="bg-[#161616]/95 backdrop-blur-2xl rounded-[28px] sm:rounded-[32px] border border-white/10 flex-1 p-4 sm:p-5 shadow-2xl relative z-30 flex flex-col mb-3 sm:mb-4 min-h-0">
+                    <div className="w-10 h-1 sm:w-12 sm:h-1.5 bg-white/20 rounded-full mx-auto mb-4 sm:mb-5 shrink-0"></div>
                     
-                    <div className="flex items-start gap-4 mb-5">
-                      <div className="w-12 h-12 bg-[#2c2c2c] rounded-2xl flex items-center justify-center border border-white/5 shadow-inner shrink-0">
-                        <Car className="w-6 h-6 text-[#00E676]/60" />
+                    <div className="flex items-start gap-3 sm:gap-4 mb-4 sm:mb-5 min-h-0">
+                      <div className="w-10 h-10 sm:w-12 sm:h-12 bg-[#2c2c2c] rounded-xl sm:rounded-2xl flex items-center justify-center border border-white/5 shadow-inner shrink-0">
+                        <Car className="w-5 h-5 sm:w-6 sm:h-6 text-[#00E676]/60" />
                       </div>
-                      <div className="flex-1 min-w-0 pr-2 pt-0.5">
-                        <h3 className="text-white font-black text-lg leading-tight flex items-center gap-1.5 truncate">
-                          Γκαράζ Συντάγματος <ShieldCheck className="w-3.5 h-3.5 text-[#00E676] shrink-0" />
+                      <div className="flex-1 min-w-0 pr-1 sm:pr-2 pt-0.5">
+                        <h3 className="text-white font-black text-base sm:text-lg leading-tight flex items-center gap-1.5 truncate">
+                          Γκαράζ Συντάγματος <ShieldCheck className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#00E676] shrink-0" />
                         </h3>
-                        <p className="text-[#888] text-[10px] mt-1 flex items-center gap-1 font-medium">
-                          <Star className="w-3 h-3 text-yellow-400 fill-current" /> 5.0 • Αθήνα
+                        <p className="text-[#888] text-[9px] sm:text-[10px] mt-0.5 sm:mt-1 flex items-center gap-1 font-medium">
+                          <Star className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-yellow-400 fill-current" /> 5.0 • Αθήνα
                         </p>
                       </div>
                     </div>
 
-                    <div className="grid grid-cols-2 gap-px bg-white/5 border border-white/5 rounded-[20px] mb-5 overflow-hidden shrink-0">
-                      <div className="bg-[#1A1A1A] p-3 flex flex-col gap-0.5">
-                        <span className="text-gray-500 text-[8px] font-black uppercase tracking-widest">Τιμη / Ωρα</span>
-                        <span className="text-white text-lg font-black">1.50<span className="text-[#00E676] ml-0.5">€</span></span>
+                    <div className="grid grid-cols-2 gap-px bg-white/5 border border-white/5 rounded-[16px] sm:rounded-[20px] mb-4 sm:mb-5 overflow-hidden shrink-0">
+                      <div className="bg-[#1A1A1A] p-2 sm:p-3 flex flex-col gap-0.5">
+                        <span className="text-gray-500 text-[7px] sm:text-[8px] font-black uppercase tracking-widest">Τιμη / Ωρα</span>
+                        <span className="text-white text-base sm:text-lg font-black">1.50<span className="text-[#00E676] ml-0.5">€</span></span>
                       </div>
-                      <div className="bg-[#1A1A1A] p-3 flex flex-col gap-0.5 items-end text-right">
-                        <span className="text-gray-500 text-[8px] font-black uppercase tracking-widest">Χρονος</span>
-                        <span className="text-white text-lg font-black">3 min</span>
+                      <div className="bg-[#1A1A1A] p-2 sm:p-3 flex flex-col gap-0.5 items-end text-right">
+                        <span className="text-gray-500 text-[7px] sm:text-[8px] font-black uppercase tracking-widest">Χρονος</span>
+                        <span className="text-white text-base sm:text-lg font-black">3 min</span>
                       </div>
                     </div>
 
-                    <div className="mt-auto">
+                    <div className="mt-auto shrink-0">
                       {/* Κουμπί που ανοίγει το Coming Soon Modal */}
                       <button 
                         onClick={() => setShowComingSoon(true)}
-                        className="w-full bg-[#00E676] text-black py-4 rounded-2xl font-black flex justify-between items-center px-5 shadow-[0_10px_20px_rgba(0,230,118,0.25)]"
+                        className="w-full bg-[#00E676] text-black py-3 sm:py-4 rounded-xl sm:rounded-2xl font-black flex justify-between items-center px-4 sm:px-5 shadow-[0_10px_20px_rgba(0,230,118,0.25)] text-xs sm:text-sm"
                       >
-                        <span className="tracking-tight uppercase text-sm">Κρατηση Τωρα</span>
-                        <ArrowRight className="w-5 h-5" />
+                        <span className="tracking-tight uppercase">Κρατηση Τωρα</span>
+                        <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
                       </button>
                     </div>
                   </div>
                 </div>
               </div>
 
-              {/* Floating Widgets */}
+              {/* Floating Widgets - Responsive Position & Scale */}
               <div 
-                className="absolute -right-8 md:-right-16 top-20 bg-[#161616]/95 backdrop-blur-xl border border-white/10 p-4 rounded-2xl shadow-2xl flex items-center gap-4 z-[100]"
-                style={{ transform: `translateZ(60px) translateY(${scrollY * -0.1}px)` }}
+                className="absolute -right-6 md:-right-16 top-16 sm:top-20 bg-[#161616]/95 backdrop-blur-xl border border-white/10 p-3 sm:p-4 rounded-xl sm:rounded-2xl shadow-2xl flex items-center gap-3 sm:gap-4 z-[100] scale-90 sm:scale-100"
+                style={{ transform: `translateZ(60px)` }}
               >
-                <div className="w-10 h-10 bg-[#00E676]/20 rounded-full flex items-center justify-center shadow-[0_0_15px_rgba(0,230,118,0.2)]">
-                  <ShieldCheck className="w-5 h-5 text-[#00E676]" />
+                <div className="w-8 h-8 sm:w-10 sm:h-10 bg-[#00E676]/20 rounded-full flex items-center justify-center shadow-[0_0_15px_rgba(0,230,118,0.2)]">
+                  <ShieldCheck className="w-4 h-4 sm:w-5 sm:h-5 text-[#00E676]" />
                 </div>
                 <div>
-                  <p className="text-white font-bold text-sm whitespace-nowrap">Ασφαλής Κράτηση</p>
-                  <p className="text-gray-400 text-xs">Verified by Stripe</p>
+                  <p className="text-white font-bold text-xs sm:text-sm whitespace-nowrap">Ασφαλής Κράτηση</p>
+                  <p className="text-gray-400 text-[10px] sm:text-xs">Verified by Stripe</p>
                 </div>
               </div>
 
               <div 
-                className="absolute -left-12 md:-left-24 bottom-32 bg-[#161616]/95 backdrop-blur-xl border border-white/10 p-4 rounded-2xl shadow-2xl flex items-center gap-3 z-[100]"
-                style={{ transform: `translateZ(80px) translateY(${scrollY * -0.05}px)` }}
+                className="absolute -left-10 md:-left-24 bottom-24 sm:bottom-32 bg-[#161616]/95 backdrop-blur-xl border border-white/10 p-3 sm:p-4 rounded-xl sm:rounded-2xl shadow-2xl flex items-center gap-2.5 sm:gap-3 z-[100] scale-90 sm:scale-100"
+                style={{ transform: `translateZ(80px)` }}
               >
-                <div className="w-10 h-10 bg-blue-500/20 rounded-full flex items-center justify-center shadow-[0_0_15px_rgba(59,130,246,0.2)]">
-                  <Key className="w-5 h-5 text-blue-400" />
+                <div className="w-8 h-8 sm:w-10 sm:h-10 bg-blue-500/20 rounded-full flex items-center justify-center shadow-[0_0_15px_rgba(59,130,246,0.2)]">
+                  <Key className="w-4 h-4 sm:w-5 sm:h-5 text-blue-400" />
                 </div>
                 <div>
-                  <p className="text-white font-bold text-sm whitespace-nowrap">Smart Entry</p>
-                  <p className="text-gray-400 text-xs whitespace-nowrap">Άνοιγμα από το App</p>
+                  <p className="text-white font-bold text-xs sm:text-sm whitespace-nowrap">Smart Entry</p>
+                  <p className="text-gray-400 text-[10px] sm:text-xs whitespace-nowrap">Άνοιγμα από το App</p>
                 </div>
               </div>
 
@@ -914,16 +913,44 @@ export default function SpotlyLanding() {
                 </div>
               </div>
 
-              {/* Social Links με SVG */}
+              {/* Social Links - Interactive & Connected */}
               <div className="flex items-center space-x-3">
-                <a href="#" className="w-10 h-10 rounded-xl bg-white/5 border border-white/5 flex items-center justify-center text-gray-400 hover:bg-[#00E676] hover:text-black transition-all duration-300 shadow-md">
+                {/* Facebook - Coming Soon */}
+                <button 
+                  onClick={() => setShowComingSoon(true)}
+                  className="w-10 h-10 rounded-xl bg-white/5 border border-white/5 flex items-center justify-center text-gray-400 hover:bg-[#00E676] hover:text-black transition-all duration-300 shadow-md group"
+                >
                   <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-                </a>
-                <a href="#" className="w-10 h-10 rounded-xl bg-white/5 border border-white/5 flex items-center justify-center text-gray-400 hover:bg-[#00E676] hover:text-black transition-all duration-300 shadow-md">
+                </button>
+
+                {/* LinkedIn - Coming Soon */}
+                <button 
+                  onClick={() => setShowComingSoon(true)}
+                  className="w-10 h-10 rounded-xl bg-white/5 border border-white/5 flex items-center justify-center text-gray-400 hover:bg-[#00E676] hover:text-black transition-all duration-300 shadow-md group"
+                >
                   <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
-                </a>
-                <a href="#" className="w-10 h-10 rounded-xl bg-white/5 border border-white/5 flex items-center justify-center text-gray-400 hover:bg-[#00E676] hover:text-black transition-all duration-300 shadow-md">
+                </button>
+
+                {/* Instagram - LIVE LINK */}
+                <a 
+                  href="https://www.instagram.com/parkspotly.official/" // <--- ΒΑΛΕ ΤΟ LINK ΣΟΥ ΕΔΩ
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-xl bg-white/5 border border-white/5 flex items-center justify-center text-gray-400 hover:bg-[#00E676] hover:text-black transition-all duration-300 shadow-md group"
+                >
                   <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                </a>
+
+                {/* TikTok - LIVE LINK */}
+                <a 
+                  href="https://www.tiktok.com/@parkspotly.official" // <--- ΒΑΛΕ ΤΟ LINK ΣΟΥ ΕΔΩ
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-xl bg-white/5 border border-white/5 flex items-center justify-center text-gray-400 hover:bg-[#00E676] hover:text-black transition-all duration-300 shadow-md group"
+                >
+                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.9-.32-1.98-.23-2.81.3a3.42 3.42 0 0 0-1.22 1.24c-.45.79-.53 1.71-.4 2.6.11.9.54 1.74 1.21 2.35.85.79 2.04 1.13 3.19.94 1.19-.15 2.27-.86 2.89-1.9.31-.5.48-1.07.51-1.65.04-3.64.02-7.28.02-10.92z"/>
+                  </svg>
                 </a>
               </div>
             </div>
