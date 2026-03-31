@@ -160,6 +160,62 @@ export default function SpotlyLanding() {
     return () => observer.disconnect();
   }, []);
 
+  // ΝΕΟ: PREMIUM EXPERIENCE ENGINE (Mouse Spotlight & 3D Tilt)
+  useEffect(() => {
+    // 1. Mouse Spotlight (Glow Tracking)
+    const cards = document.querySelectorAll<HTMLDivElement>('.spotlight-card');
+    
+    const handleMouseMoveCard = (e: MouseEvent, card: HTMLDivElement) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      card.style.setProperty('--mouse-x', `${x}px`);
+      card.style.setProperty('--mouse-y', `${y}px`);
+    };
+
+    cards.forEach(card => {
+      card.addEventListener('mousemove', (e) => handleMouseMoveCard(e, card));
+    });
+
+    // 2. Interactive 3D Mockup (Magnetic Phone)
+    const mockupContainer = document.querySelector<HTMLDivElement>('.perspective-1000');
+    const mockup = document.querySelector<HTMLDivElement>('.magnetic-mockup');
+
+    const handleMouseMoveMockup = (e: MouseEvent) => {
+      if (!mockupContainer || !mockup) return;
+      
+      const rect = mockupContainer.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+      
+      // Normalized mouse position (-1 to 1)
+      const mouseX = (e.clientX - centerX) / (rect.width / 2);
+      const mouseY = (e.clientY - centerY) / (rect.height / 2);
+      
+      // Calculate rotation (max 15 degrees)
+      const rotateX = mouseY * -15; 
+      const rotateY = mouseX * 15;
+
+      mockup.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+    };
+
+    const handleMouseLeaveMockup = () => {
+      if (!mockup) return;
+      // Smooth reset with CSS transition
+      mockup.style.transform = 'rotateX(0deg) rotateY(0deg)';
+    };
+
+    mockupContainer?.addEventListener('mousemove', handleMouseMoveMockup);
+    mockupContainer?.addEventListener('mouseleave', handleMouseLeaveMockup);
+
+    // Clean up
+    return () => {
+      cards.forEach(card => card.removeEventListener('mousemove', (e) => handleMouseMoveCard(e, card)));
+      mockupContainer?.removeEventListener('mousemove', handleMouseMoveMockup);
+      mockupContainer?.removeEventListener('mouseleave', handleMouseLeaveMockup);
+    };
+  }, []);
+
   const animateValue = (start: number, end: number, duration: number, setter: (val: number) => void) => {
     let startTimestamp: number | null = null;
     const step = (timestamp: number) => {
@@ -210,6 +266,29 @@ export default function SpotlyLanding() {
       
       {/* CUSTOM CSS FOR ANIMATIONS & GRID */}
       <style dangerouslySetInnerHTML={{__html: `
+        /* Premium Experience Styles */
+        .spotlight-card {
+          position: relative;
+        }
+        .spotlight-card::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background: radial-gradient(400px circle at var(--mouse-x, -999px) var(--mouse-y, -999px), rgba(0, 230, 118, 0.08), transparent 40%);
+          opacity: 0;
+          transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+          z-index: 1;
+          pointer-events: none;
+        }
+        .spotlight-card:hover::before {
+          opacity: 1;
+        }
+
+        .magnetic-mockup {
+          transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1); /* Very responsive */
+          will-change: transform;
+        }
+
         /* Premium Scroll Reveals */
         .reveal, .reveal-left, .reveal-right, .reveal-scale {
           opacity: 0;
@@ -226,23 +305,14 @@ export default function SpotlyLanding() {
           transform: translate(0) scale(1);
         }
 
-        /* Delays για staggered animations (το ένα μετά το άλλο) */
+        /* Delays */
         .delay-100 { transition-delay: 100ms; }
         .delay-200 { transition-delay: 200ms; }
         .delay-300 { transition-delay: 300ms; }
-        .delay-400 { transition-delay: 400ms; }
 
         @keyframes scanline { 0% { transform: translateY(-100%); } 100% { transform: translateY(200%); } }
         .scanner { animation: scanline 3s linear infinite; }
         
-        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
-        .floating { animation: float 6s ease-in-out infinite; }
-
-        @keyframes pulse-ring { 0% { transform: scale(0.8); opacity: 0.5; } 100% { transform: scale(1.5); opacity: 0; } }
-        .radar-ring { animation: pulse-ring 3s cubic-bezier(0.215, 0.61, 0.355, 1) infinite; }
-        .radar-ring:nth-child(2) { animation-delay: 1s; }
-        .radar-ring:nth-child(3) { animation-delay: 2s; }
-
         @keyframes marquee { 0% { transform: translateX(0%); } 100% { transform: translateX(-50%); } }
         .animate-marquee { display: flex; width: 200%; animation: marquee 25s linear infinite; }
 
@@ -412,7 +482,7 @@ export default function SpotlyLanding() {
             
             {/* Smooth floating & scroll parallax */}
             <div 
-              className="relative mx-auto transition-transform ease-out preserve-3d duration-1000 floating"
+              className="magnetic-mockup relative mx-auto transition-transform ease-out preserve-3d duration-1000 floating"
               style={{ transform: `rotateX(${phoneRotateX}deg) rotateY(${phoneRotateY}deg)` }}
             >
               
@@ -534,7 +604,7 @@ export default function SpotlyLanding() {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="reveal-scale bg-[#121212] p-8 rounded-[32px] border border-white/5 hover:border-[#00E676]/40 transition-all duration-300 group hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,230,118,0.05)] relative overflow-hidden">
+            <div className="spotlight-card reveal-scale bg-[#121212] p-8 rounded-[32px] border border-white/5 hover:border-[#00E676]/40 transition-all duration-300 group hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,230,118,0.05)] relative overflow-hidden">
               <div className="absolute inset-0 bg-gradient-to-br from-[#00E676]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               <div className="w-16 h-16 bg-[#1a1a1a] rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-[#00E676]/20 transition-all duration-500 border border-white/5 relative z-10">
                 <MapPin className="w-8 h-8 text-white group-hover:text-[#00E676] transition-colors" />
@@ -543,7 +613,7 @@ export default function SpotlyLanding() {
               <p className="text-gray-400 leading-relaxed relative z-10">Ο real-time χάρτης σου δείχνει μόνο τις θέσεις που είναι πραγματικά άδειες αυτή τη στιγμή, δίπλα στον προορισμό σου.</p>
             </div>
             
-            <div className="reveal-scale delay-100 bg-[#121212] p-8 rounded-[32px] border border-white/5 hover:border-[#00E676]/40 transition-all duration-300 group hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,230,118,0.05)] relative overflow-hidden mt-8 md:mt-0">
+            <div className="spotlight-card reveal-scale delay-100 bg-[#121212] p-8 rounded-[32px] border border-white/5 hover:border-[#00E676]/40 transition-all duration-300 group hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,230,118,0.05)] relative overflow-hidden mt-8 md:mt-0">
               <div className="absolute inset-0 bg-gradient-to-br from-[#00E676]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               <div className="w-16 h-16 bg-[#1a1a1a] rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-[#00E676]/20 transition-all duration-500 border border-white/5 relative z-10">
                 <Clock className="w-8 h-8 text-white group-hover:text-[#00E676] transition-colors" />
@@ -552,7 +622,7 @@ export default function SpotlyLanding() {
               <p className="text-gray-400 leading-relaxed relative z-10">Επίλεξε τον χρόνο που χρειάζεσαι. Το Spotly ελέγχει αυτόματα αν η θέση θα μείνει ελεύθερη πριν επιστρέψει ο ιδιοκτήτης.</p>
             </div>
 
-            <div className="reveal-scale delay-200 bg-[#121212] p-8 rounded-[32px] border border-white/5 hover:border-[#00E676]/40 transition-all duration-300 group hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,230,118,0.05)] relative overflow-hidden mt-16 md:mt-0">
+            <div className="spotlight-card reveal-scale delay-200 bg-[#121212] p-8 rounded-[32px] border border-white/5 hover:border-[#00E676]/40 transition-all duration-300 group hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,230,118,0.05)] relative overflow-hidden mt-16 md:mt-0">
               <div className="absolute inset-0 bg-gradient-to-br from-[#00E676]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               <div className="w-16 h-16 bg-[#1a1a1a] rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-[#00E676]/20 transition-all duration-500 border border-white/5 relative z-10">
                 <Car className="w-8 h-8 text-white group-hover:text-[#00E676] transition-colors" />
