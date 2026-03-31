@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from 'react';
-import { Car, MapPin, Zap, ShieldCheck, ArrowRight, Smartphone, Key, Navigation, Clock, Star, Wifi, Wallet, CheckCircle2, User, X, Loader2, Calendar, ChevronDown, Mail, Phone } from 'lucide-react';
+import { Car, MapPin, Zap, ShieldCheck, ArrowRight, Smartphone, Key, Navigation, Clock, Star, Wifi, Wallet, CheckCircle2, User, X, Loader2, Calendar, ChevronDown, Mail, Phone, ChevronUp } from 'lucide-react';
 
 // ============================================================================
 // COMPONENTS (FAQ)
@@ -259,6 +259,27 @@ export default function SpotlyLanding() {
       mockupContainer?.removeEventListener('mouseleave', handleMouseLeaveMockup);
     };
   }, []);
+
+  // Logic για το Back to Top κουμπί
+  const [showBackToTop, setShowBackToTop] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // Εμφανίζεται αφού ο χρήστης σκρολάρει 600px
+      if (window.scrollY > 600) {
+        setShowBackToTop(true);
+      } else {
+        setShowBackToTop(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   const animateValue = (start: number, end: number, duration: number, setter: (val: number) => void) => {
     let startTimestamp: number | null = null;
@@ -854,14 +875,18 @@ export default function SpotlyLanding() {
               {/* Fake App Badges για Premium Vibe */}
               <div className="flex flex-wrap gap-3 mb-10">
                 <div onClick={() => setShowComingSoon(true)} className="flex items-center gap-3 bg-[#121212] border border-[#222] hover:border-[#00E676]/40 px-5 py-2.5 rounded-2xl cursor-pointer transition-all hover:-translate-y-1 group shadow-lg">
-                  <svg className="w-7 h-7 text-white group-hover:text-[#00E676] transition-colors" viewBox="0 0 24 24" fill="currentColor"><path d="M16.365 21.438c-1.393.992-2.766 1.018-4.148 0-1.636-1.2-3.32-3.153-4.872-5.644-2.85-4.576-2.57-9.522.68-12.215 1.57-1.303 3.32-1.303 4.86.046 1.15.993 1.95 1.258 3.12 0 1.54-1.35 3.29-1.35 4.86-.046 1.55 1.285 2.14 3.36 1.63 6.075-.02.13-.05.26-.08.39-1.84.23-3.23 1.83-3.23 3.75 0 2.08 1.69 3.78 3.77 3.78.3 0 .59-.04.87-.1 1.01 4.14-1.2 6.82-3.24 8.23-1.12.78-2.61 1.17-4.22.73zM16.273 6.64c-.39-.99-.93-1.85-1.57-2.5-1.15-1.16-2.63-1.84-4.27-1.88-.13-1.76 1-3.51 2.82-4.31 1.77-.78 3.8-.46 5.16.82.91.86 1.52 1.99 1.76 3.24-1.66.52-3.27 2.21-3.9 4.63z"/></svg>
+                  <svg className="w-7 h-7 text-white group-hover:text-[#00E676] transition-colors" viewBox="0 0 384 512" fill="currentColor">
+                    <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/>
+                  </svg>
                   <div className="text-left">
                     <div className="text-[9px] text-gray-400 uppercase tracking-widest font-bold">Download on the</div>
                     <div className="text-base font-black text-white leading-tight">App Store</div>
                   </div>
                 </div>
                 <div onClick={() => setShowComingSoon(true)} className="flex items-center gap-3 bg-[#121212] border border-[#222] hover:border-[#00E676]/40 px-5 py-2.5 rounded-2xl cursor-pointer transition-all hover:-translate-y-1 group shadow-lg">
-                  <svg className="w-7 h-7 text-white group-hover:text-[#00E676] transition-colors" viewBox="0 0 24 24" fill="currentColor"><path d="M3.609 1.814L13.792 12 3.61 22.186a1.98 1.98 0 0 1-.587-1.42V3.234c0-.528.21-.994.586-1.42zM14.773 13.01l4.57 4.57-12.72 7.34 8.15-11.91zM22.844 10.97l-3.502-2.02-4.57 4.57 4.57 4.57 3.502-2.02a1.987 1.987 0 0 0 0-3.46l-4.29-2.48zM14.773 10.99l-8.15-11.91 12.72 7.34-4.57 4.57z"/></svg>
+                  <svg className="w-7 h-7 text-white group-hover:text-[#00E676] transition-colors" viewBox="0 0 512 512" fill="currentColor">
+                    <path d="M325.3 234.3L104.6 13l280.8 161.2-60.1 60.1zM47 0C34 6.8 25.3 19.2 25.3 35.3v441.3c0 16.1 8.7 28.5 21.7 35.3l256.6-256L47 0zm425.2 225.6l-58.9-34.1-65.7 64.5 65.7 64.5 60.1-34.1c18-14.3 18-46.5-1.2-60.8zM104.6 499l280.8-161.2-60.1-60.1L104.6 499z"/>
+                  </svg>
                   <div className="text-left">
                     <div className="text-[9px] text-gray-400 uppercase tracking-widest font-bold">GET IT ON</div>
                     <div className="text-base font-black text-white leading-tight">Google Play</div>
@@ -978,6 +1003,16 @@ export default function SpotlyLanding() {
           </div>
         </div>
       )}
+
+      {/* --- BACK TO TOP BUTTON --- */}
+      <button
+        onClick={scrollToTop}
+        className={`fixed bottom-8 right-8 z-[150] w-14 h-14 rounded-full bg-[#00E676] text-black shadow-[0_0_20px_rgba(0,230,118,0.4)] flex items-center justify-center transition-all duration-500 hover:scale-110 hover:shadow-[0_0_30px_rgba(0,230,118,0.6)] active:scale-90 ${
+          showBackToTop ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-10 scale-50 pointer-events-none'
+        }`}
+      >
+        <ChevronUp className="w-7 h-7 stroke-[3]" />
+      </button>
 
     </div>
   );
