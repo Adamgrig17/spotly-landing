@@ -104,6 +104,50 @@ const FAQSection = () => {
   );
 };
 
+// ============================================================================
+// COMPONENT: NEON GLOWING BACKGROUND PATH
+// ============================================================================
+const NeonBackgroundLine = () => (
+  <div className="absolute top-0 left-0 w-full h-[180vh] pointer-events-none z-0 overflow-hidden opacity-80">
+    <svg viewBox="0 0 1440 1200" className="absolute top-0 w-full h-full" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        {/* Το Gradient της γραμμής */}
+        <linearGradient id="neonGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#00E676" stopOpacity="0" />
+          <stop offset="20%" stopColor="#00E676" stopOpacity="1" />
+          <stop offset="80%" stopColor="#00b35c" stopOpacity="1" />
+          <stop offset="100%" stopColor="#00E676" stopOpacity="0" />
+        </linearGradient>
+        {/* Το εφέ λάμψης (Glow) */}
+        <filter id="neonGlow" x="-20%" y="-20%" width="140%" height="140%">
+          <feGaussianBlur stdDeviation="12" result="blur" />
+          <feComposite in="SourceGraphic" in2="blur" operator="over" />
+        </filter>
+      </defs>
+      
+      {/* 1. Η Διακεκομμένη Γραμμή (Οδηγός/Ράγα) πίσω-πίσω */}
+      <path 
+        d="M-100,200 C300,300 400,700 800,600 C1200,500 1300,1000 1600,900" 
+        fill="none" 
+        stroke="rgba(255, 255, 255, 0.05)" 
+        strokeWidth="2" 
+        strokeDasharray="8 12" 
+      />
+      
+      {/* 2. Η Neon Ενέργεια που τρέχει πάνω στη ράγα */}
+      <path 
+        className="neon-path-animated" 
+        d="M-100,200 C300,300 400,700 800,600 C1200,500 1300,1000 1600,900" 
+        fill="none" 
+        stroke="url(#neonGradient)" 
+        strokeWidth="3" 
+        filter="url(#neonGlow)" 
+        strokeLinecap="round"
+      />
+    </svg>
+  </div>
+);
+
 export default function SpotlyLanding() {
   const [email, setEmail] = useState('');
   const [scrollY, setScrollY] = useState(0);
@@ -322,10 +366,27 @@ export default function SpotlyLanding() {
           mask-image: radial-gradient(ellipse 80% 50% at 50% 50%, black, transparent);
           -webkit-mask-image: radial-gradient(ellipse 80% 50% at 50% 50%, black, transparent);
         }
+        /* --- NΕΟ: Neon Path Animation --- */
+        @keyframes drawNeon {
+          0% { stroke-dashoffset: 3000; }
+          100% { stroke-dashoffset: 0; }
+        }
+        .neon-path-animated {
+          stroke-dasharray: 3000;
+          stroke-dashoffset: 3000;
+          animation: drawNeon 8s linear infinite;
+        }
+        .bg-grid-fade {
+          mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+          -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+        }
       `}} />
 
       {/* Αχνό Tech Πλέγμα στο παρασκήνιο */}
       <div className="absolute inset-0 bg-grid z-0 pointer-events-none"></div>
+
+      {/* ΝΕΟ: Η Neon Γραμμή που διασχίζει την οθόνη */}
+      <NeonBackgroundLine />
 
       {/* --- HEADER --- */}
       <nav className={`fixed w-full top-0 z-50 transition-all duration-500 ${scrollY > 50 ? 'bg-[#0A0A0A]/90 backdrop-blur-xl border-b border-[#333]' : 'bg-transparent'}`}>
