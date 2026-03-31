@@ -91,7 +91,7 @@ const FAQSection = () => {
           <h3 className="text-xl font-black text-white mb-2">Έχετε ακόμα απορίες;</h3>
           <p className="text-gray-400 mb-6 text-sm">Είμαστε εδώ για να συζητήσουμε οποιαδήποτε συνεργασία ή τεχνική απορία.</p>
           <a 
-            href="ΒΑΛΕ_ΤΟ_LINK_ΣΟΥ_ΕΔΩ" // Βάλε εδώ το ίδιο link που έβαλες στο κουμπί του μενού
+            href="https://calendar.app.google/iM86XzZGJZchYixo9" // Βάλε εδώ το ίδιο link που έβαλες στο κουμπί του μενού
             target="_blank" 
             rel="noopener noreferrer" 
             className="inline-flex items-center text-[#00E676] hover:text-[#00c968] font-black text-sm uppercase tracking-widest transition-colors"
@@ -135,6 +135,30 @@ export default function SpotlyLanding() {
       window.removeEventListener('scroll', handleScroll);
     };
   }, [hostEarnings]);
+
+  // ΝΕΟ: Επαγγελματικό Scroll Reveal Animation Engine
+  useEffect(() => {
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.15 // Ενεργοποιείται όταν το 15% του στοιχείου μπει στην οθόνη
+    };
+
+    const observerCallback = (entries: IntersectionObserverEntry[], observer: IntersectionObserver) => {
+      entries.forEach((entry: IntersectionObserverEntry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target); // Το κάνει animate μόνο την πρώτη φορά
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+    const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
+    revealElements.forEach(el => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, []);
 
   const animateValue = (start: number, end: number, duration: number, setter: (val: number) => void) => {
     let startTimestamp: number | null = null;
@@ -186,9 +210,28 @@ export default function SpotlyLanding() {
       
       {/* CUSTOM CSS FOR ANIMATIONS & GRID */}
       <style dangerouslySetInnerHTML={{__html: `
-        .reveal { opacity: 0; transform: translateY(40px); transition: all 1s cubic-bezier(0.2, 0.8, 0.2, 1); }
-        .reveal.visible { opacity: 1; transform: translateY(0); }
-        
+        /* Premium Scroll Reveals */
+        .reveal, .reveal-left, .reveal-right, .reveal-scale {
+          opacity: 0;
+          will-change: transform, opacity;
+          transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal { transform: translateY(50px); }
+        .reveal-left { transform: translateX(-50px); }
+        .reveal-right { transform: translateX(50px); }
+        .reveal-scale { transform: translateY(30px) scale(0.9); }
+
+        .reveal.visible, .reveal-left.visible, .reveal-right.visible, .reveal-scale.visible {
+          opacity: 1;
+          transform: translate(0) scale(1);
+        }
+
+        /* Delays για staggered animations (το ένα μετά το άλλο) */
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; }
+        .delay-400 { transition-delay: 400ms; }
+
         @keyframes scanline { 0% { transform: translateY(-100%); } 100% { transform: translateY(200%); } }
         .scanner { animation: scanline 3s linear infinite; }
         
@@ -203,12 +246,9 @@ export default function SpotlyLanding() {
         @keyframes marquee { 0% { transform: translateX(0%); } 100% { transform: translateX(-50%); } }
         .animate-marquee { display: flex; width: 200%; animation: marquee 25s linear infinite; }
 
-        /* Tech Background Grid */
         .bg-grid {
           background-size: 50px 50px;
-          background-image: 
-            linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+          background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
           mask-image: radial-gradient(ellipse 80% 50% at 50% 50%, black, transparent);
           -webkit-mask-image: radial-gradient(ellipse 80% 50% at 50% 50%, black, transparent);
         }
@@ -494,7 +534,7 @@ export default function SpotlyLanding() {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-[#121212] p-8 rounded-[32px] border border-white/5 hover:border-[#00E676]/40 transition-all duration-300 group hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,230,118,0.05)] relative overflow-hidden">
+            <div className="reveal-scale bg-[#121212] p-8 rounded-[32px] border border-white/5 hover:border-[#00E676]/40 transition-all duration-300 group hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,230,118,0.05)] relative overflow-hidden">
               <div className="absolute inset-0 bg-gradient-to-br from-[#00E676]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               <div className="w-16 h-16 bg-[#1a1a1a] rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-[#00E676]/20 transition-all duration-500 border border-white/5 relative z-10">
                 <MapPin className="w-8 h-8 text-white group-hover:text-[#00E676] transition-colors" />
@@ -503,7 +543,7 @@ export default function SpotlyLanding() {
               <p className="text-gray-400 leading-relaxed relative z-10">Ο real-time χάρτης σου δείχνει μόνο τις θέσεις που είναι πραγματικά άδειες αυτή τη στιγμή, δίπλα στον προορισμό σου.</p>
             </div>
             
-            <div className="bg-[#121212] p-8 rounded-[32px] border border-white/5 hover:border-[#00E676]/40 transition-all duration-300 group hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,230,118,0.05)] relative overflow-hidden mt-8 md:mt-0">
+            <div className="reveal-scale delay-100 bg-[#121212] p-8 rounded-[32px] border border-white/5 hover:border-[#00E676]/40 transition-all duration-300 group hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,230,118,0.05)] relative overflow-hidden mt-8 md:mt-0">
               <div className="absolute inset-0 bg-gradient-to-br from-[#00E676]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               <div className="w-16 h-16 bg-[#1a1a1a] rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-[#00E676]/20 transition-all duration-500 border border-white/5 relative z-10">
                 <Clock className="w-8 h-8 text-white group-hover:text-[#00E676] transition-colors" />
@@ -512,7 +552,7 @@ export default function SpotlyLanding() {
               <p className="text-gray-400 leading-relaxed relative z-10">Επίλεξε τον χρόνο που χρειάζεσαι. Το Spotly ελέγχει αυτόματα αν η θέση θα μείνει ελεύθερη πριν επιστρέψει ο ιδιοκτήτης.</p>
             </div>
 
-            <div className="bg-[#121212] p-8 rounded-[32px] border border-white/5 hover:border-[#00E676]/40 transition-all duration-300 group hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,230,118,0.05)] relative overflow-hidden mt-16 md:mt-0">
+            <div className="reveal-scale delay-200 bg-[#121212] p-8 rounded-[32px] border border-white/5 hover:border-[#00E676]/40 transition-all duration-300 group hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,230,118,0.05)] relative overflow-hidden mt-16 md:mt-0">
               <div className="absolute inset-0 bg-gradient-to-br from-[#00E676]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               <div className="w-16 h-16 bg-[#1a1a1a] rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-[#00E676]/20 transition-all duration-500 border border-white/5 relative z-10">
                 <Car className="w-8 h-8 text-white group-hover:text-[#00E676] transition-colors" />
@@ -547,7 +587,7 @@ export default function SpotlyLanding() {
               </p>
               
               <ul className="space-y-8 mb-12">
-                <li className="flex items-start gap-5 group">
+                <li className="reveal-left flex items-start gap-5 group">
                   <div className="w-12 h-12 rounded-2xl bg-[#1A1A1A] border border-[#333] group-hover:border-[#00E676]/50 flex items-center justify-center shrink-0 shadow-lg transition-colors relative overflow-hidden">
                     <div className="absolute inset-0 bg-[#00E676] opacity-0 group-hover:opacity-10 transition-opacity"></div>
                     <Wifi className="w-6 h-6 text-[#00E676] relative z-10 group-hover:scale-110 transition-transform" />
@@ -560,7 +600,7 @@ export default function SpotlyLanding() {
                   </div>
                 </li>
 
-                <li className="flex items-start gap-5 group">
+                <li className="reveal-left delay-100 flex items-start gap-5 group">
                   <div className="w-12 h-12 rounded-2xl bg-[#1A1A1A] border border-[#333] group-hover:border-[#00E676]/50 flex items-center justify-center shrink-0 shadow-lg transition-colors relative overflow-hidden">
                     <div className="absolute inset-0 bg-[#00E676] opacity-0 group-hover:opacity-10 transition-opacity"></div>
                     <Smartphone className="w-6 h-6 text-[#00E676] relative z-10 group-hover:scale-110 transition-transform" />
@@ -573,7 +613,7 @@ export default function SpotlyLanding() {
                   </div>
                 </li>
 
-                <li className="flex items-start gap-5 group">
+                <li className="reveal-left delay-200 flex items-start gap-5 group">
                   <div className="w-12 h-12 rounded-2xl bg-[#1A1A1A] border border-[#333] group-hover:border-[#00E676]/50 flex items-center justify-center shrink-0 shadow-lg transition-colors relative overflow-hidden">
                     <div className="absolute inset-0 bg-[#00E676] opacity-0 group-hover:opacity-10 transition-opacity"></div>
                     <Wallet className="w-6 h-6 text-[#00E676] relative z-10 group-hover:scale-110 transition-transform" />
