@@ -822,74 +822,100 @@ export default function SpotlyLanding() {
       </section>
       {/* --- ΝΕΟ FAQ SECTION --- */}
       <FAQSection />
-      {/* --- ΝΕΟ ΕΠΑΓΓΕΛΜΑΤΙΚΟ FOOTER --- */}
-      <footer className="relative bg-[#050505] border-t border-[#222] pt-20 pb-10 overflow-hidden">
-        {/* Background Glow */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-2xl h-32 bg-[#00E676]/5 blur-[100px] pointer-events-none"></div>
+      {/* --- ΝΕΟ ULTRA-PREMIUM FOOTER --- */}
+      <footer className="relative bg-[#050505] pt-24 pb-12 overflow-hidden">
+        
+        {/* Εντυπωσιακό Neon Border στο πάνω μέρος που σβήνει στις άκρες */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-[1px] bg-gradient-to-r from-transparent via-[#00E676]/60 to-transparent"></div>
+        
+        {/* Γιγάντιο Αχνό Watermark στο Background */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[18vw] font-black text-white/[0.02] tracking-tighter pointer-events-none select-none z-0">
+          SPOTLY
+        </div>
+        
+        {/* Background Ambient Glow */}
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-2xl h-64 bg-[#00E676]/5 blur-[120px] pointer-events-none z-0"></div>
         
         <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-8 mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-8 mb-20">
             
-            {/* Left Column: Logo & Text */}
-            <div className="md:col-span-5 lg:col-span-4">
+            {/* Στήλη 1: Brand, Text & App Badges */}
+            <div className="md:col-span-5 lg:col-span-5">
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 rounded-[10px] overflow-hidden border border-white/10 bg-[#0a0a0a] shadow-[0_0_15px_rgba(0,230,118,0.3)] shrink-0">
-                  <img 
-                    src="/logo.png" 
-                    alt="Spotly App Icon" 
-                    className="w-full h-full object-cover scale-[1.02]"
-                  />
+                <div className="w-12 h-12 rounded-xl overflow-hidden border border-white/10 bg-[#0a0a0a] shadow-[0_0_20px_rgba(0,230,118,0.2)] shrink-0">
+                  <img src="/logo.png" alt="Spotly App Icon" className="w-full h-full object-cover scale-[1.02]" />
                 </div>
-                <span className="font-black tracking-tighter text-2xl text-white">Spotly<sup className="text-sm text-gray-500 font-bold ml-1">™</sup></span>
+                <span className="font-black tracking-tighter text-3xl text-white">Spotly<sup className="text-sm text-[#00E676] font-bold ml-1">™</sup></span>
               </div>
-              <p className="text-gray-400 leading-relaxed mb-6 text-sm max-w-sm">
-                Η στάθμευση δεν χρειάζεται να είναι πρόβλημα. Επαναπροσδιορίζουμε τον τρόπο που ανακαλύπτετε και διαχειρίζεστε τους χώρους σας.
+              <p className="text-gray-400 leading-relaxed mb-8 text-sm max-w-sm">
+                Η στάθμευση στη νέα εποχή. Επαναπροσδιορίζουμε τον τρόπο που ανακαλύπτετε, διαχειρίζεστε και μοιράζεστε τους χώρους σας.
               </p>
-              {/* Social Links */}
+              
+              {/* Fake App Badges για Premium Vibe */}
+              <div className="flex flex-wrap gap-3 mb-10">
+                <div onClick={() => setShowComingSoon(true)} className="flex items-center gap-3 bg-[#121212] border border-[#222] hover:border-[#00E676]/40 px-5 py-2.5 rounded-2xl cursor-pointer transition-all hover:-translate-y-1 group shadow-lg">
+                  <svg className="w-7 h-7 text-white group-hover:text-[#00E676] transition-colors" viewBox="0 0 24 24" fill="currentColor"><path d="M16.365 21.438c-1.393.992-2.766 1.018-4.148 0-1.636-1.2-3.32-3.153-4.872-5.644-2.85-4.576-2.57-9.522.68-12.215 1.57-1.303 3.32-1.303 4.86.046 1.15.993 1.95 1.258 3.12 0 1.54-1.35 3.29-1.35 4.86-.046 1.55 1.285 2.14 3.36 1.63 6.075-.02.13-.05.26-.08.39-1.84.23-3.23 1.83-3.23 3.75 0 2.08 1.69 3.78 3.77 3.78.3 0 .59-.04.87-.1 1.01 4.14-1.2 6.82-3.24 8.23-1.12.78-2.61 1.17-4.22.73zM16.273 6.64c-.39-.99-.93-1.85-1.57-2.5-1.15-1.16-2.63-1.84-4.27-1.88-.13-1.76 1-3.51 2.82-4.31 1.77-.78 3.8-.46 5.16.82.91.86 1.52 1.99 1.76 3.24-1.66.52-3.27 2.21-3.9 4.63z"/></svg>
+                  <div className="text-left">
+                    <div className="text-[9px] text-gray-400 uppercase tracking-widest font-bold">Download on the</div>
+                    <div className="text-base font-black text-white leading-tight">App Store</div>
+                  </div>
+                </div>
+                <div onClick={() => setShowComingSoon(true)} className="flex items-center gap-3 bg-[#121212] border border-[#222] hover:border-[#00E676]/40 px-5 py-2.5 rounded-2xl cursor-pointer transition-all hover:-translate-y-1 group shadow-lg">
+                  <svg className="w-7 h-7 text-white group-hover:text-[#00E676] transition-colors" viewBox="0 0 24 24" fill="currentColor"><path d="M3.609 1.814L13.792 12 3.61 22.186a1.98 1.98 0 0 1-.587-1.42V3.234c0-.528.21-.994.586-1.42zM14.773 13.01l4.57 4.57-12.72 7.34 8.15-11.91zM22.844 10.97l-3.502-2.02-4.57 4.57 4.57 4.57 3.502-2.02a1.987 1.987 0 0 0 0-3.46l-4.29-2.48zM14.773 10.99l-8.15-11.91 12.72 7.34-4.57 4.57z"/></svg>
+                  <div className="text-left">
+                    <div className="text-[9px] text-gray-400 uppercase tracking-widest font-bold">GET IT ON</div>
+                    <div className="text-base font-black text-white leading-tight">Google Play</div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Social Links με SVG */}
               <div className="flex items-center space-x-3">
-                {/* Facebook */}
-                <a href="#" className="w-10 h-10 rounded-xl bg-[#121212] border border-[#222] flex items-center justify-center text-gray-400 hover:border-[#00E676]/50 hover:text-[#00E676] transition-all duration-300">
+                <a href="#" className="w-10 h-10 rounded-xl bg-white/5 border border-white/5 flex items-center justify-center text-gray-400 hover:bg-[#00E676] hover:text-black transition-all duration-300 shadow-md">
                   <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
                 </a>
-                {/* LinkedIn */}
-                <a href="#" className="w-10 h-10 rounded-xl bg-[#121212] border border-[#222] flex items-center justify-center text-gray-400 hover:border-[#00E676]/50 hover:text-[#00E676] transition-all duration-300">
+                <a href="#" className="w-10 h-10 rounded-xl bg-white/5 border border-white/5 flex items-center justify-center text-gray-400 hover:bg-[#00E676] hover:text-black transition-all duration-300 shadow-md">
                   <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
                 </a>
-                {/* Instagram */}
-                <a href="#" className="w-10 h-10 rounded-xl bg-[#121212] border border-[#222] flex items-center justify-center text-gray-400 hover:border-[#00E676]/50 hover:text-[#00E676] transition-all duration-300">
+                <a href="#" className="w-10 h-10 rounded-xl bg-white/5 border border-white/5 flex items-center justify-center text-gray-400 hover:bg-[#00E676] hover:text-black transition-all duration-300 shadow-md">
                   <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
                 </a>
               </div>
             </div>
 
-            {/* Spacer column for larger screens */}
-            <div className="hidden lg:block lg:col-span-2"></div>
+            <div className="hidden lg:block lg:col-span-1"></div>
 
-            {/* Middle Column: Links */}
+            {/* Στήλη 2: Πλοήγηση (Με Hover Effects) */}
             <div className="md:col-span-3 lg:col-span-2">
               <h4 className="text-white font-black mb-6 uppercase tracking-widest text-xs">Πλοηγηση</h4>
               <ul className="space-y-4 text-sm font-medium">
-                <li><a href="#" className="text-gray-400 hover:text-[#00E676] transition-colors">Αρχική</a></li>
-                <li><a href="#how-it-works" className="text-gray-400 hover:text-[#00E676] transition-colors">Η Εμπειρία</a></li>
-                <li><a href="#hosts" className="text-gray-400 hover:text-[#00E676] transition-colors">Για Ιδιοκτήτες</a></li>
-                <li><a href="#faq" className="text-gray-400 hover:text-[#00E676] transition-colors">Συχνές Ερωτήσεις</a></li>
+                <li><a href="#" className="group flex items-center text-gray-400 hover:text-[#00E676] transition-colors"><ArrowRight className="w-3 h-3 mr-2 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" /> Αρχική</a></li>
+                <li><a href="#how-it-works" className="group flex items-center text-gray-400 hover:text-[#00E676] transition-colors"><ArrowRight className="w-3 h-3 mr-2 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" /> Η Εμπειρία</a></li>
+                <li><a href="#hosts" className="group flex items-center text-gray-400 hover:text-[#00E676] transition-colors"><ArrowRight className="w-3 h-3 mr-2 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" /> Για Ιδιοκτήτες</a></li>
+                <li><a href="#faq" className="group flex items-center text-gray-400 hover:text-[#00E676] transition-colors"><ArrowRight className="w-3 h-3 mr-2 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" /> Συχνές Ερωτήσεις</a></li>
               </ul>
             </div>
 
-            {/* Right Column: Contact Info */}
+            {/* Στήλη 3: Επικοινωνία */}
             <div className="md:col-span-4 lg:col-span-4">
               <h4 className="text-white font-black mb-6 uppercase tracking-widest text-xs">Επικοινωνια</h4>
-              <ul className="space-y-4 text-sm font-medium">
-                <li className="flex items-start">
-                  <Mail className="w-5 h-5 text-[#00E676] mr-3 shrink-0" />
+              <ul className="space-y-5 text-sm font-medium bg-[#121212]/50 p-6 rounded-3xl border border-white/5 backdrop-blur-sm">
+                <li className="flex items-center group">
+                  <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center mr-4 group-hover:bg-[#00E676]/20 transition-colors">
+                    <Mail className="w-4 h-4 text-[#00E676]" />
+                  </div>
                   <a href="mailto:info@parkspotly.gr" className="text-gray-400 hover:text-white transition-colors">info@parkspotly.gr</a>
                 </li>
-                <li className="flex items-start">
-                  <Phone className="w-5 h-5 text-[#00E676] mr-3 shrink-0" />
+                <li className="flex items-center group">
+                  <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center mr-4 group-hover:bg-[#00E676]/20 transition-colors">
+                    <Phone className="w-4 h-4 text-[#00E676]" />
+                  </div>
                   <a href="tel:+306900000000" className="text-gray-400 hover:text-white transition-colors">Kαλέστε μας</a>
                 </li>
-                <li className="flex items-start">
-                  <MapPin className="w-5 h-5 text-[#00E676] mr-3 shrink-0" />
+                <li className="flex items-center group">
+                  <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center mr-4 group-hover:bg-[#00E676]/20 transition-colors">
+                    <MapPin className="w-4 h-4 text-[#00E676]" />
+                  </div>
                   <span className="text-gray-400">Αθήνα, Ελλάδα</span>
                 </li>
               </ul>
@@ -897,14 +923,14 @@ export default function SpotlyLanding() {
             
           </div>
 
-          {/* Bottom Bar */}
-          <div className="pt-8 border-t border-[#222] flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-gray-600 text-xs font-bold uppercase tracking-widest flex items-center justify-center gap-1.5">
-              <CheckCircle2 className="w-3 h-3 text-[#00E676]" /> SECURED BY STRIPE • © {new Date().getFullYear()} SPOTLY
+          {/* Bottom Bar: Copyright & Legal */}
+          <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6">
+            <p className="text-gray-500 text-xs font-bold uppercase tracking-widest flex items-center justify-center gap-2">
+              <CheckCircle2 className="w-4 h-4 text-[#00E676]" /> SECURED BY STRIPE <span className="text-[#333] hidden sm:inline">|</span> © {new Date().getFullYear()} SPOTLY INC.
             </p>
-            <div className="flex space-x-6 text-xs font-bold text-gray-500 uppercase tracking-widest">
-              <a href="/privacy" className="hover:text-white transition-colors">Οροι Χρησης</a>
-              <a href="/privacy" className="hover:text-white transition-colors">Πολιτικη Απορρητου</a>
+            <div className="flex space-x-8 text-[10px] font-black text-gray-600 uppercase tracking-[0.2em]">
+              <a href="/terms" className="hover:text-[#00E676] transition-colors">Οροι Χρησης</a>
+              <a href="/privacy" className="hover:text-[#00E676] transition-colors">Πολιτικη Απορρητου</a>
             </div>
           </div>
         </div>
