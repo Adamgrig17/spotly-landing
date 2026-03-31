@@ -206,6 +206,8 @@ export default function SpotlyLanding() {
 
   // ΝΕΟ: PREMIUM EXPERIENCE ENGINE (Mouse Spotlight & 3D Tilt)
   useEffect(() => {
+    // Μην τρέχεις τα βαριά εφέ αν η οθόνη είναι κινητό (< 1024px)
+    if (window.innerWidth < 1024) return;
     // 1. Mouse Spotlight (Glow Tracking)
     const cards = document.querySelectorAll<HTMLDivElement>('.spotlight-card');
     
@@ -406,8 +408,10 @@ export default function SpotlyLanding() {
       {/* Αχνό Tech Πλέγμα στο παρασκήνιο */}
       <div className="absolute inset-0 bg-grid z-0 pointer-events-none"></div>
 
-      {/* ΝΕΟ: Η Neon Γραμμή που διασχίζει την οθόνη */}
-      <NeonBackgroundLine />
+      {/* Εμφάνιση μόνο σε μεγάλες οθόνες (lg) για αποφυγή lag */}
+      <div className="hidden lg:block">
+        <NeonBackgroundLine />
+      </div>
 
       {/* --- HEADER --- */}
       <nav className={`fixed w-full top-0 z-50 transition-all duration-500 ${scrollY > 50 ? 'bg-[#0A0A0A]/90 backdrop-blur-xl border-b border-[#333]' : 'bg-transparent'}`}>
@@ -558,7 +562,7 @@ export default function SpotlyLanding() {
           </div>
 
           {/* Right Mockup (Interactive 3D Perspective) - Responsive */}
-          <div className="flex-1 w-full max-w-[280px] sm:max-w-sm md:max-w-md relative perspective-1000 mt-16 lg:mt-0 mx-auto lg:mx-0 z-20">
+          <div className="flex-1 w-full max-w-[260px] sm:max-w-[300px] lg:max-w-[320px] relative perspective-1000 mt-12 lg:mt-0 mx-auto lg:mx-0 z-20">
             {/* Radar Pulse Effect πίσω από το κινητό - Προσαρμοσμένο μέγεθος */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 sm:w-64 sm:h-64 border border-[#00E676]/30 rounded-full radar-ring"></div>
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 sm:w-64 sm:h-64 border border-[#00E676]/20 rounded-full radar-ring"></div>
