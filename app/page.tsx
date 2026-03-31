@@ -1,7 +1,108 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from 'react';
-import { Car, MapPin, Zap, ShieldCheck, ArrowRight, Smartphone, Key, Navigation, Clock, Star, Wifi, Wallet, CheckCircle2, User, X, Loader2 } from 'lucide-react';
+import { Car, MapPin, Zap, ShieldCheck, ArrowRight, Smartphone, Key, Navigation, Clock, Star, Wifi, Wallet, CheckCircle2, User, X, Loader2, Calendar, ChevronDown, Mail, Phone } from 'lucide-react';
+
+// ============================================================================
+// COMPONENTS (FAQ)
+// ============================================================================
+
+interface FAQItemProps {
+  question: string;
+  answer: string;
+  isOpen: boolean;
+  onClick: () => void;
+}
+
+const FAQItem = ({ question, answer, isOpen, onClick }: FAQItemProps) => {
+  return (
+    <div className="border border-white/5 rounded-2xl bg-[#121212] overflow-hidden transition-all duration-300 hover:border-[#00E676]/30">
+      <button
+        className="w-full px-6 py-5 flex justify-between items-center focus:outline-none group"
+        onClick={onClick}
+      >
+        <span className="font-medium text-left text-white text-lg group-hover:text-[#00E676] transition-colors">{question}</span>
+        <ChevronDown 
+          className={`w-5 h-5 text-[#00E676] transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} 
+        />
+      </button>
+      <div 
+        className={`transition-all duration-300 ease-in-out ${
+          isOpen ? 'max-h-48 opacity-100' : 'max-h-0 opacity-0'
+        }`}
+      >
+        <div className="px-6 pb-5 text-gray-400 leading-relaxed">
+          {answer}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const FAQSection = () => {
+  const [openIndex, setOpenIndex] = useState(0); // Η πρώτη ερώτηση είναι ανοιχτή by default
+
+  const faqs = [
+    {
+      question: "Τι ακριβώς είναι το Spotly;",
+      answer: "Το Spotly είναι η πρώτη πλατφόρμα στην Ελλάδα που μετατρέπει ιδιωτικά γκαράζ σε άμεσα προσβάσιμες θέσεις στάθμευσης. Μέσω της εφαρμογής, μπορείς να βρεις, να κλείσεις και να ανοίξεις την πόρτα του γκαράζ απευθείας από το κινητό σου, χωρίς να ψάχνεις."
+    },
+    {
+      question: "Πώς λειτουργεί για τους ιδιοκτήτες (Hosts);",
+      answer: "Αν έχεις άδεια θέση ή γκαράζ, τοποθετούμε έναν απλό μηχανισμό (plug & play) στην πόρτα σου με ελάχιστο κόστος. Εσύ ορίζεις το πρόγραμμά σου (π.χ. όταν λείπεις στη δουλειά) και η θέση ενοικιάζεται αυτόματα, αποφέροντάς σου εγγυημένο παθητικό εισόδημα μέσω Stripe."
+    },
+    {
+      question: "Πώς μπορώ να κλείσω ένα ραντεβού (Let's Talk);",
+      answer: "Πολύ απλά! Πατώντας το κουμπί 'Ας Μιλήσουμε' στο πάνω μέρος της σελίδας, θα μεταφερθείτε στο περιβάλλον του Workspace μας για να διαλέξετε την ημέρα και ώρα που σας εξυπηρετεί για ένα απευθείας video call μαζί μας."
+    },
+    {
+      question: "Πότε θα κυκλοφορήσει επίσημα η εφαρμογή;",
+      answer: "Αυτή τη στιγμή βρισκόμαστε σε φάση κλειστής δοκιμής (Beta). Συμπληρώνοντας το email σας στην αρχική οθόνη (Early Access), θα είστε από τους πρώτους που θα αποκτήσουν πρόσβαση και αποκλειστικά προνόμια κατά το λανσάρισμα."
+    }
+  ];
+
+  return (
+    <section id="faq" className="py-32 relative bg-[#050505] border-t border-[#111]">
+      <div className="max-w-3xl mx-auto px-6 relative z-10">
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-gray-300 text-xs font-bold uppercase tracking-widest mb-6">
+            <ShieldCheck className="w-3 h-3 text-[#00E676]" /> Υποστήριξη
+          </div>
+          <h2 className="text-4xl md:text-5xl font-black text-white mb-4 tracking-tight">
+            Συχνές <span className="text-[#00E676]">Ερωτήσεις</span>
+          </h2>
+          <p className="text-gray-400 text-lg">Λύστε όλες σας τις απορίες σχετικά με τη νέα εποχή του parking.</p>
+        </div>
+        
+        <div className="space-y-4">
+          {faqs.map((faq, index) => (
+            <FAQItem 
+              key={index}
+              question={faq.question}
+              answer={faq.answer}
+              isOpen={openIndex === index}
+              onClick={() => setOpenIndex(openIndex === index ? -1 : index)}
+            />
+          ))}
+        </div>
+        
+        {/* Extra CTA Card */}
+        <div className="mt-12 text-center bg-[#121212] border border-[#222] rounded-[32px] p-8 shadow-xl">
+          <h3 className="text-xl font-black text-white mb-2">Έχετε ακόμα απορίες;</h3>
+          <p className="text-gray-400 mb-6 text-sm">Είμαστε εδώ για να συζητήσουμε οποιαδήποτε συνεργασία ή τεχνική απορία.</p>
+          <a 
+            href="ΒΑΛΕ_ΤΟ_LINK_ΣΟΥ_ΕΔΩ" // Βάλε εδώ το ίδιο link που έβαλες στο κουμπί του μενού
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="inline-flex items-center text-[#00E676] hover:text-[#00c968] font-black text-sm uppercase tracking-widest transition-colors"
+          >
+            Ας Μιλησουμε <ArrowRight className="w-4 h-4 ml-2" />
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+};
 
 export default function SpotlyLanding() {
   const [email, setEmail] = useState('');
@@ -77,6 +178,8 @@ export default function SpotlyLanding() {
   const phoneRotateX = Math.sin(scrollY * 0.003) * 8; 
   const phoneRotateY = Math.cos(scrollY * 0.003) * 8;
 
+  
+
 
   return (
     <div className="min-h-screen bg-[#050505] text-white font-sans selection:bg-[#00E676] selection:text-black overflow-x-hidden relative">
@@ -132,6 +235,16 @@ export default function SpotlyLanding() {
             <a href="#how-it-works" className="hover:text-white transition-colors">Η Εμπειρία</a>
             <a href="#hosts" className="hover:text-white transition-colors">Για Ιδιοκτήτες</a>
             
+            {/* ΝΕΟ: Κουμπί Let's Talk */}
+            <a 
+              href="https://calendar.app.google/MWcpcvhhjxUb7RmP6" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 bg-gradient-to-r from-[#00E676] to-[#00b35c] text-black px-5 py-2.5 rounded-full font-black text-sm hover:shadow-[0_0_20px_rgba(0,230,118,0.4)] hover:scale-105 active:scale-95 transition-all"
+            >
+              <Calendar className="w-4 h-4" /> Ας Μιλήσουμε
+            </a>
+
             {/* Κουμπί που ανοίγει το "Coming Soon" */}
             <button 
               onClick={() => setShowComingSoon(true)}
@@ -536,32 +649,94 @@ export default function SpotlyLanding() {
           </div>
         </div>
       </section>
-
-      {/* --- FOOTER --- */}
-      <footer className="border-t border-[#222] py-16 bg-[#050505] text-center relative overflow-hidden">
-        {/* Αχνό Grid στο Footer */}
-        <div className="absolute inset-0 bg-grid z-0 opacity-30 pointer-events-none"></div>
+      {/* --- ΝΕΟ FAQ SECTION --- */}
+      <FAQSection />
+      {/* --- ΝΕΟ ΕΠΑΓΓΕΛΜΑΤΙΚΟ FOOTER --- */}
+      <footer className="relative bg-[#050505] border-t border-[#222] pt-20 pb-10 overflow-hidden">
+        {/* Background Glow */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-2xl h-32 bg-[#00E676]/5 blur-[100px] pointer-events-none"></div>
         
-        <div className="relative z-10 flex flex-col items-center justify-center mb-8">
-           {/* Λογότυπο Spotly σε στυλ App Icon στο Footer */}
-           <div className="w-16 h-16 rounded-2xl overflow-hidden border border-white/10 bg-[#0a0a0a] shadow-[0_0_20px_rgba(0,230,118,0.3)] mb-4">
-             <img 
-               src="/logo.png" 
-               alt="Spotly App Icon" 
-               className="w-full h-full object-cover scale-[1.02]"
-             />
-           </div>
-           <span className="font-black tracking-tighter text-3xl text-white">Spotly<sup className="text-sm text-gray-500 font-bold ml-1">™</sup></span>
-           
-           {/* ΣΛΟΓΚΑΝ ΣΤΟ FOOTER */}
-           <span className="text-[#00E676] text-[10px] font-bold uppercase tracking-[0.25em] mt-2">Park Smart. Earn Easy.</span>
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-8 mb-16">
+            
+            {/* Left Column: Logo & Text */}
+            <div className="md:col-span-5 lg:col-span-4">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-10 h-10 rounded-[10px] overflow-hidden border border-white/10 bg-[#0a0a0a] shadow-[0_0_15px_rgba(0,230,118,0.3)] shrink-0">
+                  <img 
+                    src="/logo.png" 
+                    alt="Spotly App Icon" 
+                    className="w-full h-full object-cover scale-[1.02]"
+                  />
+                </div>
+                <span className="font-black tracking-tighter text-2xl text-white">Spotly<sup className="text-sm text-gray-500 font-bold ml-1">™</sup></span>
+              </div>
+              <p className="text-gray-400 leading-relaxed mb-6 text-sm max-w-sm">
+                Η στάθμευση δεν χρειάζεται να είναι πρόβλημα. Επαναπροσδιορίζουμε τον τρόπο που ανακαλύπτετε και διαχειρίζεστε τους χώρους σας.
+              </p>
+              {/* Social Links */}
+              <div className="flex items-center space-x-3">
+                {/* Facebook */}
+                <a href="#" className="w-10 h-10 rounded-xl bg-[#121212] border border-[#222] flex items-center justify-center text-gray-400 hover:border-[#00E676]/50 hover:text-[#00E676] transition-all duration-300">
+                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                </a>
+                {/* LinkedIn */}
+                <a href="#" className="w-10 h-10 rounded-xl bg-[#121212] border border-[#222] flex items-center justify-center text-gray-400 hover:border-[#00E676]/50 hover:text-[#00E676] transition-all duration-300">
+                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+                </a>
+                {/* Instagram */}
+                <a href="#" className="w-10 h-10 rounded-xl bg-[#121212] border border-[#222] flex items-center justify-center text-gray-400 hover:border-[#00E676]/50 hover:text-[#00E676] transition-all duration-300">
+                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                </a>
+              </div>
+            </div>
+
+            {/* Spacer column for larger screens */}
+            <div className="hidden lg:block lg:col-span-2"></div>
+
+            {/* Middle Column: Links */}
+            <div className="md:col-span-3 lg:col-span-2">
+              <h4 className="text-white font-black mb-6 uppercase tracking-widest text-xs">Πλοηγηση</h4>
+              <ul className="space-y-4 text-sm font-medium">
+                <li><a href="#" className="text-gray-400 hover:text-[#00E676] transition-colors">Αρχική</a></li>
+                <li><a href="#how-it-works" className="text-gray-400 hover:text-[#00E676] transition-colors">Η Εμπειρία</a></li>
+                <li><a href="#hosts" className="text-gray-400 hover:text-[#00E676] transition-colors">Για Ιδιοκτήτες</a></li>
+                <li><a href="#faq" className="text-gray-400 hover:text-[#00E676] transition-colors">Συχνές Ερωτήσεις</a></li>
+              </ul>
+            </div>
+
+            {/* Right Column: Contact Info */}
+            <div className="md:col-span-4 lg:col-span-4">
+              <h4 className="text-white font-black mb-6 uppercase tracking-widest text-xs">Επικοινωνια</h4>
+              <ul className="space-y-4 text-sm font-medium">
+                <li className="flex items-start">
+                  <Mail className="w-5 h-5 text-[#00E676] mr-3 shrink-0" />
+                  <a href="mailto:info@parkspotly.gr" className="text-gray-400 hover:text-white transition-colors">info@parkspotly.gr</a>
+                </li>
+                <li className="flex items-start">
+                  <Phone className="w-5 h-5 text-[#00E676] mr-3 shrink-0" />
+                  <a href="tel:+306900000000" className="text-gray-400 hover:text-white transition-colors">Kαλέστε μας</a>
+                </li>
+                <li className="flex items-start">
+                  <MapPin className="w-5 h-5 text-[#00E676] mr-3 shrink-0" />
+                  <span className="text-gray-400">Αθήνα, Ελλάδα</span>
+                </li>
+              </ul>
+            </div>
+            
+          </div>
+
+          {/* Bottom Bar */}
+          <div className="pt-8 border-t border-[#222] flex flex-col md:flex-row justify-between items-center gap-4">
+            <p className="text-gray-600 text-xs font-bold uppercase tracking-widest flex items-center justify-center gap-1.5">
+              <CheckCircle2 className="w-3 h-3 text-[#00E676]" /> SECURED BY STRIPE • © {new Date().getFullYear()} SPOTLY
+            </p>
+            <div className="flex space-x-6 text-xs font-bold text-gray-500 uppercase tracking-widest">
+              <a href="/privacy" className="hover:text-white transition-colors">Οροι Χρησης</a>
+              <a href="/privacy" className="hover:text-white transition-colors">Πολιτικη Απορρητου</a>
+            </div>
+          </div>
         </div>
-        <p className="relative z-10 text-gray-500 text-sm max-w-md mx-auto mb-8 font-medium px-4 mt-4">
-          Η στάθμευση δεν χρειάζεται να είναι πρόβλημα. Ελάτε στην κοινότητα του Spotly και ανακαλύψτε τον έξυπνο τρόπο.
-        </p>
-        <p className="relative z-10 text-[#444] text-[10px] font-bold uppercase tracking-widest flex items-center justify-center gap-1.5">
-          <CheckCircle2 className="w-3 h-3" /> SECURED BY STRIPE • © {new Date().getFullYear()} SPOTLY. ALL RIGHTS RESERVED.
-        </p>
       </footer>
 
       {/* =========================================================
