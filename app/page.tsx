@@ -1,6 +1,7 @@
 "use client";
 import Link from 'next/link';
 import React, { useState, useEffect, useRef } from 'react';
+import { useLanguage } from './context/LanguageContext';
 import { Car, MapPin, Zap, ShieldCheck, ArrowRight, Smartphone, Key, Navigation, Clock, Star, Wifi, Wallet, CheckCircle2, User, X, Loader2, Calendar, ChevronDown, Mail, Phone, ChevronUp } from 'lucide-react';
 
 // ============================================================================
@@ -181,6 +182,8 @@ export default function SpotlyLanding() {
   const [scrollY, setScrollY] = useState(0);
   const [hostEarnings, setHostEarnings] = useState(0);
   const [isHoveringPhone, setIsHoveringPhone] = useState(false);
+
+  const { language, toggleLanguage, t } = useLanguage();
   
   // ΝΕΟ STATE: Για το αναδυόμενο παράθυρο "Coming Soon"
   const [showComingSoon, setShowComingSoon] = useState(false);
@@ -455,28 +458,38 @@ export default function SpotlyLanding() {
             </div>
             <span className="text-2xl font-black tracking-tighter">Spotly<sup className="text-[10px] text-gray-500 font-bold ml-0.5">™</sup></span>
           </div>
-          <div className="hidden md:flex items-center gap-8 text-sm font-bold text-gray-400">
-            <a href="#how-it-works" className="hover:text-white transition-colors">Η Εμπειρία</a>
+            <div className="hidden md:flex items-center gap-8 text-sm font-bold text-gray-400">
+            <a href="#how-it-works" className="hover:text-white transition-colors">{t('nav', 'experience')}</a>
             <Link href="/become-a-host" className="hover:text-white transition-colors font-black text-[#00E676]">
-              Γίνε Host
+              {t('nav', 'hosts')}
             </Link>
             
-            {/* ΝΕΟ: Κουμπί Let's Talk */}
+            {/* Κουμπί Let's Talk */}
             <a 
               href="https://calendar.app.google/MWcpcvhhjxUb7RmP6" 
               target="_blank" 
               rel="noopener noreferrer"
               className="flex items-center gap-2 bg-gradient-to-r from-[#00E676] to-[#00b35c] text-black px-5 py-2.5 rounded-full font-black text-sm hover:shadow-[0_0_20px_rgba(0,230,118,0.4)] hover:scale-105 active:scale-95 transition-all"
             >
-              <Calendar className="w-4 h-4" /> Ας Μιλήσουμε
+              <Calendar className="w-4 h-4" /> {t('nav', 'letsTalk')}
             </a>
 
-            {/* Κουμπί που ανοίγει το "Coming Soon" */}
+            {/* Κουμπί Είσοδος στο App */}
             <button 
               onClick={() => setShowComingSoon(true)}
               className="bg-white/5 text-white px-6 py-2.5 rounded-full border border-white/10 hover:bg-white/10 hover:border-[#00E676]/50 transition-all active:scale-95 shadow-lg"
             >
-              Είσοδος στο App
+              {t('nav', 'enterApp')}
+            </button>
+
+            {/* === ΕΔΩ ΜΠΑΙΝΕΙ ΤΟ LANGUAGE TOGGLE === */}
+            <button 
+              onClick={toggleLanguage} 
+              className="flex items-center gap-1.5 bg-[#121212] border border-white/10 rounded-full px-3 py-2 text-xs font-black hover:border-[#00E676]/50 transition-all shadow-lg active:scale-95"
+            >
+              <span className={language === 'el' ? 'text-[#00E676]' : 'text-gray-500 transition-colors'}>EL</span>
+              <span className="text-gray-700">/</span>
+              <span className={language === 'en' ? 'text-[#00E676]' : 'text-gray-500 transition-colors'}>EN</span>
             </button>
           </div>
         </div>
@@ -503,18 +516,17 @@ export default function SpotlyLanding() {
             </div>
             
             <h1 className="text-6xl md:text-8xl font-black leading-[1.1] tracking-tighter mb-6 drop-shadow-2xl">
-              Βρες Πάρκινγκ <br />
+              {t('hero', 'title1')} <br />
               <span className="relative inline-block">
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00E676] via-emerald-400 to-[#00E676] bg-[length:200%_auto] animate-gradient">
-                  Σε 10 Δευτερόλεπτα.
+                  {t('hero', 'title2')}
                 </span>
-                {/* Accent line below text */}
                 <div className="absolute -bottom-2 left-0 w-full h-2 bg-[#00E676]/20 blur-sm rounded-full"></div>
               </span>
             </h1>
             
             <p className="text-gray-400 text-lg md:text-xl mb-10 max-w-xl mx-auto lg:mx-0 font-medium leading-relaxed">
-              Η πρώτη και μοναδική πλατφόρμα που μετατρέπει τα κλειστά ιδιωτικά γκαράζ σε δικές σου θέσεις στάθμευσης. Κλείσε θέση εκ των προτέρων, άνοιξε την πόρτα με ένα πάτημα στο κινητό σου και ξέχασε το άγχος.
+              {t('hero', 'desc')}
             </p>
 
             {/* ΝΕΑ ΦΟΡΜΑ ΠΟΥ ΚΑΛΕΙ ΤΗΝ API */}
