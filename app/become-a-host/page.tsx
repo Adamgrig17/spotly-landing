@@ -30,13 +30,30 @@ export default function BecomeAHost() {
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    // Εδώ ιδανικά θα καλούσες το δικό σου API route, π.χ. fetch('/api/submit-host', ...)
-    // Προς το παρόν βάζουμε ένα fake delay για να δεις το UI
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setSubmitStatus('success');
-      setFormData({ name: '', email: '', phone: '', address: '' });
-    }, 1500);
+    setSubmitStatus('idle'); // Επαναφορά του status
+
+    try {
+      const res = await fetch('/api/host-submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        // Στέλνουμε ακριβώς το formData state που φτιάξαμε
+        body: JSON.stringify(formData),
+      });
+
+      if (res.ok) {
+        setSubmitStatus('success');
+        setFormData({ name: '', email: '', phone: '', address: '' }); // Καθαρισμός φόρμας
+      } else {
+        setSubmitStatus('error');
+        alert("Κάτι πήγε στραβά με την αποστολή. Δοκίμασε ξανά.");
+      }
+    } catch (error) {
+      console.error("Σφάλμα δικτύου:", error);
+      setSubmitStatus('error');
+      alert("Κάτι πήγε στραβά με το δίκτυο. Δοκίμασε ξανά.");
+    } finally {
+      setIsSubmitting(false); // Κλείνουμε το loading state
+    }
   };
 
   return (
