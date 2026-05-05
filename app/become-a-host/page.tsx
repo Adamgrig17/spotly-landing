@@ -55,43 +55,110 @@ export default function BecomeAHost() {
           
           {/* Αριστερή Στήλη: Πληροφορίες & Safety Measures */}
           <div>
-            <h2 className="text-3xl font-black mb-8">Γιατί να επιλέξεις το Spotly;</h2>
-            
-            <div className="space-y-8">
-              <div className="flex gap-4">
-                <div className="w-12 h-12 bg-[#1A1A1A] rounded-xl flex items-center justify-center shrink-0 border border-white/5">
-                  <ShieldCheck className="w-6 h-6 text-[#00E676]" />
+            {/* SECTION 1: FOR HOSTS */}
+            <div className="mb-12">
+              <h2 className="text-3xl font-black mb-4">Γιατί να επιλέξεις το Spotly;</h2>
+              <p className="text-[#00E676] text-sm font-bold uppercase tracking-widest mb-8">Κερδισε Παθητικο Εισοδημα Χωρις Κοπο</p>
+              
+              <div className="space-y-6">
+                <div className="flex gap-4">
+                  <div className="w-12 h-12 bg-[#1A1A1A] rounded-xl flex items-center justify-center shrink-0 border border-white/5">
+                    <Banknote className="w-6 h-6 text-[#00E676]" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold mb-1">Αυτόματα Έσοδα (80%)</h3>
+                    <p className="text-gray-400 text-sm leading-relaxed">
+                      Κράτησε το 80% της συνολικής τιμής για κάθε οδηγό που παρκάρει στον χώρο σου. Αναλαμβάνουμε τις πληρωμές και μεταφέρουμε τα κέρδη σου με απόλυτη ασφάλεια μέσω Stripe.
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="text-xl font-bold mb-2">Απόλυτη Ασφάλεια</h3>
-                  <p className="text-gray-400 text-sm leading-relaxed">
-                    Όλοι οι οδηγοί είναι ταυτοποιημένοι με τηλέφωνο, email και στοιχεία οχήματος. Τα οχήματά τους διαθέτουν υποχρεωτική ασφάλιση για κάλυψη ζημιών.
-                  </p>
+
+                <div className="flex gap-4">
+                  <div className="w-12 h-12 bg-[#1A1A1A] rounded-xl flex items-center justify-center shrink-0 border border-white/5">
+                    <Zap className="w-6 h-6 text-[#00E676]" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold mb-1">Μηδενική Φυσική Παρουσία</h3>
+                    <p className="text-gray-400 text-sm leading-relaxed">
+                      Με την αναβάθμιση σε "Smart Spot" (μέσω της συσκευής Shelly IoT), οι οδηγοί ανοίγουν την πόρτα μόνοι τους. Δεν χρειάζεται να είσαι σπίτι, να δώσεις κλειδιά ή να μοιράζεσαι κωδικούς PIN.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex gap-4">
+                  <div className="w-12 h-12 bg-[#1A1A1A] rounded-xl flex items-center justify-center shrink-0 border border-white/5">
+                    <User className="w-6 h-6 text-[#00E676]" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold mb-1">Απόλυτος Έλεγχος</h3>
+                    <p className="text-gray-400 text-sm leading-relaxed">
+                      Εσύ ορίζεις τους κανόνες. Επίλεξε τη δική σου τιμή ανά ώρα και το δικό σου πρόγραμμα διαθεσιμότητας, ώστε η θέση να ενοικιάζεται μόνο όταν δεν τη χρειάζεσαι.
+                    </p>
+                  </div>
                 </div>
               </div>
+            </div>
 
-              <div className="flex gap-4">
-                <div className="w-12 h-12 bg-[#1A1A1A] rounded-xl flex items-center justify-center shrink-0 border border-white/5">
-                  <Lock className="w-6 h-6 text-[#00E676]" />
+            <div className="w-full h-px bg-white/10 my-12"></div>
+
+            {/* SECTION 2: SECURITY FIRST */}
+            <div>
+              <h2 className="text-3xl font-black mb-4">Προτεραιότητα η Ασφάλειά σου</h2>
+              <p className="text-[#00E676] text-sm font-bold uppercase tracking-widest mb-8">Πρωτοκολλα Ασφαλειας Τραπεζικου Επιπεδου</p>
+              
+              <div className="space-y-6">
+                <div className="flex gap-4">
+                  <div className="w-12 h-12 bg-[#1A1A1A] rounded-xl flex items-center justify-center shrink-0 border border-white/5">
+                    <MapPin className="w-6 h-6 text-[#00E676]" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold mb-1">Άνοιγμα μόνο μέσω GPS (Geofenced)</h3>
+                    <p className="text-gray-400 text-sm leading-relaxed">
+                      Οι οδηγοί δεν μπορούν να ανοίξουν το γκαράζ σου από τον... καναπέ τους. Το σύστημα απαιτεί ακρίβεια GPS, επιτρέποντας το άνοιγμα μόνο όταν το κινητό βρίσκεται σε ακτίνα 50 μέτρων.
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="text-xl font-bold mb-2">Smart Πρόσβαση</h3>
-                  <p className="text-gray-400 text-sm leading-relaxed">
-                    Σε κλειστά γκαράζ τοποθετούμε ειδικό μηχανισμό (plug & play) ώστε ο οδηγός να ανοίγει την πόρτα μέσω του app, χωρίς να χρειάζεται να του δώσεις κλειδιά.
+
+                <div className="flex gap-4">
+                  <div className="w-12 h-12 bg-[#1A1A1A] rounded-xl flex items-center justify-center shrink-0 border border-white/5">
+                    <Lock className="w-6 h-6 text-[#00E676]" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold mb-1">Αυστηροί Χρονικοί Περιορισμοί</h3>
+                    <p className="text-gray-400 text-sm leading-relaxed">
+                      Το Smart Gate λειτουργεί <b>μόνο</b> κατά τη διάρκεια μιας ενεργής κράτησης. Αν ο οδηγός φτάσει πολύ νωρίς ή ο χρόνος του έχει λήξει, το κουμπί ανοίγματος απενεργοποιείται πλήρως.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex gap-4">
+                  <div className="w-12 h-12 bg-[#1A1A1A] rounded-xl flex items-center justify-center shrink-0 border border-white/5">
+                    <ShieldCheck className="w-6 h-6 text-[#00E676]" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold mb-1">Υποχρεωτικό Κλείσιμο Πόρτας</h3>
+                    <p className="text-gray-400 text-sm leading-relaxed">
+                      Στα κλειστά γκαράζ, ο οδηγός δεν μπορεί να τερματίσει την κράτησή του αν η πόρτα παραμείνει ανοιχτή. Το κουμπί τερματισμού εμφανίζεται μόνο όταν το σύστημα επιβεβαιώσει το κλείσιμο.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="bg-[#1A1A1A] p-5 rounded-2xl border border-[#00E676]/20 mt-4">
+                  <h4 className="text-white font-bold mb-2 flex items-center gap-2">
+                    <ShieldCheck className="w-4 h-4 text-[#00E676]" /> Πλήρης Ιχνηλασιμότητα & Anti-Spam
+                  </h4>
+                  <p className="text-gray-400 text-xs leading-relaxed">
+                    Απαιτείται πλήρης καταχώρηση πινακίδας και στοιχείων οχήματος. Επιβάλλουμε αναμονή 10 δευτερολέπτων μεταξύ των εντολών για αποφυγή κατάχρησης, ενώ κάθε είσοδος/έξοδος καταγράφεται στο ιστορικό μας. Η πολιτική μας για τις καθυστερήσεις είναι μηδενικής ανοχής, με αυστηρά πέναλτι.
                   </p>
                 </div>
-              </div>
-
-              <div className="flex gap-4">
-                <div className="w-12 h-12 bg-[#1A1A1A] rounded-xl flex items-center justify-center shrink-0 border border-white/5">
-                  <Zap className="w-6 h-6 text-[#00E676]" />
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold mb-2">Προστασία Χρόνου</h3>
-                  <p className="text-gray-400 text-sm leading-relaxed">
-                    Αν ο οδηγός αργήσει να πάρει το αυτοκίνητό του, χρεώνεται αυτόματα με πέναλτι (διπλάσια χρέωση για κάθε 30 λεπτά), το οποίο πιστώνεται απευθείας σε εσένα.
+                
+                {/* Important Reminder Note */}
+                <div className="bg-white/5 p-4 rounded-xl border border-white/10 mt-6">
+                  <p className="text-gray-400 text-xs leading-relaxed">
+                    <b className="text-white">Σημαντική Υπενθύμιση:</b> Ως Host, δεσμεύεσαι να τηρείς τις επιβεβαιωμένες κρατήσεις και να διατηρείς το "Smart Spot" σου συνδεδεμένο στο διαδίκτυο. Συναλλαγές εκτός πλατφόρμας απαγορεύονται αυστηρά.
                   </p>
                 </div>
+
               </div>
             </div>
 
