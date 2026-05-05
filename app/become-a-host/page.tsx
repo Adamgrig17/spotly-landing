@@ -9,17 +9,19 @@ export default function BecomeAHost() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
-  // States για το Simulator Εσόδων
-  const [hourlyRate, setHourlyRate] = useState(1.5);
+  // States για το Simulator Εσόδων (Default τιμές)
+  const [hourlyRate, setHourlyRate] = useState(5); // Ξεκινάει με 5€
   const [hoursPerDay, setHoursPerDay] = useState(5);
   const [daysPerMonth, setDaysPerMonth] = useState(20);
 
-  // Υπολογισμός Εσόδων (Εκτίμηση)
+  // Υπολογισμός Εσόδων (Καθαρό Κέρδος Host 80%)
   const calculateIncome = () => {
-    const totalIncome = hourlyRate * hoursPerDay * daysPerMonth;
-    // Προσθέτουμε ένα "range" (π.χ. +/- 10%) για να είναι ρεαλιστικό το simulation
-    const minIncome = (totalIncome * 0.9).toFixed(0);
-    const maxIncome = (totalIncome * 1.1).toFixed(0);
+    const grossIncome = hourlyRate * hoursPerDay * daysPerMonth;
+    const netIncome = grossIncome * 0.80; // Ο Host κρατάει το 80%
+    
+    // Προσθέτουμε ένα "range" για να φαίνεται πιο ρεαλιστικό το simulation
+    const minIncome = (netIncome * 0.95).toFixed(0);
+    const maxIncome = (netIncome * 1.05).toFixed(0);
     return { minIncome, maxIncome };
   };
 
@@ -162,60 +164,93 @@ export default function BecomeAHost() {
               </div>
             </div>
 
-            {/* Εργαλείο: Income Simulator */}
-            <div className="mt-16 bg-[#121212] p-8 rounded-3xl border border-white/10 shadow-2xl">
-              <div className="flex items-center gap-3 mb-6">
-                <Banknote className="w-6 h-6 text-[#00E676]" />
-                <h3 className="text-2xl font-black">Υπολόγισε τα Κέρδη σου</h3>
-              </div>
+            {/* Εργαλείο: Income Simulator (PREMIUM UI) */}
+            <div className="mt-16 relative group">
+              {/* Animated Glow Border Background */}
+              <div className="absolute -inset-0.5 bg-gradient-to-r from-[#00E676]/50 to-emerald-900 rounded-[2rem] blur opacity-30 group-hover:opacity-50 transition duration-1000"></div>
               
-              <div className="space-y-6">
-                <div>
-                  <div className="flex justify-between mb-2">
-                    <label className="text-sm text-gray-400 font-bold">Τιμή ανά Ώρα (€)</label>
-                    <span className="text-white font-bold">{hourlyRate.toFixed(2)}€</span>
+              <div className="relative bg-[#0a0a0a] p-8 md:p-10 rounded-[2rem] border border-white/10 shadow-2xl overflow-hidden">
+                {/* Subtle Grid Background */}
+                <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)', backgroundSize: '20px 20px' }}></div>
+                
+                <div className="flex items-center gap-4 mb-10 relative z-10">
+                  <div className="w-12 h-12 bg-[#00E676]/10 rounded-2xl flex items-center justify-center border border-[#00E676]/20">
+                    <Banknote className="w-6 h-6 text-[#00E676]" />
                   </div>
-                  <input 
-                    type="range" min="0.5" max="5" step="0.1" 
-                    value={hourlyRate} onChange={(e) => setHourlyRate(Number(e.target.value))}
-                    className="w-full accent-[#00E676]"
-                  />
+                  <h3 className="text-2xl md:text-3xl font-black tracking-tight text-white">Υπολόγισε τα Κέρδη σου</h3>
+                </div>
+                
+                <div className="space-y-8 relative z-10">
+                  {/* Slider 1: Τιμή ανά Ώρα */}
+                  <div className="bg-[#121212] p-5 rounded-2xl border border-white/5 hover:border-white/10 transition-colors">
+                    <div className="flex justify-between items-end mb-4">
+                      <label className="text-sm text-gray-400 font-bold uppercase tracking-wider">Τιμή ανά Ώρα (€)</label>
+                      <span className="text-2xl font-black text-white">{hourlyRate.toFixed(2)}€</span>
+                    </div>
+                    <input 
+                      type="range" min="3" max="15" step="0.5" 
+                      value={hourlyRate} onChange={(e) => setHourlyRate(Number(e.target.value))}
+                      className="w-full h-2 bg-gray-800 rounded-lg appearance-none cursor-pointer accent-[#00E676] hover:accent-[#00c968] transition-all"
+                    />
+                    <div className="flex justify-between mt-2 text-[10px] text-gray-600 font-bold">
+                      <span>3.00€</span><span>15.00€</span>
+                    </div>
+                  </div>
+
+                  {/* Slider 2: Ώρες / Ημέρα */}
+                  <div className="bg-[#121212] p-5 rounded-2xl border border-white/5 hover:border-white/10 transition-colors">
+                    <div className="flex justify-between items-end mb-4">
+                      <label className="text-sm text-gray-400 font-bold uppercase tracking-wider">Ώρες Κράτησης / Ημέρα</label>
+                      <span className="text-2xl font-black text-white">{hoursPerDay} <span className="text-sm text-gray-500 font-medium">Ώρες</span></span>
+                    </div>
+                    <input 
+                      type="range" min="1" max="24" step="1" 
+                      value={hoursPerDay} onChange={(e) => setHoursPerDay(Number(e.target.value))}
+                      className="w-full h-2 bg-gray-800 rounded-lg appearance-none cursor-pointer accent-[#00E676] hover:accent-[#00c968] transition-all"
+                    />
+                    <div className="flex justify-between mt-2 text-[10px] text-gray-600 font-bold">
+                      <span>1</span><span>24</span>
+                    </div>
+                  </div>
+
+                  {/* Slider 3: Ημέρες / Μήνα */}
+                  <div className="bg-[#121212] p-5 rounded-2xl border border-white/5 hover:border-white/10 transition-colors">
+                    <div className="flex justify-between items-end mb-4">
+                      <label className="text-sm text-gray-400 font-bold uppercase tracking-wider">Ημέρες Διαθεσιμότητας / Μήνα</label>
+                      <span className="text-2xl font-black text-white">{daysPerMonth} <span className="text-sm text-gray-500 font-medium">Ημέρες</span></span>
+                    </div>
+                    <input 
+                      type="range" min="1" max="30" step="1" 
+                      value={daysPerMonth} onChange={(e) => setDaysPerMonth(Number(e.target.value))}
+                      className="w-full h-2 bg-gray-800 rounded-lg appearance-none cursor-pointer accent-[#00E676] hover:accent-[#00c968] transition-all"
+                    />
+                    <div className="flex justify-between mt-2 text-[10px] text-gray-600 font-bold">
+                      <span>1</span><span>30</span>
+                    </div>
+                  </div>
                 </div>
 
-                <div>
-                  <div className="flex justify-between mb-2">
-                    <label className="text-sm text-gray-400 font-bold">Εκτιμώμενες Ώρες Κράτησης / Ημέρα</label>
-                    <span className="text-white font-bold">{hoursPerDay} Ώρες</span>
+                {/* The Result Box (Glowing Core) */}
+                <div className="mt-10 relative">
+                  <div className="absolute -inset-1 bg-gradient-to-r from-[#00E676] to-[#00b35c] rounded-[24px] blur-md opacity-20 animate-pulse"></div>
+                  <div className="relative p-8 bg-[#121212] rounded-[24px] border border-[#00E676]/40 text-center overflow-hidden">
+                    <div className="absolute top-0 right-0 w-48 h-48 bg-[#00E676] opacity-10 blur-[50px] rounded-full pointer-events-none"></div>
+                    <div className="absolute bottom-0 left-0 w-32 h-32 bg-blue-500 opacity-5 blur-[40px] rounded-full pointer-events-none"></div>
+                    
+                    <p className="text-[#00E676] text-xs md:text-sm font-black uppercase tracking-[0.2em] mb-4">
+                      Εκτιμωμενο Καθαρο Εισοδημα
+                    </p>
+                    <div className="text-5xl md:text-6xl font-black text-white tracking-tighter drop-shadow-[0_0_20px_rgba(0,230,118,0.4)] flex items-center justify-center gap-3">
+                      {income.minIncome}€ <span className="text-gray-600 font-normal text-4xl">-</span> {income.maxIncome}€
+                    </div>
+                    <p className="text-gray-500 text-[10px] uppercase tracking-widest mt-5 font-bold">
+                      *Εχει αφαιρεθει η προμηθεια του Spotly (Εσυ κρατας το 80%)
+                    </p>
                   </div>
-                  <input 
-                    type="range" min="1" max="24" step="1" 
-                    value={hoursPerDay} onChange={(e) => setHoursPerDay(Number(e.target.value))}
-                    className="w-full accent-[#00E676]"
-                  />
                 </div>
-
-                <div>
-                  <div className="flex justify-between mb-2">
-                    <label className="text-sm text-gray-400 font-bold">Ημέρες Διαθεσιμότητας / Μήνα</label>
-                    <span className="text-white font-bold">{daysPerMonth} Ημέρες</span>
-                  </div>
-                  <input 
-                    type="range" min="1" max="30" step="1" 
-                    value={daysPerMonth} onChange={(e) => setDaysPerMonth(Number(e.target.value))}
-                    className="w-full accent-[#00E676]"
-                  />
-                </div>
-              </div>
-
-              <div className="mt-8 p-6 bg-[#1A1A1A] rounded-2xl text-center border border-[#00E676]/20 relative overflow-hidden">
-                 <div className="absolute top-0 right-0 w-24 h-24 bg-[#00E676] opacity-10 blur-2xl rounded-full"></div>
-                 <p className="text-gray-400 text-xs font-bold uppercase tracking-widest mb-2">Εκτιμωμενο Μηνιαιο Εισοδημα</p>
-                 <div className="text-4xl font-black text-white">
-                   {income.minIncome}€ - {income.maxIncome}€
-                 </div>
               </div>
             </div>
-          </div>
+          </div> {/* ΑΥΤΟ ΤΟ DIV ΚΛΕΙΝΕΙ ΤΗΝ ΑΡΙΣΤΕΡΗ ΣΤΗΛΗ. ΜΗΝ ΤΟ ΧΑΣΕΙΣ! */}
 
           {/* Δεξιά Στήλη: Φόρμα Επικοινωνίας */}
           <div className="bg-[#121212] p-8 md:p-10 rounded-3xl border border-white/5 h-fit sticky top-32">
