@@ -1,5 +1,5 @@
 "use client";
-
+import Link from 'next/link';
 import React, { useState, useEffect, useRef } from 'react';
 import { Car, MapPin, Zap, ShieldCheck, ArrowRight, Smartphone, Key, Navigation, Clock, Star, Wifi, Wallet, CheckCircle2, User, X, Loader2, Calendar, ChevronDown, Mail, Phone, ChevronUp } from 'lucide-react';
 
@@ -457,7 +457,9 @@ export default function SpotlyLanding() {
           </div>
           <div className="hidden md:flex items-center gap-8 text-sm font-bold text-gray-400">
             <a href="#how-it-works" className="hover:text-white transition-colors">Η Εμπειρία</a>
-            <a href="#hosts" className="hover:text-white transition-colors">Για Ιδιοκτήτες</a>
+            <Link href="/become-a-host" className="hover:text-white transition-colors font-black text-[#00E676]">
+              Γίνε Host
+            </Link>
             
             {/* ΝΕΟ: Κουμπί Let's Talk */}
             <a 
@@ -810,12 +812,12 @@ export default function SpotlyLanding() {
                 </li>
               </ul>
 
-              <button 
-                onClick={() => setShowComingSoon(true)}
+              <Link 
+                href="/become-a-host"
                 className="inline-flex bg-white hover:bg-gray-200 text-black px-8 py-4 rounded-2xl font-black items-center gap-3 transition-transform active:scale-95 shadow-[0_0_30px_rgba(255,255,255,0.2)]"
               >
-                ΞΕΚΙΝΑ ΝΑ ΚΕΡΔΙΖΕΙΣ <ArrowRight className="w-5 h-5" />
-              </button>
+                ΓΙΝΕ HOST <ArrowRight className="w-5 h-5" />
+              </Link>
             </div>
             
             <div className="flex-1 w-full max-w-md relative mt-16 lg:mt-0">
