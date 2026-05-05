@@ -1,12 +1,12 @@
 import { NextResponse } from 'next/server';
+import nodemailer from 'nodemailer';
 import { createClient } from '@supabase/supabase-js';
 
-// Αρχικοποίηση Supabase (Βεβαιώσου ότι έχεις αυτά τα env variables στο .env.local σου)
+// Σύνδεση με το Supabase
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-// Χρησιμοποιούμε το SERVICE_ROLE_KEY για να έχουμε δικαίωμα εγγραφής (bypasses RLS)
-// Αν δεν το έχεις, βάλε το NEXT_PUBLIC_SUPABASE_ANON_KEY (αλλά θέλει σωστό RLS policy στο Supabase)
+// Χρησιμοποιούμε το service_role key για να γράψουμε στον πίνακα παρακάμπτοντας το RLS, 
+// ή το anon key αν έχεις σετάρει public insert policy.
 const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
-
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 export async function POST(request: Request) {
@@ -14,21 +14,96 @@ export async function POST(request: Request) {
     const body = await request.json();
     const { name, email, phone, address } = body;
 
-    // Εισαγωγή στη βάση δεδομένων, στον πίνακα 'host_submissions'
-    const { data, error } = await supabase
-      .from('host_submissions')
-      .insert([
-        { name, email, phone, address }
-      ]);
-
-    if (error) {
-      console.error('Supabase error:', error);
-      return NextResponse.json({ error: error.message }, { status: 500 });
+    if (!email || !name || !phone || !address) {
+      return NextResponse.json({ error: 'Όλα τα πεδία είναι υποχρεωτικά' }, { status: 400 });
     }
 
-    return NextResponse.json({ success: true, data }, { status: 200 });
-  } catch (error) {
-    console.error('Server error:', error);
-    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+    // 1. ΑΠΟΘΗΚΕΥΣΗ ΣΤΟ SUPABASE (Στον πίνακα host_submissions)
+    const { error: dbError } = await supabase
+      .from('host_submissions')
+      .insert([{ name, email, phone, address }]);
+
+    if (dbError) {
+      console.error('Σφάλμα Supabase:', dbError);
+      return NextResponse.json({ error: 'Σφάλμα αποθήκευσης στη βάση' }, { status: 500 });
+    }
+
+    // 2. ΡΥΘΜΙΣΗ ΑΠΟΣΤΟΛΗΣ EMAIL (Nodemailer)
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: process.env.EMAIL_USER, // π.χ. a.grigoropoulos@parkspotly.gr
+        pass: process.env.EMAIL_PASS, // Ο 16-ψήφιος κωδικός
+      },
+    });
+
+    // 3. ΤΟ ΜΗΝΥΜΑ ΠΟΥ ΘΑ ΠΑΕΙ ΣΤΟΝ ΥΠΟΨΗΦΙΟ HOST (Με το δικό σου Design!)
+    const mailOptions = {
+      from: `"Spotly" <${process.env.EMAIL_USER}>`,
+      to: email,
+      subject: 'Η αίτησή σου καταχωρήθηκε! Καλώς ήρθες στο Spotly 🚀',
+      html: `
+        <div style="background-color: #050505; padding: 40px 20px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; text-align: center; color: #fff;">
+          
+          <!-- Header / Logo -->
+          <div style="margin-bottom: 30px;">
+            <img src="https://parkspotly.gr/logo.png" width="70" style="border-radius: 16px; margin-bottom: 15px; border: 1px solid rgba(0, 230, 118, 0.2); box-shadow: 0 0 20px rgba(0, 230, 118, 0.2);" alt="Spotly Logo">
+            <h1 style="color: #ffffff; font-size: 32px; font-weight: 900; margin: 0; letter-spacing: -1px;">Spotly</h1>
+            <p style="color: #00E676; font-size: 11px; font-weight: bold; text-transform: uppercase; letter-spacing: 2px; margin-top: 5px;">Park Smart. Earn Easy.</p>
+          </div>
+
+          <!-- Main Content Card -->
+          <div style="background-color: #121212; border: 1px solid #333; border-radius: 24px; padding: 40px; max-width: 500px; margin: 0 auto; text-align: left;">
+            
+            <h2 style="color: #fff; margin-top: 0; margin-bottom: 20px; font-size: 24px;">Γεια σου, ${name}! 👋</h2>
+            
+            <p style="color: #ccc; font-size: 16px; line-height: 1.6; margin-bottom: 25px;">
+              Λάβαμε επιτυχώς τα στοιχεία σου και την αίτησή σου για να γίνεις Host στο Spotly. Σε ευχαριστούμε για το ενδιαφέρον σου να αξιοποιήσεις τον χώρο σου στη διεύθυνση <strong>${address}</strong>.
+            </p>
+            
+            <!-- Highlight Box -->
+            <div style="background-color: rgba(0, 230, 118, 0.05); border-left: 4px solid #00E676; padding: 20px; border-radius: 0 12px 12px 0; margin-bottom: 25px;">
+               <p style="color: #00E676; margin: 0 0 8px 0; font-size: 12px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px;">Τι ακολουθει τωρα;</p>
+               <p style="color: #aaa; margin: 0; font-size: 14px; line-height: 1.6;">Η ομάδα μας εξετάζει τα στοιχεία του χώρου σου. Θα σε καλέσουμε άμεσα στο τηλέφωνο επικοινωνίας (<strong>${phone}</strong>) για να συζητήσουμε τις λεπτομέρειες και να προχωρήσουμε στην ένταξή σου!</p>
+            </div>
+
+            <p style="color: #ccc; font-size: 16px; line-height: 1.6; margin-bottom: 30px;">
+              Είμαστε πολύ ενθουσιασμένοι που κάνεις το πρώτο βήμα. Το άδειο σου πάρκινγκ ετοιμάζεται να γίνει η νέα σου πηγή παθητικού εισοδήματος.<br><br>
+              Τα λέμε σύντομα!
+            </p>
+
+            <hr style="border: none; border-top: 1px dashed #333; margin: 30px 0;">
+            
+            <!-- Signature -->
+            <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                    <td width="50" style="padding-right: 15px;">
+                        <img src="https://ui-avatars.com/api/?name=Αδαμάντιος+Γρηγορόπουλος&background=222&color=00E676&bold=true" width="50" height="50" style="border-radius: 50%;" alt="Adamantios">
+                    </td>
+                    <td>
+                        <p style="margin: 0; color: #fff; font-weight: bold; font-size: 16px;">Αδαμάντιος Γρηγορόπουλος</p>
+                        <p style="margin: 0; color: #888; font-size: 13px;">Founder & CEO, Spotly</p>
+                    </td>
+                </tr>
+            </table>
+          </div>
+          
+          <!-- Footer -->
+          <p style="color: #555; font-size: 11px; margin-top: 30px; text-transform: uppercase; letter-spacing: 1px;">
+            © ${new Date().getFullYear()} Spotly App. All rights reserved.<br>
+            Αθήνα, Ελλάδα
+          </p>
+        </div>
+      `,
+    };
+
+    // 4. ΑΠΟΣΤΟΛΗ ΤΟΥ EMAIL
+    await transporter.sendMail(mailOptions);
+
+    return NextResponse.json({ success: true, message: 'Επιτυχής υποβολή φόρμας Host!' });
+
+  } catch (error: any) {
+    console.error('Σφάλμα API:', error);
+    return NextResponse.json({ error: 'Σφάλμα κατά την αποστολή email' }, { status: 500 });
   }
 }
