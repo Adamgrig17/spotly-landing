@@ -1,6 +1,7 @@
 "use client";
-
+import Link from 'next/link';
 import React, { useState, useEffect, useRef } from 'react';
+import { useLanguage } from './context/LanguageContext';
 import { Car, MapPin, Zap, ShieldCheck, ArrowRight, Smartphone, Key, Navigation, Clock, Star, Wifi, Wallet, CheckCircle2, User, X, Loader2, Calendar, ChevronDown, Mail, Phone, ChevronUp } from 'lucide-react';
 
 // ============================================================================
@@ -50,6 +51,34 @@ const FAQSection = () => {
     {
       question: "Πώς λειτουργεί για τους ιδιοκτήτες (Hosts);",
       answer: "Αν έχεις άδεια θέση ή γκαράζ, τοποθετούμε έναν απλό μηχανισμό (plug & play) στην πόρτα σου με ελάχιστο κόστος. Εσύ ορίζεις το πρόγραμμά σου (π.χ. όταν λείπεις στη δουλειά) και η θέση ενοικιάζεται αυτόματα, αποφέροντάς σου εγγυημένο παθητικό εισόδημα μέσω Stripe."
+    },
+    {
+      question: "Τι γίνεται αν ο οδηγός κάνει ζημιά στην περιουσία μου;",
+      answer: "Η ασφάλεια της περιουσίας σας είναι η απόλυτη προτεραιότητά μας. Κάθε οδηγός που χρησιμοποιεί το Spotly είναι ταυτοποιημένος και το όχημά του διαθέτει υποχρεωτικά ενεργό ασφαλιστήριο συμβόλαιο, το οποίο καλύπτει τυχόν υλικές ζημιές προς τρίτους. Παράλληλα, το Spotly βρίσκεται σε διαδικασία ενσωμάτωσης δικής του επιπλέον ασφαλιστικής κάλυψης, ώστε να σας προσφέρει τη μέγιστη δυνατή σιγουριά. Σε κάθε περίπτωση, η ομάδα υποστήριξής μας είναι δίπλα σας."
+    },
+    {
+      question: "Πώς ξέρω ότι ο άνθρωπος που θα παρκάρει είναι αξιόπιστος;",
+      answer: "Χτίζουμε μια κοινότητα εμπιστοσύνης. Για να κάνει κράτηση ένας οδηγός στο Spotly, απαιτείται πρώτα η εγγραφή και ταυτοποίησή του. Καταχωρεί υποχρεωτικά το email και το τηλέφωνό του, καθώς και όλα τα στοιχεία του οχήματός του (πινακίδα, χρώμα, μοντέλο και μάρκα). Επιπλέον, μετά από κάθε στάθμευση λειτουργεί σύστημα αξιολόγησης."
+    },
+    {
+      question: "Τι συμβαίνει αν ο οδηγός δεν πάρει το αυτοκίνητό του όταν λήξει ο χρόνος του;",
+      answer: "Προστατεύουμε αυστηρά τον χρόνο και τον χώρο σας. Σε περίπτωση που ο οδηγός υπερβεί τον συμφωνημένο χρόνο στάθμευσης, του επιβάλλεται αυτόματα πέναλτι. Συγκεκριμένα, χρεώνεται με το διπλάσιο της αρχικής τιμής για κάθε 30 λεπτά καθυστέρησης, και το ποσό αυτό πιστώνεται σε εσάς ως αποζημίωση."
+    },
+    {
+      question: "Η θέση μου είναι σε κλειστό γκαράζ. Μπορώ να την καταχωρήσω στο Spotly;",
+      answer: "Φυσικά! Το Spotly υποστηρίζει κάθε τύπο θέσης στάθμευσης, συμπεριλαμβανομένων και των κλειστών γκαράζ. Κατά τη δημιουργία του προφίλ της θέσης σας, μπορείτε να προσθέσετε συγκεκριμένες οδηγίες προς τους οδηγούς για τον τρόπο πρόσβασης στον χώρο, ώστε η διαδικασία να είναι ομαλή και ασφαλής."
+    },
+    {
+      question: "Μπορώ να χρησιμοποιώ κι εγώ τη θέση μου ή δεσμεύεται 24/7 στο Spotly;",
+      answer: "Εσείς έχετε τον απόλυτο έλεγχο! Μέσα από το προφίλ σας στο Spotly, ορίζετε το δικό σας ημερολόγιο διαθεσιμότητας. Αν χρειάζεστε τη θέση σας συγκεκριμένες μέρες ή ώρες, απλά την 'κλείνετε' στο σύστημα. Τις υπόλοιπες ώρες, η θέση σας παραμένει ανοιχτή για να σας αποφέρει παθητικό εισόδημα."
+    },
+    {
+      question: "Τι γίνεται αν ένας οδηγός κλείσει τη θέση και την ακυρώσει τελευταία στιγμή;",
+      answer: "Για να διασφαλίσουμε τα έσοδά σας, οι οδηγοί έχουν δικαίωμα δωρεάν ακύρωσης μόνο μέσα στα πρώτα 10 λεπτά από τη στιγμή της κράτησης. Μετά τα 10 λεπτά, η ακύρωση δεν είναι εφικτή. Ωστόσο, αν ένας οδηγός κλείσει π.χ. για 2 ώρες και αποχωρήσει στη 1 ώρα, η κράτηση τερματίζεται, του επιστρέφεται το υπόλοιπο στο Spotly Wallet του, και η θέση σας απελευθερώνεται άμεσα για τον επόμενο πελάτη."
+    },
+    {
+      question: "Υπάρχει κάποιο νομικό ζήτημα με την ενοικίαση της θέσης μου; Πώς δηλώνω τα έσοδα;",
+      answer: "Η βραχυχρόνια ενοικίαση ιδιωτικού χώρου στάθμευσης λειτουργεί νόμιμα στα πρότυπα της οικονομίας διαμοιρασμού (sharing economy). Το Spotly σας παρέχει ένα ξεκάθαρο και πλήρες ιστορικό των συναλλαγών σας. Έτσι, μπορείτε εύκολα να συμβουλευτείτε τον λογιστή σας για την απλή και ορθή δήλωση των εσόδων σας."
     },
     {
       question: "Πώς μπορώ να κλείσω ένα ραντεβού (Let's Talk);",
@@ -153,6 +182,8 @@ export default function SpotlyLanding() {
   const [scrollY, setScrollY] = useState(0);
   const [hostEarnings, setHostEarnings] = useState(0);
   const [isHoveringPhone, setIsHoveringPhone] = useState(false);
+
+  const { language, toggleLanguage, t } = useLanguage();
   
   // ΝΕΟ STATE: Για το αναδυόμενο παράθυρο "Coming Soon"
   const [showComingSoon, setShowComingSoon] = useState(false);
@@ -427,26 +458,38 @@ export default function SpotlyLanding() {
             </div>
             <span className="text-2xl font-black tracking-tighter">Spotly<sup className="text-[10px] text-gray-500 font-bold ml-0.5">™</sup></span>
           </div>
-          <div className="hidden md:flex items-center gap-8 text-sm font-bold text-gray-400">
-            <a href="#how-it-works" className="hover:text-white transition-colors">Η Εμπειρία</a>
-            <a href="#hosts" className="hover:text-white transition-colors">Για Ιδιοκτήτες</a>
+            <div className="hidden md:flex items-center gap-8 text-sm font-bold text-gray-400">
+            <a href="#how-it-works" className="hover:text-white transition-colors">{t('nav', 'experience')}</a>
+            <Link href="/become-a-host" className="hover:text-white transition-colors font-black text-[#00E676]">
+              {t('nav', 'hosts')}
+            </Link>
             
-            {/* ΝΕΟ: Κουμπί Let's Talk */}
+            {/* Κουμπί Let's Talk */}
             <a 
               href="https://calendar.app.google/MWcpcvhhjxUb7RmP6" 
               target="_blank" 
               rel="noopener noreferrer"
               className="flex items-center gap-2 bg-gradient-to-r from-[#00E676] to-[#00b35c] text-black px-5 py-2.5 rounded-full font-black text-sm hover:shadow-[0_0_20px_rgba(0,230,118,0.4)] hover:scale-105 active:scale-95 transition-all"
             >
-              <Calendar className="w-4 h-4" /> Ας Μιλήσουμε
+              <Calendar className="w-4 h-4" /> {t('nav', 'letsTalk')}
             </a>
 
-            {/* Κουμπί που ανοίγει το "Coming Soon" */}
+            {/* Κουμπί Είσοδος στο App */}
             <button 
               onClick={() => setShowComingSoon(true)}
               className="bg-white/5 text-white px-6 py-2.5 rounded-full border border-white/10 hover:bg-white/10 hover:border-[#00E676]/50 transition-all active:scale-95 shadow-lg"
             >
-              Είσοδος στο App
+              {t('nav', 'enterApp')}
+            </button>
+
+            {/* === ΕΔΩ ΜΠΑΙΝΕΙ ΤΟ LANGUAGE TOGGLE === */}
+            <button 
+              onClick={toggleLanguage} 
+              className="flex items-center gap-1.5 bg-[#121212] border border-white/10 rounded-full px-3 py-2 text-xs font-black hover:border-[#00E676]/50 transition-all shadow-lg active:scale-95"
+            >
+              <span className={language === 'el' ? 'text-[#00E676]' : 'text-gray-500 transition-colors'}>EL</span>
+              <span className="text-gray-700">/</span>
+              <span className={language === 'en' ? 'text-[#00E676]' : 'text-gray-500 transition-colors'}>EN</span>
             </button>
           </div>
         </div>
@@ -473,18 +516,17 @@ export default function SpotlyLanding() {
             </div>
             
             <h1 className="text-6xl md:text-8xl font-black leading-[1.1] tracking-tighter mb-6 drop-shadow-2xl">
-              Βρες Πάρκινγκ <br />
+              {t('hero', 'title1')} <br />
               <span className="relative inline-block">
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00E676] via-emerald-400 to-[#00E676] bg-[length:200%_auto] animate-gradient">
-                  Σε 10 Δευτερόλεπτα.
+                  {t('hero', 'title2')}
                 </span>
-                {/* Accent line below text */}
                 <div className="absolute -bottom-2 left-0 w-full h-2 bg-[#00E676]/20 blur-sm rounded-full"></div>
               </span>
             </h1>
             
             <p className="text-gray-400 text-lg md:text-xl mb-10 max-w-xl mx-auto lg:mx-0 font-medium leading-relaxed">
-              Η πρώτη και μοναδική πλατφόρμα που μετατρέπει τα κλειστά ιδιωτικά γκαράζ σε δικές σου θέσεις στάθμευσης. Κλείσε θέση εκ των προτέρων, άνοιξε την πόρτα με ένα πάτημα στο κινητό σου και ξέχασε το άγχος.
+              {t('hero', 'desc')}
             </p>
 
             {/* ΝΕΑ ΦΟΡΜΑ ΠΟΥ ΚΑΛΕΙ ΤΗΝ API */}
@@ -782,12 +824,12 @@ export default function SpotlyLanding() {
                 </li>
               </ul>
 
-              <button 
-                onClick={() => setShowComingSoon(true)}
+              <Link 
+                href="/become-a-host"
                 className="inline-flex bg-white hover:bg-gray-200 text-black px-8 py-4 rounded-2xl font-black items-center gap-3 transition-transform active:scale-95 shadow-[0_0_30px_rgba(255,255,255,0.2)]"
               >
-                ΞΕΚΙΝΑ ΝΑ ΚΕΡΔΙΖΕΙΣ <ArrowRight className="w-5 h-5" />
-              </button>
+                ΓΙΝΕ HOST <ArrowRight className="w-5 h-5" />
+              </Link>
             </div>
             
             <div className="flex-1 w-full max-w-md relative mt-16 lg:mt-0">

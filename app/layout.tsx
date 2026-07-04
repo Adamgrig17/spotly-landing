@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { LanguageProvider } from './context/LanguageContext';
 import "./globals.css";
 // --- ΠΡΟΗΓΜΕΝΑ METADATA ΓΙΑ GOOGLE & SOCIAL MEDIA ---
 export const metadata: Metadata = {
@@ -76,7 +77,12 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="antialiased bg-[#121212]">{children}</body>
+      <body className="antialiased bg-[#121212]">
+        {/* ΕΔΩ ΜΠΑΙΝΕΙ Ο LANGUAGE PROVIDER */}
+        <LanguageProvider>
+          {children}
+        </LanguageProvider>
+      </body>
     </html>
   );
 }
