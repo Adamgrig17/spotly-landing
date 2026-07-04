@@ -1002,7 +1002,7 @@ export default function SpotlyLanding() {
           {/* Bottom Bar: Copyright & Legal */}
           <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6">
             <p className="text-gray-500 text-xs font-bold uppercase tracking-widest flex items-center justify-center gap-2">
-              <CheckCircle2 className="w-4 h-4 text-[#00E676]" /> SECURED BY STRIPE <span className="text-[#333] hidden sm:inline">|</span> © {new Date().getFullYear()} SPOTLY INC.
+              <CheckCircle2 className="w-4 h-4 text-[#00E676]" /> SECURED BY STRIPE <span className="text-[#333] hidden sm:inline">|</span> © {new Date().getFullYear()} SPOTLY PARKING MANAGEMENT L.P. (δ.τ. SPOTLY) · ΑΦΜ 803339090
             </p>
             <div className="flex space-x-8 text-[10px] font-black text-gray-600 uppercase tracking-[0.2em]">
               <a href="/terms" className="hover:text-[#00E676] transition-colors">Οροι Χρησης</a>
