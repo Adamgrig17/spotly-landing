@@ -538,7 +538,7 @@ export default function SpotlyLanding() {
                     type="email" 
                     required
                     disabled={status === 'loading' || status === 'success'}
-                    placeholder="Το email σου..." 
+                    placeholder={t('hero', 'placeholder')} 
                     className="relative w-full bg-[#121212] border border-[#333] rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-[#00E676] transition-colors disabled:opacity-50"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
@@ -552,7 +552,7 @@ export default function SpotlyLanding() {
                   {status === 'loading' ? (
                     <Loader2 className="w-5 h-5 animate-spin" />
                   ) : (
-                    <>EARLY ACCESS <ArrowRight className="w-5 h-5" /></>
+                    <>{t('hero', 'earlyAccess')} <ArrowRight className="w-5 h-5" /></>
                   )}
                 </button>
               </div>
@@ -571,8 +571,8 @@ export default function SpotlyLanding() {
                       </div>
                     </div>
                     <div className="flex flex-col text-left">
-                      <span className="text-white font-black text-sm tracking-tight">Η θέση σου κατοχυρώθηκε! 🚀</span>
-                      <span className="text-[#00E676] text-[10px] font-bold uppercase tracking-widest mt-0.5">Ελεγξε τα εισερχομενα σου</span>
+                      <span className="text-white font-black text-sm tracking-tight">{t('hero', 'successTitle')}</span>
+                      <span className="text-[#00E676] text-[10px] font-bold uppercase tracking-widest mt-0.5">{t('hero', 'successSub')}</span>
                     </div>
                   </div>
                 )}
@@ -581,7 +581,7 @@ export default function SpotlyLanding() {
                 {status === 'error' && (
                   <div className="inline-flex items-center gap-3 bg-red-500/10 border border-red-500/20 py-2 px-4 rounded-xl animate-in fade-in slide-in-from-bottom-2 duration-300">
                     <X className="w-4 h-4 text-red-500" />
-                    <span className="text-red-500 text-sm font-bold">Κάτι πήγε στραβά. Ξαναδοκίμασε.</span>
+                    <span className="text-red-500 text-sm font-bold">{t('hero', 'errorMsg')}</span>
                   </div>
                 )}
               </div>
@@ -598,7 +598,7 @@ export default function SpotlyLanding() {
                  ))}
               </div>
               <div className="text-xs text-gray-500 font-medium">
-                 Οδηγοί είναι ήδη στη λίστα
+                 {t('hero', 'socialProof')}
               </div>
             </div>
           </div>
@@ -726,8 +726,8 @@ export default function SpotlyLanding() {
       <section id="how-it-works" className="py-32 relative bg-gradient-to-b from-[#050505] to-[#0A0A0A]">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-20" style={{ transform: `translateY(${Math.max(0, 100 - scrollY * 0.2)}px)`, opacity: Math.min(1, scrollY / 300) }}>
-            <h2 className="text-4xl md:text-5xl font-black tracking-tight mb-4">Η Μαγεία της Απλότητας</h2>
-            <p className="text-gray-400 max-w-2xl mx-auto text-lg">Τρεις κινήσεις. Μηδέν άγχος. Ο χρόνος σου είναι πολύτιμος για να τον ξοδεύεις ψάχνοντας.</p>
+            <h2 className="text-4xl md:text-5xl font-black tracking-tight mb-4">{t('how', 'title1')} {t('how', 'title2')}</h2>
+            <p className="text-gray-400 max-w-2xl mx-auto text-lg">{t('how', 'desc')}</p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
@@ -736,8 +736,8 @@ export default function SpotlyLanding() {
               <div className="w-16 h-16 bg-[#1a1a1a] rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-[#00E676]/20 transition-all duration-500 border border-white/5 relative z-10">
                 <MapPin className="w-8 h-8 text-white group-hover:text-[#00E676] transition-colors" />
               </div>
-              <h3 className="text-xl font-black mb-3 relative z-10">1. Εντόπισε</h3>
-              <p className="text-gray-400 leading-relaxed relative z-10">Ο real-time χάρτης σου δείχνει μόνο τις θέσεις που είναι πραγματικά άδειες αυτή τη στιγμή, δίπλα στον προορισμό σου.</p>
+              <h3 className="text-xl font-black mb-3 relative z-10">{t('how', 'step1Title')}</h3>
+              <p className="text-gray-400 leading-relaxed relative z-10">{t('how', 'step1Desc')}</p>
             </div>
             
             <div className="spotlight-card reveal-scale delay-100 bg-[#121212] p-8 rounded-[32px] border border-white/5 hover:border-[#00E676]/40 transition-all duration-300 group hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,230,118,0.05)] relative overflow-hidden mt-8 md:mt-0">
@@ -745,8 +745,8 @@ export default function SpotlyLanding() {
               <div className="w-16 h-16 bg-[#1a1a1a] rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-[#00E676]/20 transition-all duration-500 border border-white/5 relative z-10">
                 <Clock className="w-8 h-8 text-white group-hover:text-[#00E676] transition-colors" />
               </div>
-              <h3 className="text-xl font-black mb-3 relative z-10">2. Κλείσε</h3>
-              <p className="text-gray-400 leading-relaxed relative z-10">Επίλεξε τον χρόνο που χρειάζεσαι. Το Spotly ελέγχει αυτόματα αν η θέση θα μείνει ελεύθερη πριν επιστρέψει ο ιδιοκτήτης.</p>
+              <h3 className="text-xl font-black mb-3 relative z-10">{t('how', 'step2Title')}</h3>
+              <p className="text-gray-400 leading-relaxed relative z-10">{t('how', 'step2Desc')}</p>
             </div>
 
             <div className="spotlight-card reveal-scale delay-200 bg-[#121212] p-8 rounded-[32px] border border-white/5 hover:border-[#00E676]/40 transition-all duration-300 group hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,230,118,0.05)] relative overflow-hidden mt-16 md:mt-0">
@@ -754,9 +754,9 @@ export default function SpotlyLanding() {
               <div className="w-16 h-16 bg-[#1a1a1a] rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-[#00E676]/20 transition-all duration-500 border border-white/5 relative z-10">
                 <Car className="w-8 h-8 text-white group-hover:text-[#00E676] transition-colors" />
               </div>
-              <h3 className="text-xl font-black mb-3 relative z-10">3. Πάρκαρε</h3>
+              <h3 className="text-xl font-black mb-3 relative z-10">{t('how', 'step3Title')}</h3>
               <p className="text-gray-400 leading-relaxed relative z-10">
-                Το GPS σε οδηγεί εκεί. Δες τον κωδικό PIN, ή <b className="text-white group-hover:text-[#00E676] transition-colors">άνοιξε την γκαραζόπορτα με ένα πάτημα</b> από το app, και πάρκαρε.
+                {t('how', 'step3DescA')}<b className="text-white group-hover:text-[#00E676] transition-colors">{t('how', 'step3DescBold')}</b>{t('how', 'step3DescB')}
               </p>
             </div>
           </div>
@@ -773,14 +773,14 @@ export default function SpotlyLanding() {
             
             <div className="flex-1 relative">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-gray-300 text-xs font-bold uppercase tracking-widest mb-6">
-                <Star className="w-3 h-3 text-yellow-500 fill-current" /> Γίνε Host
+                <Star className="w-3 h-3 text-yellow-500 fill-current" /> {t('hosts', 'badge')}
               </div>
               <h2 className="text-4xl md:text-6xl font-black tracking-tighter mb-6 leading-tight">
-                Το άδειο σου πάρκινγκ,<br/>
-                <span className="text-[#00E676]">η νέα σου επιχείρηση.</span>
+                {t('hosts', 'title1')}<br/>
+                <span className="text-[#00E676]">{t('hosts', 'title2')}</span>
               </h2>
               <p className="text-gray-400 text-lg md:text-xl mb-10 max-w-lg leading-relaxed">
-                Νοίκιασε τη θέση σου με <b>Αυτόματο Πιλότο</b> όσο λείπεις στη δουλειά. Η ενσωμάτωση γίνεται σε 5 λεπτά και τα κέρδη μπαίνουν αυτόματα στο ΙΒΑΝ σου.
+                {t('hosts', 'descA')}<b>{t('hosts', 'descBold')}</b>{t('hosts', 'descB')}
               </p>
               
               <ul className="space-y-8 mb-12">
@@ -790,9 +790,9 @@ export default function SpotlyLanding() {
                     <Wifi className="w-6 h-6 text-[#00E676] relative z-10 group-hover:scale-110 transition-transform" />
                   </div>
                   <div>
-                    <h4 className="text-white font-bold text-xl mb-1">Plug & Play Εγκατάσταση</h4>
+                    <h4 className="text-white font-bold text-xl mb-1">{t('hosts', 'f1Title')}</h4>
                     <p className="text-gray-400 text-sm leading-relaxed">
-                      Από ανοιχτές πιλοτές μέχρι ηλεκτρικές γκαραζόπορτες. Συνδέεται με το App μέσω απλού εξοπλισμού <b>των 15€</b>. Το στήνεις σε 5 λεπτά!
+                      {t('hosts', 'f1DescA')}<b>{t('hosts', 'f1DescBold')}</b>{t('hosts', 'f1DescB')}
                     </p>
                   </div>
                 </li>
@@ -803,9 +803,9 @@ export default function SpotlyLanding() {
                     <Smartphone className="w-6 h-6 text-[#00E676] relative z-10 group-hover:scale-110 transition-transform" />
                   </div>
                   <div>
-                    <h4 className="text-white font-bold text-xl mb-1">Smart Schedule</h4>
+                    <h4 className="text-white font-bold text-xl mb-1">{t('hosts', 'f2Title')}</h4>
                     <p className="text-gray-400 text-sm leading-relaxed">
-                      Όρισε τις ώρες που λείπεις (π.χ. Δευ-Παρ, 08:00 - 17:00). Το Spotly ανοιγοκλείνει τη διαθεσιμότητα αυτόματα, χωρίς να ασχολείσαι καθόλου.
+                      {t('hosts', 'f2Desc')}
                     </p>
                   </div>
                 </li>
@@ -816,9 +816,9 @@ export default function SpotlyLanding() {
                     <Wallet className="w-6 h-6 text-[#00E676] relative z-10 group-hover:scale-110 transition-transform" />
                   </div>
                   <div>
-                    <h4 className="text-white font-bold text-xl mb-1">Εγγυημένες Πληρωμές</h4>
+                    <h4 className="text-white font-bold text-xl mb-1">{t('hosts', 'f3Title')}</h4>
                     <p className="text-gray-400 text-sm leading-relaxed">
-                      100% ψηφιακές συναλλαγές. Τα χρήματά σου μπαίνουν με ασφάλεια κατευθείαν στον τραπεζικό σου λογαριασμό μέσω της <b>Stripe</b>.
+                      {t('hosts', 'f3DescA')}<b>Stripe</b>.
                     </p>
                   </div>
                 </li>
@@ -828,7 +828,7 @@ export default function SpotlyLanding() {
                 href="/become-a-host"
                 className="inline-flex bg-white hover:bg-gray-200 text-black px-8 py-4 rounded-2xl font-black items-center gap-3 transition-transform active:scale-95 shadow-[0_0_30px_rgba(255,255,255,0.2)]"
               >
-                ΓΙΝΕ HOST <ArrowRight className="w-5 h-5" />
+                {t('hosts', 'cta')} <ArrowRight className="w-5 h-5" />
               </Link>
             </div>
             
@@ -934,12 +934,13 @@ export default function SpotlyLanding() {
                 <span className="font-black tracking-tighter text-3xl text-white">Spotly<sup className="text-sm text-[#00E676] font-bold ml-1">™</sup></span>
               </div>
               <p className="text-gray-400 leading-relaxed mb-8 text-sm max-w-sm">
-                Η στάθμευση στη νέα εποχή. Επαναπροσδιορίζουμε τον τρόπο που ανακαλύπτετε, διαχειρίζεστε και μοιράζεστε τους χώρους σας.
+                {t('footer', 'tagline')}
               </p>
               
-              {/* Fake App Badges για Premium Vibe */}
+              {/* App Badges — Coming Soon (ανοίγουν το Early Access modal) */}
               <div className="flex flex-wrap gap-3 mb-10">
-                <div onClick={() => setShowComingSoon(true)} className="flex items-center gap-3 bg-[#121212] border border-[#222] hover:border-[#00E676]/40 px-5 py-2.5 rounded-2xl cursor-pointer transition-all hover:-translate-y-1 group shadow-lg">
+                <div onClick={() => setShowComingSoon(true)} className="relative flex items-center gap-3 bg-[#121212] border border-[#222] hover:border-[#00E676]/40 px-5 py-2.5 rounded-2xl cursor-pointer transition-all hover:-translate-y-1 group shadow-lg">
+                  <span className="absolute -top-2 -right-2 bg-[#00E676] text-black text-[8px] font-black uppercase tracking-widest px-2 py-0.5 rounded-full shadow-[0_0_10px_rgba(0,230,118,0.5)]">{t('footer', 'comingSoon')}</span>
                   <svg className="w-7 h-7 text-white group-hover:text-[#00E676] transition-colors" viewBox="0 0 384 512" fill="currentColor">
                     <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/>
                   </svg>
@@ -948,7 +949,8 @@ export default function SpotlyLanding() {
                     <div className="text-base font-black text-white leading-tight">App Store</div>
                   </div>
                 </div>
-                <div onClick={() => setShowComingSoon(true)} className="flex items-center gap-3 bg-[#121212] border border-[#222] hover:border-[#00E676]/40 px-5 py-2.5 rounded-2xl cursor-pointer transition-all hover:-translate-y-1 group shadow-lg">
+                <div onClick={() => setShowComingSoon(true)} className="relative flex items-center gap-3 bg-[#121212] border border-[#222] hover:border-[#00E676]/40 px-5 py-2.5 rounded-2xl cursor-pointer transition-all hover:-translate-y-1 group shadow-lg">
+                  <span className="absolute -top-2 -right-2 bg-[#00E676] text-black text-[8px] font-black uppercase tracking-widest px-2 py-0.5 rounded-full shadow-[0_0_10px_rgba(0,230,118,0.5)]">{t('footer', 'comingSoon')}</span>
                   <svg className="w-7 h-7 text-white group-hover:text-[#00E676] transition-colors" viewBox="0 0 512 512" fill="currentColor">
                     <path d="M325.3 234.3L104.6 13l280.8 161.2-60.1 60.1zM47 0C34 6.8 25.3 19.2 25.3 35.3v441.3c0 16.1 8.7 28.5 21.7 35.3l256.6-256L47 0zm425.2 225.6l-58.9-34.1-65.7 64.5 65.7 64.5 60.1-34.1c18-14.3 18-46.5-1.2-60.8zM104.6 499l280.8-161.2-60.1-60.1L104.6 499z"/>
                   </svg>
@@ -1005,18 +1007,18 @@ export default function SpotlyLanding() {
 
             {/* Στήλη 2: Πλοήγηση (Με Hover Effects) */}
             <div className="md:col-span-3 lg:col-span-2">
-              <h4 className="text-white font-black mb-6 uppercase tracking-widest text-xs">Πλοηγηση</h4>
+              <h4 className="text-white font-black mb-6 uppercase tracking-widest text-xs">{t('footer', 'navHeading')}</h4>
               <ul className="space-y-4 text-sm font-medium">
-                <li><a href="#" className="group flex items-center text-gray-400 hover:text-[#00E676] transition-colors"><ArrowRight className="w-3 h-3 mr-2 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" /> Αρχική</a></li>
-                <li><a href="#how-it-works" className="group flex items-center text-gray-400 hover:text-[#00E676] transition-colors"><ArrowRight className="w-3 h-3 mr-2 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" /> Η Εμπειρία</a></li>
-                <li><a href="#hosts" className="group flex items-center text-gray-400 hover:text-[#00E676] transition-colors"><ArrowRight className="w-3 h-3 mr-2 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" /> Για Ιδιοκτήτες</a></li>
-                <li><a href="#faq" className="group flex items-center text-gray-400 hover:text-[#00E676] transition-colors"><ArrowRight className="w-3 h-3 mr-2 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" /> Συχνές Ερωτήσεις</a></li>
+                <li><a href="#" className="group flex items-center text-gray-400 hover:text-[#00E676] transition-colors"><ArrowRight className="w-3 h-3 mr-2 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" /> {t('footer', 'navHome')}</a></li>
+                <li><a href="#how-it-works" className="group flex items-center text-gray-400 hover:text-[#00E676] transition-colors"><ArrowRight className="w-3 h-3 mr-2 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" /> {t('footer', 'navExperience')}</a></li>
+                <li><a href="#hosts" className="group flex items-center text-gray-400 hover:text-[#00E676] transition-colors"><ArrowRight className="w-3 h-3 mr-2 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" /> {t('footer', 'navHosts')}</a></li>
+                <li><a href="#faq" className="group flex items-center text-gray-400 hover:text-[#00E676] transition-colors"><ArrowRight className="w-3 h-3 mr-2 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" /> {t('footer', 'navFaq')}</a></li>
               </ul>
             </div>
 
             {/* Στήλη 3: Επικοινωνία */}
             <div className="md:col-span-4 lg:col-span-4">
-              <h4 className="text-white font-black mb-6 uppercase tracking-widest text-xs">Επικοινωνια</h4>
+              <h4 className="text-white font-black mb-6 uppercase tracking-widest text-xs">{t('footer', 'contactHeading')}</h4>
               <ul className="space-y-5 text-sm font-medium bg-[#121212]/50 p-6 rounded-3xl border border-white/5 backdrop-blur-sm">
                 <li className="flex items-center group">
                   <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center mr-4 group-hover:bg-[#00E676]/20 transition-colors">
@@ -1034,7 +1036,7 @@ export default function SpotlyLanding() {
                   <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center mr-4 group-hover:bg-[#00E676]/20 transition-colors">
                     <MapPin className="w-4 h-4 text-[#00E676]" />
                   </div>
-                  <span className="text-gray-400">Αθήνα, Ελλάδα</span>
+                  <span className="text-gray-400">{t('footer', 'location')}</span>
                 </li>
               </ul>
             </div>
@@ -1042,14 +1044,20 @@ export default function SpotlyLanding() {
           </div>
 
           {/* Bottom Bar: Copyright & Legal */}
-          <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6">
-            <p className="text-gray-500 text-xs font-bold uppercase tracking-widest flex items-center justify-center gap-2">
-              <CheckCircle2 className="w-4 h-4 text-[#00E676]" /> SECURED BY STRIPE <span className="text-[#333] hidden sm:inline">|</span> © {new Date().getFullYear()} SPOTLY PARKING MANAGEMENT ΕΤΕΡΟΡΡΥΘΜΗ ΕΤΑΙΡΕΙΑ (δ.τ. SPOTLY) · ΑΦΜ 803339090
-            </p>
-            <div className="flex space-x-8 text-[10px] font-black text-gray-600 uppercase tracking-[0.2em]">
-              <a href="/terms" className="hover:text-[#00E676] transition-colors">Οροι Χρησης</a>
-              <a href="/privacy" className="hover:text-[#00E676] transition-colors">Πολιτικη Απορρητου</a>
+          <div className="pt-8 border-t border-white/10 flex flex-col gap-5">
+            <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+              <p className="text-gray-500 text-xs font-bold uppercase tracking-widest flex items-center justify-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-[#00E676]" /> SECURED BY STRIPE <span className="text-[#333] hidden sm:inline">|</span> © {new Date().getFullYear()} SPOTLY
+              </p>
+              <div className="flex space-x-8 text-[10px] font-black text-gray-600 uppercase tracking-[0.2em]">
+                <a href="/terms" className="hover:text-[#00E676] transition-colors">{t('footer', 'terms')}</a>
+                <a href="/privacy" className="hover:text-[#00E676] transition-colors">{t('footer', 'privacy')}</a>
+              </div>
             </div>
+            {/* Στοιχεία εταιρείας (ν. 4919/2022: επωνυμία, νομική μορφή, ΓΕΜΗ, έδρα) */}
+            <p className="text-gray-600 text-[11px] leading-relaxed text-center md:text-left">
+              {t('footer', 'legalLine')}
+            </p>
           </div>
         </div>
       </footer>
