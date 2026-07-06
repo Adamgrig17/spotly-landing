@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 
 // Το Λεξικό μας
 const translations = {
@@ -145,8 +145,18 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 export const LanguageProvider = ({ children }: { children: React.ReactNode }) => {
   const [language, setLanguage] = useState<Language>('el'); // Προεπιλογή Ελληνικά
 
+  // Διατήρηση επιλογής γλώσσας μεταξύ σελίδων (terms, privacy κ.λπ.)
+  useEffect(() => {
+    const saved = window.localStorage.getItem('spotly-lang');
+    if (saved === 'en' || saved === 'el') setLanguage(saved);
+  }, []);
+
   const toggleLanguage = () => {
-    setLanguage((prev) => (prev === 'el' ? 'en' : 'el'));
+    setLanguage((prev) => {
+      const next = prev === 'el' ? 'en' : 'el';
+      window.localStorage.setItem('spotly-lang', next);
+      return next;
+    });
   };
 
   const t = (section: keyof typeof translations['el'], key: string) => {

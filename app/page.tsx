@@ -40,71 +40,139 @@ const FAQItem = ({ question, answer, isOpen, onClick }: FAQItemProps) => {
   );
 };
 
+const faqContent = {
+  el: {
+    badge: "Υποστήριξη",
+    title1: "Συχνές",
+    title2: "Ερωτήσεις",
+    subtitle: "Λύστε όλες σας τις απορίες σχετικά με τη νέα εποχή του parking.",
+    ctaTitle: "Έχετε ακόμα απορίες;",
+    ctaDesc: "Είμαστε εδώ για να συζητήσουμε οποιαδήποτε συνεργασία ή τεχνική απορία.",
+    ctaButton: "Ας Μιλησουμε",
+    faqs: [
+      {
+        question: "Τι ακριβώς είναι το Spotly;",
+        answer: "Το Spotly είναι η πρώτη πλατφόρμα στην Ελλάδα που μετατρέπει ιδιωτικά γκαράζ σε άμεσα προσβάσιμες θέσεις στάθμευσης. Μέσω της εφαρμογής, μπορείς να βρεις, να κλείσεις και να ανοίξεις την πόρτα του γκαράζ απευθείας από το κινητό σου, χωρίς να ψάχνεις."
+      },
+      {
+        question: "Πώς λειτουργεί για τους ιδιοκτήτες (Hosts);",
+        answer: "Αν έχεις άδεια θέση ή γκαράζ, τοποθετούμε έναν απλό μηχανισμό (plug & play) στην πόρτα σου με ελάχιστο κόστος. Εσύ ορίζεις το πρόγραμμά σου (π.χ. όταν λείπεις στη δουλειά) και η θέση ενοικιάζεται αυτόματα, αποφέροντάς σου εγγυημένο παθητικό εισόδημα μέσω Stripe."
+      },
+      {
+        question: "Τι γίνεται αν ο οδηγός κάνει ζημιά στην περιουσία μου;",
+        answer: "Η ασφάλεια της περιουσίας σας είναι η απόλυτη προτεραιότητά μας. Κάθε οδηγός που χρησιμοποιεί το Spotly είναι ταυτοποιημένος και το όχημά του διαθέτει υποχρεωτικά ενεργό ασφαλιστήριο συμβόλαιο, το οποίο καλύπτει τυχόν υλικές ζημιές προς τρίτους. Παράλληλα, το Spotly βρίσκεται σε διαδικασία ενσωμάτωσης δικής του επιπλέον ασφαλιστικής κάλυψης, ώστε να σας προσφέρει τη μέγιστη δυνατή σιγουριά. Σε κάθε περίπτωση, η ομάδα υποστήριξής μας είναι δίπλα σας."
+      },
+      {
+        question: "Πώς ξέρω ότι ο άνθρωπος που θα παρκάρει είναι αξιόπιστος;",
+        answer: "Χτίζουμε μια κοινότητα εμπιστοσύνης. Για να κάνει κράτηση ένας οδηγός στο Spotly, απαιτείται πρώτα η εγγραφή και ταυτοποίησή του. Καταχωρεί υποχρεωτικά το email και το τηλέφωνό του, καθώς και όλα τα στοιχεία του οχήματός του (πινακίδα, χρώμα, μοντέλο και μάρκα). Επιπλέον, μετά από κάθε στάθμευση λειτουργεί σύστημα αξιολόγησης."
+      },
+      {
+        question: "Τι συμβαίνει αν ο οδηγός δεν πάρει το αυτοκίνητό του όταν λήξει ο χρόνος του;",
+        answer: "Προστατεύουμε αυστηρά τον χρόνο και τον χώρο σας. Σε περίπτωση που ο οδηγός υπερβεί τον συμφωνημένο χρόνο στάθμευσης, του επιβάλλεται αυτόματα πέναλτι. Συγκεκριμένα, χρεώνεται με το διπλάσιο της αρχικής τιμής για κάθε 30 λεπτά καθυστέρησης, και το ποσό αυτό πιστώνεται σε εσάς ως αποζημίωση."
+      },
+      {
+        question: "Η θέση μου είναι σε κλειστό γκαράζ. Μπορώ να την καταχωρήσω στο Spotly;",
+        answer: "Φυσικά! Το Spotly υποστηρίζει κάθε τύπο θέσης στάθμευσης, συμπεριλαμβανομένων και των κλειστών γκαράζ. Κατά τη δημιουργία του προφίλ της θέσης σας, μπορείτε να προσθέσετε συγκεκριμένες οδηγίες προς τους οδηγούς για τον τρόπο πρόσβασης στον χώρο, ώστε η διαδικασία να είναι ομαλή και ασφαλής."
+      },
+      {
+        question: "Μπορώ να χρησιμοποιώ κι εγώ τη θέση μου ή δεσμεύεται 24/7 στο Spotly;",
+        answer: "Εσείς έχετε τον απόλυτο έλεγχο! Μέσα από το προφίλ σας στο Spotly, ορίζετε το δικό σας ημερολόγιο διαθεσιμότητας. Αν χρειάζεστε τη θέση σας συγκεκριμένες μέρες ή ώρες, απλά την 'κλείνετε' στο σύστημα. Τις υπόλοιπες ώρες, η θέση σας παραμένει ανοιχτή για να σας αποφέρει παθητικό εισόδημα."
+      },
+      {
+        question: "Τι γίνεται αν ένας οδηγός κλείσει τη θέση και την ακυρώσει τελευταία στιγμή;",
+        answer: "Για να διασφαλίσουμε τα έσοδά σας, οι οδηγοί έχουν δικαίωμα δωρεάν ακύρωσης μόνο μέσα στα πρώτα 10 λεπτά από τη στιγμή της κράτησης. Μετά τα 10 λεπτά, η ακύρωση δεν είναι εφικτή. Ωστόσο, αν ένας οδηγός κλείσει π.χ. για 2 ώρες και αποχωρήσει στη 1 ώρα, η κράτηση τερματίζεται, του επιστρέφεται το υπόλοιπο στο Spotly Wallet του, και η θέση σας απελευθερώνεται άμεσα για τον επόμενο πελάτη."
+      },
+      {
+        question: "Υπάρχει κάποιο νομικό ζήτημα με την ενοικίαση της θέσης μου; Πώς δηλώνω τα έσοδα;",
+        answer: "Η βραχυχρόνια ενοικίαση ιδιωτικού χώρου στάθμευσης λειτουργεί νόμιμα στα πρότυπα της οικονομίας διαμοιρασμού (sharing economy). Το Spotly σας παρέχει ένα ξεκάθαρο και πλήρες ιστορικό των συναλλαγών σας. Έτσι, μπορείτε εύκολα να συμβουλευτείτε τον λογιστή σας για την απλή και ορθή δήλωση των εσόδων σας."
+      },
+      {
+        question: "Πώς μπορώ να κλείσω ένα ραντεβού (Let's Talk);",
+        answer: "Πολύ απλά! Πατώντας το κουμπί 'Ας Μιλήσουμε' στο πάνω μέρος της σελίδας, θα μεταφερθείτε στο περιβάλλον του Workspace μας για να διαλέξετε την ημέρα και ώρα που σας εξυπηρετεί για ένα απευθείας video call μαζί μας."
+      },
+      {
+        question: "Πότε θα κυκλοφορήσει επίσημα η εφαρμογή;",
+        answer: "Αυτή τη στιγμή βρισκόμαστε σε φάση κλειστής δοκιμής (Beta). Συμπληρώνοντας το email σας στην αρχική οθόνη (Early Access), θα είστε από τους πρώτους που θα αποκτήσουν πρόσβαση και αποκλειστικά προνόμια κατά το λανσάρισμα."
+      }
+    ]
+  },
+  en: {
+    badge: "Support",
+    title1: "Frequently Asked",
+    title2: "Questions",
+    subtitle: "Get answers to all your questions about the new era of parking.",
+    ctaTitle: "Still have questions?",
+    ctaDesc: "We're here to discuss any partnership or technical question.",
+    ctaButton: "Let's Talk",
+    faqs: [
+      {
+        question: "What exactly is Spotly?",
+        answer: "Spotly is the first platform in Greece that turns private garages into instantly accessible parking spots. Through the app, you can find a spot, book it, and open the garage door straight from your phone — no more circling the block."
+      },
+      {
+        question: "How does it work for owners (Hosts)?",
+        answer: "If you have an empty spot or garage, we install a simple plug & play device on your door at minimal cost. You set your schedule (e.g. while you're at work) and your spot is rented out automatically, earning you guaranteed passive income via Stripe."
+      },
+      {
+        question: "What happens if a driver damages my property?",
+        answer: "The safety of your property is our absolute priority. Every driver using Spotly is identity-verified and their vehicle is required to carry an active insurance policy covering material damage to third parties. In addition, Spotly is in the process of integrating its own supplementary insurance coverage for maximum peace of mind. In any case, our support team is by your side."
+      },
+      {
+        question: "How do I know the person parking is trustworthy?",
+        answer: "We are building a community of trust. Before a driver can book on Spotly, they must register and be verified. They are required to provide their email and phone number, as well as full vehicle details (license plate, color, model and make). On top of that, a rating system runs after every parking session."
+      },
+      {
+        question: "What happens if the driver doesn't collect their car when their time is up?",
+        answer: "We strictly protect your time and your space. If a driver exceeds the agreed parking time, a penalty is applied automatically: they are charged double the original rate for every 30 minutes of delay, and that amount is credited to you as compensation."
+      },
+      {
+        question: "My spot is in a closed garage. Can I list it on Spotly?",
+        answer: "Of course! Spotly supports every type of parking spot, including closed garages. When creating your spot's profile, you can add specific access instructions for drivers, so the process is smooth and safe."
+      },
+      {
+        question: "Can I still use my own spot, or is it locked into Spotly 24/7?",
+        answer: "You are in full control! Through your Spotly profile, you set your own availability calendar. If you need your spot on specific days or hours, you simply block it in the system. The rest of the time, your spot stays open and earns you passive income."
+      },
+      {
+        question: "What if a driver books my spot and cancels at the last minute?",
+        answer: "To protect your earnings, drivers can cancel for free only within the first 10 minutes after booking. After 10 minutes, cancellation is no longer possible. However, if a driver books e.g. 2 hours and leaves after 1 hour, the booking ends, the remaining balance is refunded to their Spotly Wallet, and your spot is immediately released for the next customer."
+      },
+      {
+        question: "Are there any legal issues with renting out my spot? How do I declare the income?",
+        answer: "Short-term rental of a private parking space operates legally under the sharing-economy model. Spotly provides you with a clear and complete history of your transactions, so you can easily consult your accountant for a simple and correct declaration of your income."
+      },
+      {
+        question: "How can I book a meeting (Let's Talk)?",
+        answer: "It's simple! By clicking the 'Let's Talk' button at the top of the page, you'll be taken to our Workspace environment to pick the day and time that suits you for a direct video call with us."
+      },
+      {
+        question: "When will the app officially launch?",
+        answer: "We are currently in a closed testing phase (Beta). By entering your email on the home screen (Early Access), you'll be among the first to get access and exclusive perks at launch."
+      }
+    ]
+  }
+};
+
 const FAQSection = () => {
   const [openIndex, setOpenIndex] = useState(0); // Η πρώτη ερώτηση είναι ανοιχτή by default
-
-  const faqs = [
-    {
-      question: "Τι ακριβώς είναι το Spotly;",
-      answer: "Το Spotly είναι η πρώτη πλατφόρμα στην Ελλάδα που μετατρέπει ιδιωτικά γκαράζ σε άμεσα προσβάσιμες θέσεις στάθμευσης. Μέσω της εφαρμογής, μπορείς να βρεις, να κλείσεις και να ανοίξεις την πόρτα του γκαράζ απευθείας από το κινητό σου, χωρίς να ψάχνεις."
-    },
-    {
-      question: "Πώς λειτουργεί για τους ιδιοκτήτες (Hosts);",
-      answer: "Αν έχεις άδεια θέση ή γκαράζ, τοποθετούμε έναν απλό μηχανισμό (plug & play) στην πόρτα σου με ελάχιστο κόστος. Εσύ ορίζεις το πρόγραμμά σου (π.χ. όταν λείπεις στη δουλειά) και η θέση ενοικιάζεται αυτόματα, αποφέροντάς σου εγγυημένο παθητικό εισόδημα μέσω Stripe."
-    },
-    {
-      question: "Τι γίνεται αν ο οδηγός κάνει ζημιά στην περιουσία μου;",
-      answer: "Η ασφάλεια της περιουσίας σας είναι η απόλυτη προτεραιότητά μας. Κάθε οδηγός που χρησιμοποιεί το Spotly είναι ταυτοποιημένος και το όχημά του διαθέτει υποχρεωτικά ενεργό ασφαλιστήριο συμβόλαιο, το οποίο καλύπτει τυχόν υλικές ζημιές προς τρίτους. Παράλληλα, το Spotly βρίσκεται σε διαδικασία ενσωμάτωσης δικής του επιπλέον ασφαλιστικής κάλυψης, ώστε να σας προσφέρει τη μέγιστη δυνατή σιγουριά. Σε κάθε περίπτωση, η ομάδα υποστήριξής μας είναι δίπλα σας."
-    },
-    {
-      question: "Πώς ξέρω ότι ο άνθρωπος που θα παρκάρει είναι αξιόπιστος;",
-      answer: "Χτίζουμε μια κοινότητα εμπιστοσύνης. Για να κάνει κράτηση ένας οδηγός στο Spotly, απαιτείται πρώτα η εγγραφή και ταυτοποίησή του. Καταχωρεί υποχρεωτικά το email και το τηλέφωνό του, καθώς και όλα τα στοιχεία του οχήματός του (πινακίδα, χρώμα, μοντέλο και μάρκα). Επιπλέον, μετά από κάθε στάθμευση λειτουργεί σύστημα αξιολόγησης."
-    },
-    {
-      question: "Τι συμβαίνει αν ο οδηγός δεν πάρει το αυτοκίνητό του όταν λήξει ο χρόνος του;",
-      answer: "Προστατεύουμε αυστηρά τον χρόνο και τον χώρο σας. Σε περίπτωση που ο οδηγός υπερβεί τον συμφωνημένο χρόνο στάθμευσης, του επιβάλλεται αυτόματα πέναλτι. Συγκεκριμένα, χρεώνεται με το διπλάσιο της αρχικής τιμής για κάθε 30 λεπτά καθυστέρησης, και το ποσό αυτό πιστώνεται σε εσάς ως αποζημίωση."
-    },
-    {
-      question: "Η θέση μου είναι σε κλειστό γκαράζ. Μπορώ να την καταχωρήσω στο Spotly;",
-      answer: "Φυσικά! Το Spotly υποστηρίζει κάθε τύπο θέσης στάθμευσης, συμπεριλαμβανομένων και των κλειστών γκαράζ. Κατά τη δημιουργία του προφίλ της θέσης σας, μπορείτε να προσθέσετε συγκεκριμένες οδηγίες προς τους οδηγούς για τον τρόπο πρόσβασης στον χώρο, ώστε η διαδικασία να είναι ομαλή και ασφαλής."
-    },
-    {
-      question: "Μπορώ να χρησιμοποιώ κι εγώ τη θέση μου ή δεσμεύεται 24/7 στο Spotly;",
-      answer: "Εσείς έχετε τον απόλυτο έλεγχο! Μέσα από το προφίλ σας στο Spotly, ορίζετε το δικό σας ημερολόγιο διαθεσιμότητας. Αν χρειάζεστε τη θέση σας συγκεκριμένες μέρες ή ώρες, απλά την 'κλείνετε' στο σύστημα. Τις υπόλοιπες ώρες, η θέση σας παραμένει ανοιχτή για να σας αποφέρει παθητικό εισόδημα."
-    },
-    {
-      question: "Τι γίνεται αν ένας οδηγός κλείσει τη θέση και την ακυρώσει τελευταία στιγμή;",
-      answer: "Για να διασφαλίσουμε τα έσοδά σας, οι οδηγοί έχουν δικαίωμα δωρεάν ακύρωσης μόνο μέσα στα πρώτα 10 λεπτά από τη στιγμή της κράτησης. Μετά τα 10 λεπτά, η ακύρωση δεν είναι εφικτή. Ωστόσο, αν ένας οδηγός κλείσει π.χ. για 2 ώρες και αποχωρήσει στη 1 ώρα, η κράτηση τερματίζεται, του επιστρέφεται το υπόλοιπο στο Spotly Wallet του, και η θέση σας απελευθερώνεται άμεσα για τον επόμενο πελάτη."
-    },
-    {
-      question: "Υπάρχει κάποιο νομικό ζήτημα με την ενοικίαση της θέσης μου; Πώς δηλώνω τα έσοδα;",
-      answer: "Η βραχυχρόνια ενοικίαση ιδιωτικού χώρου στάθμευσης λειτουργεί νόμιμα στα πρότυπα της οικονομίας διαμοιρασμού (sharing economy). Το Spotly σας παρέχει ένα ξεκάθαρο και πλήρες ιστορικό των συναλλαγών σας. Έτσι, μπορείτε εύκολα να συμβουλευτείτε τον λογιστή σας για την απλή και ορθή δήλωση των εσόδων σας."
-    },
-    {
-      question: "Πώς μπορώ να κλείσω ένα ραντεβού (Let's Talk);",
-      answer: "Πολύ απλά! Πατώντας το κουμπί 'Ας Μιλήσουμε' στο πάνω μέρος της σελίδας, θα μεταφερθείτε στο περιβάλλον του Workspace μας για να διαλέξετε την ημέρα και ώρα που σας εξυπηρετεί για ένα απευθείας video call μαζί μας."
-    },
-    {
-      question: "Πότε θα κυκλοφορήσει επίσημα η εφαρμογή;",
-      answer: "Αυτή τη στιγμή βρισκόμαστε σε φάση κλειστής δοκιμής (Beta). Συμπληρώνοντας το email σας στην αρχική οθόνη (Early Access), θα είστε από τους πρώτους που θα αποκτήσουν πρόσβαση και αποκλειστικά προνόμια κατά το λανσάρισμα."
-    }
-  ];
+  const { language } = useLanguage();
+  const c = faqContent[language];
 
   return (
     <section id="faq" className="py-32 relative bg-[#050505] border-t border-[#111]">
       <div className="max-w-3xl mx-auto px-6 relative z-10">
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-gray-300 text-xs font-bold uppercase tracking-widest mb-6">
-            <ShieldCheck className="w-3 h-3 text-[#00E676]" /> Υποστήριξη
+            <ShieldCheck className="w-3 h-3 text-[#00E676]" /> {c.badge}
           </div>
           <h2 className="text-4xl md:text-5xl font-black text-white mb-4 tracking-tight">
-            Συχνές <span className="text-[#00E676]">Ερωτήσεις</span>
+            {c.title1} <span className="text-[#00E676]">{c.title2}</span>
           </h2>
-          <p className="text-gray-400 text-lg">Λύστε όλες σας τις απορίες σχετικά με τη νέα εποχή του parking.</p>
+          <p className="text-gray-400 text-lg">{c.subtitle}</p>
         </div>
         
         <div className="space-y-4">
-          {faqs.map((faq, index) => (
+          {c.faqs.map((faq, index) => (
             <FAQItem 
               key={index}
               question={faq.question}
@@ -117,15 +185,15 @@ const FAQSection = () => {
         
         {/* Extra CTA Card */}
         <div className="mt-12 text-center bg-[#121212] border border-[#222] rounded-[32px] p-8 shadow-xl">
-          <h3 className="text-xl font-black text-white mb-2">Έχετε ακόμα απορίες;</h3>
-          <p className="text-gray-400 mb-6 text-sm">Είμαστε εδώ για να συζητήσουμε οποιαδήποτε συνεργασία ή τεχνική απορία.</p>
+          <h3 className="text-xl font-black text-white mb-2">{c.ctaTitle}</h3>
+          <p className="text-gray-400 mb-6 text-sm">{c.ctaDesc}</p>
           <a 
             href="https://calendar.app.google/iM86XzZGJZchYixo9" // Βάλε εδώ το ίδιο link που έβαλες στο κουμπί του μενού
             target="_blank" 
             rel="noopener noreferrer" 
             className="inline-flex items-center text-[#00E676] hover:text-[#00c968] font-black text-sm uppercase tracking-widest transition-colors"
           >
-            Ας Μιλησουμε <ArrowRight className="w-4 h-4 ml-2" />
+            {c.ctaButton} <ArrowRight className="w-4 h-4 ml-2" />
           </a>
         </div>
       </div>
