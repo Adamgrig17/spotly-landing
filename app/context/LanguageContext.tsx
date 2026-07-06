@@ -61,8 +61,8 @@ const translations = {
       navHosts: "Για Ιδιοκτήτες",
       navFaq: "Συχνές Ερωτήσεις",
       contactHeading: "Επικοινωνια",
-      location: "Αθήνα, Ελλάδα",
-      legalLine: "SPOTLY PARKING MANAGEMENT ΕΤΕΡΟΡΡΥΘΜΗ ΕΤΑΙΡΕΙΑ (Spotly Parking Management L.P.) · δ.τ. SPOTLY · ΑΦΜ 803339090 · ΓΕΜΗ 194898201000 · Έδρα: Αθήνα, Ελλάδα",
+      location: "Ρίμινι 14, 122 43 Αιγάλεω",
+      legalLine: "SPOTLY PARKING MANAGEMENT ΕΤΕΡΟΡΡΥΘΜΗ ΕΤΑΙΡΕΙΑ (Spotly Parking Management L.P.) · δ.τ. SPOTLY · ΑΦΜ 803339090 · ΓΕΜΗ 194898201000 · Έδρα: Ρίμινι 14, 122 43 Αιγάλεω",
       terms: "Οροι Χρησης",
       privacy: "Πολιτικη Απορρητου"
     }
@@ -124,8 +124,8 @@ const translations = {
       navHosts: "For Hosts",
       navFaq: "FAQ",
       contactHeading: "Contact",
-      location: "Athens, Greece",
-      legalLine: "Spotly Parking Management L.P. (SPOTLY PARKING MANAGEMENT ΕΤΕΡΟΡΡΥΘΜΗ ΕΤΑΙΡΕΙΑ) · trade name SPOTLY · VAT EL803339090 · General Commercial Registry (ΓΕΜΗ) No. 194898201000 · Registered seat: Athens, Greece",
+      location: "Rimini 14, 122 43 Egaleo, Greece",
+      legalLine: "Spotly Parking Management L.P. (SPOTLY PARKING MANAGEMENT ΕΤΕΡΟΡΡΥΘΜΗ ΕΤΑΙΡΕΙΑ) · trade name SPOTLY · VAT EL803339090 · General Commercial Registry (ΓΕΜΗ) No. 194898201000 · Registered seat: Rimini 14, 122 43 Egaleo, Greece",
       terms: "Terms of Use",
       privacy: "Privacy Policy"
     }
