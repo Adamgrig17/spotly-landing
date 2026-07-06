@@ -153,6 +153,107 @@ const faqContent = {
   }
 };
 
+// ============================================================================
+// COMPONENT: SPOT — AI SUPPORT SECTION
+// ============================================================================
+const spotAiContent = {
+  el: {
+    badge: "AI Support 24/7",
+    title1: "Γνώρισε τον",
+    title2: "Spot.",
+    desc: "Ο Spot είναι ο AI βοηθός του Spotly — πάντα ξύπνιος, πάντα πρόθυμος. Απαντάει άμεσα σε ό,τι χρειαστείς για κρατήσεις, πληρωμές, επιστροφές και πρόσβαση στους χώρους, στα ελληνικά και στα αγγλικά.",
+    human: "Και όταν κάτι θέλει ανθρώπινο χέρι, η ομάδα υποστήριξής μας παραλαμβάνει άμεσα — με email ή τηλέφωνο.",
+    cta: "Μιλα με τον Spot",
+    features: [
+      { title: "Άμεσες απαντήσεις", desc: "Χωρίς αναμονή, 24 ώρες το 24ωρο" },
+      { title: "Κρατήσεις & Πληρωμές", desc: "Ακυρώσεις, επιστροφές, Spotly Wallet" },
+      { title: "Human Support", desc: "Πάντα διαθέσιμη η ομάδα μας από πίσω" }
+    ]
+  },
+  en: {
+    badge: "AI Support 24/7",
+    title1: "Meet",
+    title2: "Spot.",
+    desc: "Spot is Spotly's AI assistant — always awake, always eager to help. He instantly answers anything you need about bookings, payments, refunds and access to spots, in Greek and English.",
+    human: "And when something needs a human touch, our support team takes over right away — by email or phone.",
+    cta: "Chat with Spot",
+    features: [
+      { title: "Instant answers", desc: "No waiting, 24 hours a day" },
+      { title: "Bookings & Payments", desc: "Cancellations, refunds, Spotly Wallet" },
+      { title: "Human Support", desc: "Our team is always right behind him" }
+    ]
+  }
+};
+
+const SpotAISection = () => {
+  const { language } = useLanguage();
+  const c = spotAiContent[language];
+
+  return (
+    <section id="support" className="py-32 relative bg-[#0A0A0A] border-t border-[#111] overflow-hidden">
+      {/* Ambient glow πίσω από το mascot */}
+      <div className="absolute top-1/2 right-0 lg:right-32 -translate-y-1/2 w-[500px] h-[500px] bg-[#00E676]/10 blur-[150px] rounded-full pointer-events-none"></div>
+
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
+        <div className="flex flex-col lg:flex-row items-center gap-16">
+          
+          {/* Κείμενο */}
+          <div className="flex-1 text-center lg:text-left">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#00E676]/10 border border-[#00E676]/30 text-[#00E676] text-xs font-black uppercase tracking-widest mb-6">
+              <Zap className="w-3 h-3 fill-current" /> {c.badge}
+            </div>
+            <h2 className="text-4xl md:text-6xl font-black tracking-tighter mb-6 leading-tight">
+              {c.title1} <span className="text-[#00E676]">{c.title2}</span>
+            </h2>
+            <p className="text-gray-400 text-lg md:text-xl mb-4 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+              {c.desc}
+            </p>
+            <p className="text-gray-500 text-base mb-10 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+              {c.human}
+            </p>
+
+            <div className="grid sm:grid-cols-3 gap-4 mb-10 max-w-xl mx-auto lg:mx-0">
+              {c.features.map((f, i) => (
+                <div key={i} className="bg-[#121212] border border-white/5 rounded-2xl p-4 text-left hover:border-[#00E676]/30 transition-colors">
+                  <p className="text-white font-bold text-sm mb-1">{f.title}</p>
+                  <p className="text-gray-500 text-xs leading-relaxed">{f.desc}</p>
+                </div>
+              ))}
+            </div>
+
+            <a
+              href="https://api.parkspotly.gr/support"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-3 bg-[#00E676] text-black px-8 py-4 rounded-2xl font-black uppercase tracking-wide hover:bg-[#00c968] transition-all shadow-[0_0_30px_rgba(0,230,118,0.3)] hover:shadow-[0_0_50px_rgba(0,230,118,0.5)] active:scale-95"
+            >
+              {c.cta} <ArrowRight className="w-5 h-5" />
+            </a>
+          </div>
+
+          {/* Mascot */}
+          <div className="flex-1 flex justify-center relative">
+            <div className="relative">
+              <div className="absolute inset-0 bg-[#00E676]/20 blur-[80px] rounded-full scale-90 animate-pulse pointer-events-none"></div>
+              <img
+                src="/spot-mascot.png"
+                alt="Spot — ο AI βοηθός του Spotly"
+                className="relative w-64 h-64 sm:w-80 sm:h-80 object-contain drop-shadow-[0_20px_60px_rgba(0,230,118,0.25)] floating"
+              />
+              {/* Online badge */}
+              <div className="absolute bottom-4 right-4 flex items-center gap-2 bg-[#121212]/90 backdrop-blur border border-[#00E676]/30 px-4 py-2 rounded-full shadow-xl">
+                <span className="w-2 h-2 rounded-full bg-[#00E676] animate-pulse"></span>
+                <span className="text-xs font-black text-white uppercase tracking-widest">Spot · Online</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  );
+};
+
 const FAQSection = () => {
   const [openIndex, setOpenIndex] = useState(0); // Η πρώτη ερώτηση είναι ανοιχτή by default
   const { language } = useLanguage();
@@ -954,6 +1055,8 @@ export default function SpotlyLanding() {
           </div>
         </div>
       </section>
+      {/* --- SPOT AI SUPPORT SECTION --- */}
+      <SpotAISection />
       {/* --- ΝΕΟ FAQ SECTION --- */}
       <FAQSection />
       {/* --- ΝΕΟ ULTRA-PREMIUM FOOTER --- */}
@@ -1080,6 +1183,7 @@ export default function SpotlyLanding() {
                 <li><a href="#" className="group flex items-center text-gray-400 hover:text-[#00E676] transition-colors"><ArrowRight className="w-3 h-3 mr-2 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" /> {t('footer', 'navHome')}</a></li>
                 <li><a href="#how-it-works" className="group flex items-center text-gray-400 hover:text-[#00E676] transition-colors"><ArrowRight className="w-3 h-3 mr-2 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" /> {t('footer', 'navExperience')}</a></li>
                 <li><a href="#hosts" className="group flex items-center text-gray-400 hover:text-[#00E676] transition-colors"><ArrowRight className="w-3 h-3 mr-2 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" /> {t('footer', 'navHosts')}</a></li>
+                <li><a href="#support" className="group flex items-center text-gray-400 hover:text-[#00E676] transition-colors"><ArrowRight className="w-3 h-3 mr-2 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" /> {t('footer', 'navSupport')}</a></li>
                 <li><a href="#faq" className="group flex items-center text-gray-400 hover:text-[#00E676] transition-colors"><ArrowRight className="w-3 h-3 mr-2 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" /> {t('footer', 'navFaq')}</a></li>
               </ul>
             </div>
