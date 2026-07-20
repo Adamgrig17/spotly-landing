@@ -85,9 +85,10 @@ export async function POST(request: Request) {
             </div>
             
             <!-- Footer -->
-            <p style="color: #555; font-size: 11px; margin-top: 30px; text-transform: uppercase; letter-spacing: 1px;">
-              © ${new Date().getFullYear()} Spotly App. All rights reserved.<br>
-              Αθήνα, Ελλάδα
+            <p style="color: #888; font-size: 11px; margin-top: 30px; line-height: 1.55;">
+              © ${new Date().getFullYear()} SPOTLY PARKING MANAGEMENT ΕΤΕΡΟΡΡΥΘΜΗ ΕΤΑΙΡΕΙΑ (δ.τ. SPOTLY)<br>
+              ΑΦΜ 803339090 · ΓΕΜΗ 194898201000 · Ρίμινι 14, 122 43 Αιγάλεω<br>
+              www.parkspotly.gr · info@parkspotly.gr
             </p>
           </div>
         `,
