@@ -43,7 +43,8 @@ export const termsContent: Record<'el' | 'en', LegalDoc> = {
       {
         title: '2. Λογαριασμοί Χρηστών',
         paragraphs: [
-          'Για να χρησιμοποιήσετε την Πλατφόρμα, πρέπει να είστε άνω των 18 ετών. Η εγγραφή απαιτεί ταυτοποίηση με email ή λογαριασμό Google/Apple, και για τους Οδηγούς την καταχώρηση των στοιχείων του οχήματος (πινακίδα, μάρκα, μοντέλο, χρώμα). Είστε υπεύθυνοι για τη διατήρηση της εμπιστευτικότητας των στοιχείων πρόσβασής σας και για όλες τις δραστηριότητες που πραγματοποιούνται μέσω του λογαριασμού σας.',
+          'Για τη δημιουργία λογαριασμού και την πραγματοποίηση κράτησης πρέπει να έχετε συμπληρώσει το 18ο έτος της ηλικίας σας· η υπηρεσία συνάπτει σύμβαση παροχής στάθμευσης και περιλαμβάνει πληρωμή.',
+          'Η εγγραφή απαιτεί ταυτοποίηση με email ή λογαριασμό Google/Apple, και για τους Οδηγούς την καταχώρηση των στοιχείων του οχήματος (πινακίδα, μάρκα, μοντέλο, χρώμα). Είστε υπεύθυνοι για τη διατήρηση της εμπιστευτικότητας των στοιχείων πρόσβασής σας και για όλες τις δραστηριότητες που πραγματοποιούνται μέσω του λογαριασμού σας.',
         ],
       },
       {
@@ -113,7 +114,8 @@ export const termsContent: Record<'el' | 'en', LegalDoc> = {
       {
         title: '2. User Accounts',
         paragraphs: [
-          'To use the Platform, you must be over 18 years old. Registration requires verification via email or a Google/Apple account, and for Drivers the registration of vehicle details (license plate, make, model, color). You are responsible for maintaining the confidentiality of your credentials and for all activity carried out through your account.',
+          'You must be at least 18 years old to create an account and make a booking: the service forms a parking contract and involves payment.',
+          'Registration requires verification via email or a Google/Apple account, and for Drivers the registration of vehicle details (license plate, make, model, color). You are responsible for maintaining the confidentiality of your credentials and for all activity carried out through your account.',
         ],
       },
       {
