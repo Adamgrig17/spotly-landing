@@ -24,3 +24,38 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Legal pages: both EL and EN are in the HTML (App Review / no-JS).
+   With JS, .js-legal + data-legal-lang shows one language. */
+.legal-lang-label {
+  display: none;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #00e676;
+  margin-bottom: 1.5rem;
+}
+
+html:not(.js-legal) .legal-lang-label {
+  display: block;
+}
+
+html:not(.js-legal) .legal-en {
+  margin-top: 5rem;
+  padding-top: 5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.js-legal[data-legal-lang='el'] .legal-en {
+  display: none;
+}
+
+.js-legal[data-legal-lang='en'] .legal-el {
+  display: none;
+}
+
+html:not(.js-legal) a .legal-en::before {
+  content: " · ";
+  color: #6b7280;
+}
