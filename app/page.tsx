@@ -233,15 +233,14 @@ const SpotAISection = () => {
 
           {/* Mascot */}
           <div className="flex-1 flex justify-center relative">
-            <div className="relative">
+            <div className="relative flex flex-col items-center">
               <div className="absolute inset-0 bg-[#00E676]/20 blur-[80px] rounded-full scale-90 animate-pulse pointer-events-none"></div>
               <img
                 src="/spot-mascot.png"
                 alt="Spot — ο AI βοηθός του Spotly"
                 className="relative w-64 h-64 sm:w-80 sm:h-80 object-contain drop-shadow-[0_20px_60px_rgba(0,230,118,0.25)] floating"
               />
-              {/* Online badge */}
-              <div className="absolute bottom-4 right-4 flex items-center gap-2 bg-[#121212]/90 backdrop-blur border border-[#00E676]/30 px-4 py-2 rounded-full shadow-xl">
+              <div className="relative z-10 -mt-3 flex items-center gap-2 bg-[#121212]/90 backdrop-blur border border-[#00E676]/30 px-4 py-2 rounded-full shadow-xl">
                 <span className="w-2 h-2 rounded-full bg-[#00E676] animate-pulse"></span>
                 <span className="text-xs font-black text-white uppercase tracking-widest">Spot · Online</span>
               </div>
