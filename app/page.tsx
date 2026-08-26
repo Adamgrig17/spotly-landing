@@ -1,5 +1,4 @@
 "use client";
-import Link from 'next/link';
 import React, { useState, useEffect, useRef } from 'react';
 import { useLanguage } from './context/LanguageContext';
 import { Car, MapPin, Zap, ShieldCheck, ArrowRight, Smartphone, Key, Navigation, Clock, Star, Wifi, Wallet, CheckCircle2, User, X, Loader2, Calendar, ChevronDown, Mail, Phone, ChevronUp } from 'lucide-react';
@@ -629,9 +628,9 @@ export default function SpotlyLanding() {
           </div>
             <div className="hidden md:flex items-center gap-8 text-sm font-bold text-gray-400">
             <a href="#how-it-works" className="hover:text-white transition-colors">{t('nav', 'experience')}</a>
-            <Link href="/become-a-host" className="hover:text-white transition-colors font-black text-[#00E676]">
+            <a href="https://spotlyparking.gr/" className="hover:text-white transition-colors font-black text-[#00E676]">
               {t('nav', 'hosts')}
-            </Link>
+            </a>
             
             {/* Κουμπί Let's Talk */}
             <a 
@@ -993,12 +992,12 @@ export default function SpotlyLanding() {
                 </li>
               </ul>
 
-              <Link 
-                href="/become-a-host"
+              <a 
+                href="https://spotlyparking.gr/"
                 className="inline-flex bg-white hover:bg-gray-200 text-black px-8 py-4 rounded-2xl font-black items-center gap-3 transition-transform active:scale-95 shadow-[0_0_30px_rgba(255,255,255,0.2)]"
               >
                 {t('hosts', 'cta')} <ArrowRight className="w-5 h-5" />
-              </Link>
+              </a>
             </div>
             
             <div className="flex-1 w-full max-w-md relative mt-16 lg:mt-0">
