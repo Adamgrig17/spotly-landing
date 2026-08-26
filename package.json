@@ -2,6 +2,7 @@
   "name": "spotly-landing",
   "version": "0.1.0",
   "private": true,
+  "browserslist": [">0.5%", "not dead", "not op_mini all", "not IE 11"],
   "scripts": {
     "dev": "next dev",
     "build": "next build",

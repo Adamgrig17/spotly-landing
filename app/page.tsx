@@ -1,6 +1,8 @@
 "use client";
 import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
+import logoImg from '../public/logo.png';
+import spotMascotImg from '../public/spot-mascot.png';
 import { useLanguage } from './context/LanguageContext';
 import { Car, MapPin, Zap, ShieldCheck, ArrowRight, Smartphone, Key, Navigation, Clock, Star, Wifi, Wallet, CheckCircle2, User, X, Loader2, Calendar, ChevronDown, Mail, Phone, ChevronUp } from 'lucide-react';
 
@@ -21,9 +23,11 @@ const FAQItem = ({ question, answer, isOpen, onClick }: FAQItemProps) => {
       <button
         className="w-full px-6 py-5 flex justify-between items-center focus:outline-none group"
         onClick={onClick}
+        aria-expanded={isOpen}
       >
         <span className="font-medium text-left text-white text-lg group-hover:text-[#00E676] transition-colors">{question}</span>
         <ChevronDown 
+          aria-hidden="true"
           className={`w-5 h-5 text-[#00E676] transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} 
         />
       </button>
@@ -208,7 +212,7 @@ const SpotAISection = () => {
             <p className="text-gray-400 text-lg md:text-xl mb-4 max-w-xl mx-auto lg:mx-0 leading-relaxed">
               {c.desc}
             </p>
-            <p className="text-gray-500 text-base mb-10 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+            <p className="text-gray-400 text-base mb-10 max-w-xl mx-auto lg:mx-0 leading-relaxed">
               {c.human}
             </p>
 
@@ -216,7 +220,7 @@ const SpotAISection = () => {
               {c.features.map((f, i) => (
                 <div key={i} className="bg-[#121212] border border-white/5 rounded-2xl p-4 text-left hover:border-[#00E676]/30 transition-colors">
                   <p className="text-white font-bold text-sm mb-1">{f.title}</p>
-                  <p className="text-gray-500 text-xs leading-relaxed">{f.desc}</p>
+                  <p className="text-gray-400 text-xs leading-relaxed">{f.desc}</p>
                 </div>
               ))}
             </div>
@@ -235,9 +239,12 @@ const SpotAISection = () => {
           <div className="flex-1 flex justify-center relative">
             <div className="relative flex flex-col items-center">
               <div className="absolute inset-0 bg-[#00E676]/20 blur-[80px] rounded-full scale-90 animate-pulse pointer-events-none"></div>
-              <img
-                src="/spot-mascot.png"
+              <Image
+                src={spotMascotImg}
                 alt="Spot — ο AI βοηθός του Spotly"
+                width={320}
+                height={320}
+                sizes="(min-width: 640px) 320px, 256px"
                 className="relative w-64 h-64 sm:w-80 sm:h-80 object-contain drop-shadow-[0_20px_60px_rgba(0,230,118,0.25)] floating"
               />
               <div className="relative z-10 -mt-3 flex items-center gap-2 bg-[#121212]/90 backdrop-blur border border-[#00E676]/30 px-4 py-2 rounded-full shadow-xl">
@@ -291,9 +298,10 @@ const FAQSection = () => {
             href="https://calendar.app.google/iM86XzZGJZchYixo9" // Βάλε εδώ το ίδιο link που έβαλες στο κουμπί του μενού
             target="_blank" 
             rel="noopener noreferrer" 
+            aria-label="Κλείσε ραντεβού από τις συχνές ερωτήσεις"
             className="inline-flex items-center text-[#00E676] hover:text-[#00c968] font-black text-sm uppercase tracking-widest transition-colors"
           >
-            {c.ctaButton} <ArrowRight className="w-4 h-4 ml-2" />
+            {c.ctaButton} <ArrowRight className="w-4 h-4 ml-2" aria-hidden="true" />
           </a>
         </div>
       </div>
@@ -305,7 +313,7 @@ const FAQSection = () => {
 // COMPONENT: NEON GLOWING BACKGROUND PATH
 // ============================================================================
 const NeonBackgroundLine = () => (
-  <div className="absolute top-0 left-0 w-full h-[180vh] pointer-events-none z-0 overflow-hidden opacity-80">
+  <div className="neon-wrap absolute top-0 left-0 w-full h-[180vh] pointer-events-none z-0 opacity-80">
     <svg viewBox="0 0 1440 1200" className="absolute top-0 w-full h-full" preserveAspectRatio="xMidYMid slice">
       <defs>
         {/* Το Gradient της γραμμής */}
@@ -333,7 +341,6 @@ const NeonBackgroundLine = () => (
       
       {/* 2. Η Neon Ενέργεια που τρέχει πάνω στη ράγα */}
       <path 
-        className="neon-path-animated" 
         d="M-100,200 C300,300 400,700 800,600 C1200,500 1300,1000 1600,900" 
         fill="none" 
         stroke="url(#neonGradient)" 
@@ -342,6 +349,7 @@ const NeonBackgroundLine = () => (
         strokeLinecap="round"
       />
     </svg>
+    <div className="neon-cover" aria-hidden="true"></div>
   </div>
 );
 
@@ -587,19 +595,26 @@ export default function SpotlyLanding() {
           mask-image: radial-gradient(ellipse 80% 50% at 50% 50%, black, transparent);
           -webkit-mask-image: radial-gradient(ellipse 80% 50% at 50% 50%, black, transparent);
         }
-        /* --- NΕΟ: Neon Path Animation --- */
-        @keyframes drawNeon {
-          0% { stroke-dashoffset: 3000; }
-          100% { stroke-dashoffset: 0; }
-        }
-        .neon-path-animated {
-          stroke-dasharray: 3000;
-          stroke-dashoffset: 3000;
-          animation: drawNeon 8s linear infinite;
-        }
         .bg-grid-fade {
           mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
           -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+        }
+        .neon-wrap {
+          overflow: hidden;
+        }
+        .neon-cover {
+          position: absolute;
+          inset: 0;
+          background: #050505;
+          transform: translateX(0);
+          animation: wipe 1.8s cubic-bezier(.22, .61, .36, 1) forwards;
+          will-change: transform;
+        }
+        @keyframes wipe {
+          to { transform: translateX(100%); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .neon-cover { animation: none; transform: translateX(100%); }
         }
       `}} />
 
@@ -617,17 +632,20 @@ export default function SpotlyLanding() {
           <div className="flex items-center gap-3 group cursor-pointer" onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}>
             {/* Λογότυπο Spotly σε στυλ App Icon */}
             <div className="w-10 h-10 rounded-[10px] overflow-hidden border border-white/10 bg-[#0a0a0a] shadow-[0_0_15px_rgba(0,230,118,0.3)] group-hover:shadow-[0_0_25px_rgba(0,230,118,0.6)] transition-all duration-300 shrink-0">
-              <img 
-                src="/logo.png" 
+              <Image 
+                src={logoImg} 
                 alt="Spotly App Icon" 
+                width={40}
+                height={40}
+                sizes="40px"
                 className="w-full h-full object-cover scale-[1.02]"
               />
             </div>
-            <span className="text-2xl font-black tracking-tighter">Spotly<sup className="text-[10px] text-gray-500 font-bold ml-0.5">™</sup></span>
+            <span className="text-2xl font-black tracking-tighter">Spotly<sup className="text-[10px] text-gray-400 font-bold ml-0.5">™</sup></span>
           </div>
             <div className="hidden md:flex items-center gap-8 text-sm font-bold text-gray-400">
             <a href="#how-it-works" className="hover:text-white transition-colors">{t('nav', 'experience')}</a>
-            <a href="https://spotlyparking.gr/" className="hover:text-white transition-colors font-black text-[#00E676]">
+            <a href="https://spotlyparking.gr/" aria-label="Για ιδιοκτήτες, σελίδα εγγραφής Host" className="hover:text-white transition-colors font-black text-[#00E676]">
               {t('nav', 'hosts')}
             </a>
             
@@ -636,9 +654,10 @@ export default function SpotlyLanding() {
               href="https://calendar.app.google/MWcpcvhhjxUb7RmP6" 
               target="_blank" 
               rel="noopener noreferrer"
+              aria-label="Κλείσε ραντεβού από το μενού"
               className="flex items-center gap-2 bg-gradient-to-r from-[#00E676] to-[#00b35c] text-black px-5 py-2.5 rounded-full font-black text-sm hover:shadow-[0_0_20px_rgba(0,230,118,0.4)] hover:scale-105 active:scale-95 transition-all"
             >
-              <Calendar className="w-4 h-4" /> {t('nav', 'letsTalk')}
+              <Calendar className="w-4 h-4" aria-hidden="true" /> {t('nav', 'letsTalk')}
             </a>
 
             {/* Κουμπί Είσοδος στο App */}
@@ -651,17 +670,20 @@ export default function SpotlyLanding() {
 
             {/* === ΕΔΩ ΜΠΑΙΝΕΙ ΤΟ LANGUAGE TOGGLE === */}
             <button 
+              type="button"
               onClick={toggleLanguage} 
+              aria-label="Αλλαγή γλώσσας"
               className="flex items-center gap-1.5 bg-[#121212] border border-white/10 rounded-full px-3 py-2 text-xs font-black hover:border-[#00E676]/50 transition-all shadow-lg active:scale-95"
             >
-              <span className={language === 'el' ? 'text-[#00E676]' : 'text-gray-500 transition-colors'}>EL</span>
-              <span className="text-gray-700">/</span>
-              <span className={language === 'en' ? 'text-[#00E676]' : 'text-gray-500 transition-colors'}>EN</span>
+              <span className={language === 'el' ? 'text-[#00E676]' : 'text-gray-400 transition-colors'}>EL</span>
+              <span className="text-gray-400">/</span>
+              <span className={language === 'en' ? 'text-[#00E676]' : 'text-gray-400 transition-colors'}>EN</span>
             </button>
           </div>
         </div>
       </nav>
 
+      <main>
       {/* --- HERO SECTION --- Responsive Padding */}
       <section className="pt-24 sm:pt-32 pb-16 px-6 relative min-h-[90vh] flex items-center">
         {/* Dynamic Glow */}
@@ -753,11 +775,11 @@ export default function SpotlyLanding() {
               <div className="flex -space-x-3">
                  {[1,2,3,4].map(i => (
                    <div key={i} className={`w-8 h-8 rounded-full border-2 border-[#050505] bg-gray-800 flex items-center justify-center text-[10px] font-bold ${i===4 ? 'bg-[#1a1a1a] text-[#00E676] border-[#00E676]/30 z-10' : 'z-0'}`}>
-                     {i===4 ? '+2K' : <User className="w-4 h-4 text-gray-500" />}
+                     {i===4 ? '+2K' : <User className="w-4 h-4 text-gray-400" />}
                    </div>
                  ))}
               </div>
-              <div className="text-xs text-gray-500 font-medium">
+              <div className="text-xs text-gray-400 font-medium">
                  {t('hero', 'socialProof')}
               </div>
             </div>
@@ -803,6 +825,7 @@ export default function SpotlyLanding() {
                     alt={language === 'el' ? 'Ο χάρτης του Spotly με θέσεις στην Αθήνα' : 'The Spotly map with spots in Athens'}
                     fill
                     priority
+                    fetchPriority="high"
                     sizes="(max-width: 1024px) 280px, 340px"
                     className="object-cover object-top"
                   />
@@ -930,7 +953,7 @@ export default function SpotlyLanding() {
                     <Wifi className="w-6 h-6 text-[#00E676] relative z-10 group-hover:scale-110 transition-transform" />
                   </div>
                   <div>
-                    <h4 className="text-white font-bold text-xl mb-1">{t('hosts', 'f1Title')}</h4>
+                    <h3 className="text-white font-bold text-xl mb-1">{t('hosts', 'f1Title')}</h3>
                     <p className="text-gray-400 text-sm leading-relaxed">
                       {t('hosts', 'f1DescA')}<b>{t('hosts', 'f1DescBold')}</b>{t('hosts', 'f1DescB')}
                     </p>
@@ -943,7 +966,7 @@ export default function SpotlyLanding() {
                     <Smartphone className="w-6 h-6 text-[#00E676] relative z-10 group-hover:scale-110 transition-transform" />
                   </div>
                   <div>
-                    <h4 className="text-white font-bold text-xl mb-1">{t('hosts', 'f2Title')}</h4>
+                    <h3 className="text-white font-bold text-xl mb-1">{t('hosts', 'f2Title')}</h3>
                     <p className="text-gray-400 text-sm leading-relaxed">
                       {t('hosts', 'f2Desc')}
                     </p>
@@ -956,7 +979,7 @@ export default function SpotlyLanding() {
                     <Wallet className="w-6 h-6 text-[#00E676] relative z-10 group-hover:scale-110 transition-transform" />
                   </div>
                   <div>
-                    <h4 className="text-white font-bold text-xl mb-1">{t('hosts', 'f3Title')}</h4>
+                    <h3 className="text-white font-bold text-xl mb-1">{t('hosts', 'f3Title')}</h3>
                     <p className="text-gray-400 text-sm leading-relaxed">
                       {t('hosts', 'f3DescA')}<b>Stripe</b>.
                     </p>
@@ -987,7 +1010,7 @@ export default function SpotlyLanding() {
                   </div>
                   
                   <div className="mb-10 relative z-10">
-                    <p className="text-gray-500 text-xs font-bold uppercase tracking-widest mb-2">ΣΥΝΟΛΙΚΑ ΚΕΡΔΗ</p>
+                    <p className="text-gray-400 text-xs font-bold uppercase tracking-widest mb-2">ΣΥΝΟΛΙΚΑ ΚΕΡΔΗ</p>
                     <div className="text-6xl font-black text-white tracking-tighter flex items-baseline">
                       {hostEarnings.toFixed(2)}<span className="text-[#00E676] ml-2 text-4xl">€</span>
                     </div>
@@ -999,7 +1022,7 @@ export default function SpotlyLanding() {
                          <div className="w-10 h-10 bg-[#222] rounded-xl flex items-center justify-center"><Car className="w-5 h-5 text-gray-400" /></div>
                          <div>
                            <p className="text-white font-bold text-sm">Κράτηση (Audi A3)</p>
-                           <p className="text-gray-500 text-[11px] font-medium">Σήμερα, 14:30</p>
+                           <p className="text-gray-400 text-[11px] font-medium">Σήμερα, 14:30</p>
                          </div>
                        </div>
                        <span className="text-[#00E676] font-black text-lg">+€8.50</span>
@@ -1007,10 +1030,10 @@ export default function SpotlyLanding() {
                     
                     <div className="p-4 bg-[#1A1A1A] rounded-2xl border border-white/5 flex items-center justify-between opacity-70">
                        <div className="flex items-center gap-3">
-                         <div className="w-10 h-10 bg-[#222] rounded-xl flex items-center justify-center"><Car className="w-5 h-5 text-gray-500" /></div>
+                         <div className="w-10 h-10 bg-[#222] rounded-xl flex items-center justify-center"><Car className="w-5 h-5 text-gray-400" /></div>
                          <div>
                            <p className="text-white font-bold text-sm">Κράτηση (Toyota)</p>
-                           <p className="text-gray-500 text-[11px] font-medium">Χθες, 09:15</p>
+                           <p className="text-gray-400 text-[11px] font-medium">Χθες, 09:15</p>
                          </div>
                        </div>
                        <span className="text-white font-black text-lg">+€12.00</span>
@@ -1030,6 +1053,7 @@ export default function SpotlyLanding() {
       <SpotAISection />
       {/* --- ΝΕΟ FAQ SECTION --- */}
       <FAQSection />
+      </main>
       {/* --- ΝΕΟ ULTRA-PREMIUM FOOTER --- */}
       <footer 
         className="relative bg-[#050505] pt-24 pb-12 overflow-hidden group"
@@ -1071,7 +1095,7 @@ export default function SpotlyLanding() {
             <div className="md:col-span-5 lg:col-span-5">
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-12 h-12 rounded-xl overflow-hidden border border-white/10 bg-[#0a0a0a] shadow-[0_0_20px_rgba(0,230,118,0.2)] shrink-0">
-                  <img src="/logo.png" alt="Spotly App Icon" className="w-full h-full object-cover scale-[1.02]" />
+                  <Image src={logoImg} alt="Spotly App Icon" width={48} height={48} sizes="48px" className="w-full h-full object-cover scale-[1.02]" />
                 </div>
                 <span className="font-black tracking-tighter text-3xl text-white">Spotly<sup className="text-sm text-[#00E676] font-bold ml-1">™</sup></span>
               </div>
@@ -1107,18 +1131,22 @@ export default function SpotlyLanding() {
               <div className="flex items-center space-x-3">
                 {/* Facebook - Coming Soon */}
                 <button 
+                  type="button"
                   onClick={() => setShowComingSoon(true)}
+                  aria-label="Facebook, σύντομα"
                   className="w-10 h-10 rounded-xl bg-white/5 border border-white/5 flex items-center justify-center text-gray-400 hover:bg-[#00E676] hover:text-black transition-all duration-300 shadow-md group"
                 >
-                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                  <svg aria-hidden="true" className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
                 </button>
 
                 {/* LinkedIn - Coming Soon */}
                 <button 
+                  type="button"
                   onClick={() => setShowComingSoon(true)}
+                  aria-label="LinkedIn, σύντομα"
                   className="w-10 h-10 rounded-xl bg-white/5 border border-white/5 flex items-center justify-center text-gray-400 hover:bg-[#00E676] hover:text-black transition-all duration-300 shadow-md group"
                 >
-                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+                  <svg aria-hidden="true" className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
                 </button>
 
                 {/* Instagram - LIVE LINK */}
@@ -1126,9 +1154,10 @@ export default function SpotlyLanding() {
                   href="https://www.instagram.com/parkspotly.official/" // <--- ΒΑΛΕ ΤΟ LINK ΣΟΥ ΕΔΩ
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label="Instagram του Spotly"
                   className="w-10 h-10 rounded-xl bg-white/5 border border-white/5 flex items-center justify-center text-gray-400 hover:bg-[#00E676] hover:text-black transition-all duration-300 shadow-md group"
                 >
-                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                  <svg aria-hidden="true" className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
                 </a>
 
                 {/* TikTok - LIVE LINK */}
@@ -1136,9 +1165,10 @@ export default function SpotlyLanding() {
                   href="https://www.tiktok.com/@parkspotly.official" // <--- ΒΑΛΕ ΤΟ LINK ΣΟΥ ΕΔΩ
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label="TikTok του Spotly"
                   className="w-10 h-10 rounded-xl bg-white/5 border border-white/5 flex items-center justify-center text-gray-400 hover:bg-[#00E676] hover:text-black transition-all duration-300 shadow-md group"
                 >
-                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                  <svg aria-hidden="true" className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.9-.32-1.98-.23-2.81.3a3.42 3.42 0 0 0-1.22 1.24c-.45.79-.53 1.71-.4 2.6.11.9.54 1.74 1.21 2.35.85.79 2.04 1.13 3.19.94 1.19-.15 2.27-.86 2.89-1.9.31-.5.48-1.07.51-1.65.04-3.64.02-7.28.02-10.92z"/>
                   </svg>
                 </a>
@@ -1153,7 +1183,7 @@ export default function SpotlyLanding() {
               <ul className="space-y-4 text-sm font-medium">
                 <li><a href="#" className="group flex items-center text-gray-400 hover:text-[#00E676] transition-colors"><ArrowRight className="w-3 h-3 mr-2 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" /> {t('footer', 'navHome')}</a></li>
                 <li><a href="#how-it-works" className="group flex items-center text-gray-400 hover:text-[#00E676] transition-colors"><ArrowRight className="w-3 h-3 mr-2 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" /> {t('footer', 'navExperience')}</a></li>
-                <li><a href="#hosts" className="group flex items-center text-gray-400 hover:text-[#00E676] transition-colors"><ArrowRight className="w-3 h-3 mr-2 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" /> {t('footer', 'navHosts')}</a></li>
+                <li><a href="#hosts" aria-label="Για ιδιοκτήτες, ενότητα σε αυτή τη σελίδα" className="group flex items-center text-gray-400 hover:text-[#00E676] transition-colors"><ArrowRight className="w-3 h-3 mr-2 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" aria-hidden="true" /> {t('footer', 'navHosts')}</a></li>
                 <li><a href="#support" className="group flex items-center text-gray-400 hover:text-[#00E676] transition-colors"><ArrowRight className="w-3 h-3 mr-2 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" /> {t('footer', 'navSupport')}</a></li>
                 <li><a href="#faq" className="group flex items-center text-gray-400 hover:text-[#00E676] transition-colors"><ArrowRight className="w-3 h-3 mr-2 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" /> {t('footer', 'navFaq')}</a></li>
               </ul>
@@ -1189,16 +1219,16 @@ export default function SpotlyLanding() {
           {/* Bottom Bar: Copyright & Legal */}
           <div className="pt-8 border-t border-white/10 flex flex-col gap-5">
             <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-              <p className="text-gray-500 text-xs font-bold uppercase tracking-widest flex items-center justify-center gap-2">
+              <p className="text-gray-400 text-xs font-bold uppercase tracking-widest flex items-center justify-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-[#00E676]" /> SECURED BY STRIPE <span className="text-[#333] hidden sm:inline">|</span> © {new Date().getFullYear()} SPOTLY
               </p>
-              <div className="flex space-x-8 text-[10px] font-black text-gray-600 uppercase tracking-[0.2em]">
+              <div className="flex space-x-8 text-[10px] font-black text-gray-400 uppercase tracking-[0.2em]">
                 <a href="/terms" className="hover:text-[#00E676] transition-colors">{t('footer', 'terms')}</a>
                 <a href="/privacy" className="hover:text-[#00E676] transition-colors">{t('footer', 'privacy')}</a>
               </div>
             </div>
             {/* Στοιχεία εταιρείας (ν. 4919/2022: επωνυμία, νομική μορφή, ΓΕΜΗ, έδρα) */}
-            <p className="text-gray-600 text-[11px] leading-relaxed text-center md:text-left">
+            <p className="text-gray-400 text-[11px] leading-relaxed text-center md:text-left">
               {t('footer', 'legalLine')}
             </p>
           </div>
@@ -1212,17 +1242,20 @@ export default function SpotlyLanding() {
         <div className="fixed inset-0 bg-black/80 backdrop-blur-md z-[200] flex items-center justify-center p-6 animate-fadeIn" onClick={() => setShowComingSoon(false)}>
           <div className="bg-[#161616]/95 backdrop-blur-2xl border border-[#00E676]/30 rounded-[40px] max-w-md w-full p-10 relative shadow-[0_20px_60px_rgba(0,230,118,0.2)] text-center animate-slideUp" onClick={e => e.stopPropagation()}>
             
-            <button onClick={() => setShowComingSoon(false)} className="absolute top-6 right-6 text-gray-400 hover:text-white bg-white/5 hover:bg-white/10 p-2.5 rounded-full transition-all z-10">
-              <X className="w-5 h-5" />
+            <button type="button" onClick={() => setShowComingSoon(false)} aria-label="Κλείσιμο" className="absolute top-6 right-6 text-gray-400 hover:text-white bg-white/5 hover:bg-white/10 p-2.5 rounded-full transition-all z-10">
+              <X className="w-5 h-5" aria-hidden="true" />
             </button>
 
             {/* Logo με Floating & Pulse Animations & App Icon styling */}
             <div className="relative w-28 h-28 mx-auto mb-8 animate-float">
               <div className="absolute inset-0 bg-[#00E676] opacity-20 blur-[30px] rounded-full animate-pulse"></div>
               <div className="relative z-10 w-full h-full rounded-[28px] overflow-hidden border border-white/10 bg-[#0a0a0a] shadow-[0_0_30px_rgba(0,230,118,0.4)]">
-                <img 
-                  src="/logo.png" 
+                <Image 
+                  src={logoImg} 
                   alt="Spotly App Icon" 
+                  width={112}
+                  height={112}
+                  sizes="112px"
                   className="w-full h-full object-cover scale-[1.02]"
                 />
               </div>
@@ -1250,12 +1283,16 @@ export default function SpotlyLanding() {
 
       {/* --- BACK TO TOP BUTTON --- */}
       <button
+        type="button"
         onClick={scrollToTop}
+        aria-label="Επιστροφή στην κορυφή"
+        aria-hidden={!showBackToTop}
+        tabIndex={showBackToTop ? 0 : -1}
         className={`fixed bottom-8 right-8 z-[150] w-14 h-14 rounded-full bg-[#00E676] text-black shadow-[0_0_20px_rgba(0,230,118,0.4)] flex items-center justify-center transition-all duration-500 hover:scale-110 hover:shadow-[0_0_30px_rgba(0,230,118,0.6)] active:scale-90 ${
           showBackToTop ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-10 scale-50 pointer-events-none'
         }`}
       >
-        <ChevronUp className="w-7 h-7 stroke-[3]" />
+        <ChevronUp className="w-7 h-7 stroke-[3]" aria-hidden="true" />
       </button>
 
     </div>
