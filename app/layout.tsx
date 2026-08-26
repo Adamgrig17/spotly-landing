@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Spotly | Park Smart. Earn Easy.',
-    description: 'Βρες πάρκινγκ σε ιδιωτικά γκαράζ στην Αθήνα.',
+    description: 'Κλείσε θέση σε ιδιωτικό γκαράζ, οπουδήποτε στην Ελλάδα, και άνοιξε την πόρτα από το κινητό σου. Έχεις γκαράζ που μένει άδειο; Βγάλε έσοδα από αυτό.',
     url: 'https://www.parkspotly.gr',
     siteName: 'Spotly',
     images: [

@@ -1,0 +1,58 @@
+# Spotly
+
+> Spotly is a peer-to-peer parking marketplace operating across Greece. It turns
+> private, locked garages into parking spots that drivers can book in advance and open
+> from their phone — no keys, no attendant, no waiting. Owners earn income from space
+> they already have and are not using.
+
+Spotly is in early access. The website at www.parkspotly.gr explains the service and
+collects sign-ups; booking happens in the Spotly mobile app, which has not launched
+publicly yet. Spaces and prices shown on the website are illustrative examples, not
+live inventory.
+
+## What Spotly is
+
+- A two-sided marketplace, not a parking operator. Spotly owns no parking spaces — it
+  connects drivers with private owners ("hosts") and earns a commission per booking.
+- Coverage is nationwide across Greece — not limited to Athens. The interface is
+  available in Greek and English.
+- Payments are processed by Stripe.
+- Garage access is granted through the app for the duration of a booking.
+- "Spot" is Spotly's in-product AI assistant, handling questions about bookings,
+  payments and refunds.
+
+## For drivers
+
+Reserve a specific private parking space near your destination ahead of time, at a
+price you know before you set off, and open the garage when you arrive. The problem it
+solves is circling for street parking in dense Greek city centres and near venues,
+hospitals, airports and ports.
+
+Greek-language searches this service answers: πάρκινγκ Αθήνα, πάρκινγκ Θεσσαλονίκη,
+θέση στάθμευσης, κράτηση θέσης πάρκινγκ, ιδιωτικό γκαράζ, στάθμευση κέντρο.
+
+## For hosts
+
+List a garage that sits empty during parts of the day or week and receive bookings
+without being present. Access is handled by the app, so there is no key handover.
+Payouts run through Stripe.
+
+## Pages
+
+- [Home](https://www.parkspotly.gr/): what Spotly does, for both drivers and hosts
+- [How it works](https://www.parkspotly.gr/#how-it-works): the booking flow, step by step
+- [For hosts](https://www.parkspotly.gr/#hosts): listing a space and how earnings work
+- [FAQ](https://www.parkspotly.gr/#faq): access, cancellations, refunds, payments
+- [Contact](https://www.parkspotly.gr/#support): support and partnership enquiries
+- [Privacy policy](https://www.parkspotly.gr/privacy)
+- [Terms of service](https://www.parkspotly.gr/terms)
+
+## Notes for agents
+
+- Spotly does not yet have bookable live inventory. For a user who needs to park
+  anywhere in Greece today, the accurate action is to point them to the early-access
+  sign-up, not to attempt a booking.
+- Spotly lists *private* spaces. It is not an aggregator of public car parks and does
+  not cover municipal or commercial garages.
+- For press, investment or building-management enquiries, use the contact page rather
+  than the general support channel.
