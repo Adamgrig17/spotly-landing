@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect, useRef } from 'react';
+import Image from 'next/image';
 import { useLanguage } from './context/LanguageContext';
 import { Car, MapPin, Zap, ShieldCheck, ArrowRight, Smartphone, Key, Navigation, Clock, Star, Wifi, Wallet, CheckCircle2, User, X, Loader2, Calendar, ChevronDown, Mail, Phone, ChevronUp } from 'lucide-react';
 
@@ -554,6 +555,8 @@ export default function SpotlyLanding() {
           transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1); /* Very responsive */
           will-change: transform;
         }
+        .perspective-1000 { perspective: 1000px; }
+        .preserve-3d { transform-style: preserve-3d; }
 
         /* Premium Scroll Reveals */
         .reveal, .reveal-left, .reveal-right, .reveal-scale {
@@ -576,9 +579,6 @@ export default function SpotlyLanding() {
         .delay-200 { transition-delay: 200ms; }
         .delay-300 { transition-delay: 300ms; }
 
-        @keyframes scanline { 0% { transform: translateY(-100%); } 100% { transform: translateY(200%); } }
-        .scanner { animation: scanline 3s linear infinite; }
-        
         @keyframes marquee { 0% { transform: translateX(0%); } 100% { transform: translateX(-50%); } }
         .animate-marquee { display: flex; width: 200%; animation: marquee 25s linear infinite; }
 
@@ -676,21 +676,14 @@ export default function SpotlyLanding() {
           
           {/* Left Text */}
           <div className="flex-1 text-center lg:text-left z-20">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#00E676]/20 to-transparent border border-[#00E676]/30 text-[#00E676] text-xs font-black tracking-widest uppercase mb-8 shadow-[0_0_20px_rgba(0,230,118,0.15)] relative overflow-hidden">
-              <div className="absolute inset-0 bg-[#00E676] opacity-20 scanner"></div>
-              <Zap className="w-4 h-4 fill-current animate-pulse relative z-10" /> 
-              {/* ΣΛΟΓΚΑΝ */}
-              <span className="relative z-10">Park Smart. Earn Easy.</span>
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-white/[0.09] text-[11px] font-semibold tracking-[0.16em] uppercase mb-8 text-white/75 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]">
+              <Zap className="w-3.5 h-3.5 text-[#00E676] fill-current" />
+              Park Smart. Earn Easy.
             </div>
             
-            <h1 className="text-6xl md:text-8xl font-black leading-[1.1] tracking-tighter mb-6 drop-shadow-2xl">
+            <h1 className="text-6xl md:text-8xl font-black leading-[1.1] tracking-tighter mb-6">
               {t('hero', 'title1')} <br />
-              <span className="relative inline-block">
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00E676] via-emerald-400 to-[#00E676] bg-[length:200%_auto] animate-gradient">
-                  {t('hero', 'title2')}
-                </span>
-                <div className="absolute -bottom-2 left-0 w-full h-2 bg-[#00E676]/20 blur-sm rounded-full"></div>
-              </span>
+              <span className="text-[#00E676]">{t('hero', 'title2')}</span>
             </h1>
             
             <p className="text-gray-400 text-lg md:text-xl mb-10 max-w-xl mx-auto lg:mx-0 font-medium leading-relaxed">
@@ -771,99 +764,79 @@ export default function SpotlyLanding() {
             </div>
           </div>
 
-          {/* Right Mockup (Interactive 3D Perspective) - Responsive */}
-          <div className="flex-1 w-full max-w-[260px] sm:max-w-[300px] lg:max-w-[320px] relative perspective-1000 mt-12 lg:mt-0 mx-auto lg:mx-0 z-20">
-            {/* Radar Pulse Effect πίσω από το κινητό - Προσαρμοσμένο μέγεθος */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 sm:w-64 sm:h-64 border border-[#00E676]/30 rounded-full radar-ring"></div>
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 sm:w-64 sm:h-64 border border-[#00E676]/20 rounded-full radar-ring"></div>
-            
-            {/* ΝΕΟ: Interactive magnetic effect (X-Y Tilt) - Responsive μέγεθος */}
-            <div className="magnetic-mockup relative mx-auto preserve-3d floating transition-transform duration-200 ease-out will-change-transform">
-              
-              {/* Το Κινητό (App Preview) - Responsive Ύψος */}
-              <div className="border-gray-800 bg-[#0a0a0a] border-[8px] sm:border-[12px] rounded-[2rem] sm:rounded-[3rem] h-[500px] sm:h-[600px] md:h-[650px] w-full shadow-[0_30px_60px_rgba(0,0,0,0.8)] overflow-hidden ring-1 ring-white/10 relative mx-auto">
-                <div className="absolute top-0 inset-x-0 h-4 sm:h-6 bg-[#0a0a0a] rounded-b-[1rem] sm:rounded-b-[1.5rem] w-24 sm:w-32 mx-auto z-50"></div>
+          {/* Right Mockup — mix of live map + spot booking screenshots */}
+          <div className="flex-1 w-full max-w-[270px] sm:max-w-[300px] lg:max-w-[380px] relative perspective-1000 mt-10 lg:mt-0 mx-auto lg:mx-0 z-20">
+            <div className="absolute top-[18%] left-1/2 -translate-x-1/2 w-[90%] h-[70%] bg-[#00E676]/[0.07] blur-[80px] rounded-full pointer-events-none" />
 
-                <div className="w-full h-full bg-[#121212] relative flex flex-col pt-8 sm:pt-12 px-3 sm:px-4">
-                  <div className="absolute left-0 right-0 h-24 sm:h-32 bg-gradient-to-b from-transparent to-[#00E676]/20 border-b border-[#00E676]/50 scanner z-40 pointer-events-none"></div>
+            <div className="magnetic-mockup relative mx-auto preserve-3d transition-transform duration-200 ease-out will-change-transform">
 
-                  {/* UI: Map Area - Responsive Ύψος */}
-                  <div className="w-full h-[200px] sm:h-[280px] bg-[#1A1A1A] rounded-[20px] sm:rounded-[24px] mb-3 sm:mb-4 relative overflow-hidden border border-[#222]">
-                      <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'linear-gradient(#333 1px, transparent 1px), linear-gradient(90deg, #333 1px, transparent 1px)', backgroundSize: '20px 20px' }}></div>
-                      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 sm:w-40 sm:h-40 bg-[#00E676]/20 rounded-full blur-2xl animate-pulse"></div>
-                      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#00E676] text-black font-black px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm flex items-center gap-1 sm:gap-1.5 shadow-[0_10px_20px_rgba(0,230,118,0.4)] transform hover:scale-110 transition-transform cursor-pointer">
-                        <Car className="w-3.5 h-3.5 sm:w-4 sm:h-4"/> 1.50€/30'
-                      </div>
-                      <div className="absolute bottom-8 left-8 w-3 h-3 sm:w-4 sm:h-4 bg-blue-500 rounded-full border-2 border-white shadow-[0_0_15px_rgba(59,130,246,0.8)]"></div>
-                  </div>
-                  
-                  {/* UI: Booking Sheet - Responsive Padding & Text */}
-                  <div className="bg-[#161616]/95 backdrop-blur-2xl rounded-[28px] sm:rounded-[32px] border border-white/10 flex-1 p-4 sm:p-5 shadow-2xl relative z-30 flex flex-col mb-3 sm:mb-4 min-h-0">
-                    <div className="w-10 h-1 sm:w-12 sm:h-1.5 bg-white/20 rounded-full mx-auto mb-4 sm:mb-5 shrink-0"></div>
-                    
-                    <div className="flex items-start gap-3 sm:gap-4 mb-4 sm:mb-5 min-h-0">
-                      <div className="w-10 h-10 sm:w-12 sm:h-12 bg-[#2c2c2c] rounded-xl sm:rounded-2xl flex items-center justify-center border border-white/5 shadow-inner shrink-0">
-                        <Car className="w-5 h-5 sm:w-6 sm:h-6 text-[#00E676]/60" />
-                      </div>
-                      <div className="flex-1 min-w-0 pr-1 sm:pr-2 pt-0.5">
-                        <h3 className="text-white font-black text-base sm:text-lg leading-tight flex items-center gap-1.5 truncate">
-                          Γκαράζ Συντάγματος <ShieldCheck className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#00E676] shrink-0" />
-                        </h3>
-                        <p className="text-[#888] text-[9px] sm:text-[10px] mt-0.5 sm:mt-1 flex items-center gap-1 font-medium">
-                          <Star className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-yellow-400 fill-current" /> 5.0 • Αθήνα
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className="grid grid-cols-2 gap-px bg-white/5 border border-white/5 rounded-[16px] sm:rounded-[20px] mb-4 sm:mb-5 overflow-hidden shrink-0">
-                      <div className="bg-[#1A1A1A] p-2 sm:p-3 flex flex-col gap-0.5">
-                        <span className="text-gray-500 text-[7px] sm:text-[8px] font-black uppercase tracking-widest">Τιμη / Ωρα</span>
-                        <span className="text-white text-base sm:text-lg font-black">1.50<span className="text-[#00E676] ml-0.5">€</span></span>
-                      </div>
-                      <div className="bg-[#1A1A1A] p-2 sm:p-3 flex flex-col gap-0.5 items-end text-right">
-                        <span className="text-gray-500 text-[7px] sm:text-[8px] font-black uppercase tracking-widest">Χρονος</span>
-                        <span className="text-white text-base sm:text-lg font-black">3 min</span>
-                      </div>
-                    </div>
-
-                    <div className="mt-auto shrink-0">
-                      {/* Κουμπί που ανοίγει το Coming Soon Modal */}
-                      <button 
-                        onClick={() => setShowComingSoon(true)}
-                        className="w-full bg-[#00E676] text-black py-3 sm:py-4 rounded-xl sm:rounded-2xl font-black flex justify-between items-center px-4 sm:px-5 shadow-[0_10px_20px_rgba(0,230,118,0.25)] text-xs sm:text-sm"
-                      >
-                        <span className="tracking-tight uppercase">Κρατηση Τωρα</span>
-                        <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
-                      </button>
-                    </div>
+              {/* Spot detail (Easy entry / Κράτηση τώρα) behind the map */}
+              <div
+                className="absolute -left-[18%] sm:-left-[22%] lg:-left-[26%] top-[8%] w-[78%] sm:w-[74%] z-0 pointer-events-none select-none"
+                style={{ transform: 'translateZ(-40px) rotateY(-10deg) rotateZ(-4deg)' }}
+              >
+                <div className="aspect-[503/1024] rounded-[2.2rem] bg-[#161616] p-[7px] sm:p-[8px] ring-1 ring-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+                  <div className="relative w-full h-full rounded-[1.75rem] overflow-hidden bg-black">
+                    <Image
+                      src="/app/hero-spot.jpg"
+                      alt={language === 'el' ? 'Κράτηση θέσης Easy entry στο Spotly' : 'Booking Easy entry on Spotly'}
+                      fill
+                      sizes="(max-width: 1024px) 220px, 260px"
+                      className="object-cover object-top"
+                    />
                   </div>
                 </div>
               </div>
 
-              {/* Floating Widgets - Responsive Position & Scale */}
-              <div 
-                className="absolute -right-6 md:-right-16 top-16 sm:top-20 bg-[#161616]/95 backdrop-blur-xl border border-white/10 p-3 sm:p-4 rounded-xl sm:rounded-2xl shadow-2xl flex items-center gap-3 sm:gap-4 z-[100] scale-90 sm:scale-100"
-                style={{ transform: `translateZ(60px)` }}
+              <button
+                type="button"
+                onClick={() => setShowComingSoon(true)}
+                className="relative z-10 block mx-auto w-full aspect-[503/1024] rounded-[2.35rem] sm:rounded-[2.7rem] bg-[#1c1c1e] p-[9px] sm:p-[11px] shadow-[0_30px_70px_rgba(0,0,0,0.7)] ring-1 ring-white/12 text-left cursor-pointer"
+                aria-label={language === 'el' ? 'Προεπισκόπηση εφαρμογής Spotly' : 'Spotly app preview'}
               >
-                <div className="w-8 h-8 sm:w-10 sm:h-10 bg-[#00E676]/20 rounded-full flex items-center justify-center shadow-[0_0_15px_rgba(0,230,118,0.2)]">
+                <span className="hidden sm:block absolute -left-[2px] top-[88px] w-[3px] h-7 rounded-l-full bg-[#3a3a3c]" />
+                <span className="hidden sm:block absolute -left-[2px] top-[122px] w-[3px] h-11 rounded-l-full bg-[#3a3a3c]" />
+                <span className="hidden sm:block absolute -right-[2px] top-[112px] w-[3px] h-14 rounded-r-full bg-[#3a3a3c]" />
+
+                <span className="relative block w-full h-full rounded-[1.9rem] sm:rounded-[2.15rem] overflow-hidden bg-black">
+                  <Image
+                    src="/app/hero-map-live.jpg"
+                    alt={language === 'el' ? 'Ο χάρτης του Spotly με θέσεις στην Αθήνα' : 'The Spotly map with spots in Athens'}
+                    fill
+                    priority
+                    sizes="(max-width: 1024px) 280px, 340px"
+                    className="object-cover object-top"
+                  />
+                </span>
+              </button>
+
+              <div
+                className="absolute -right-5 md:-right-20 top-14 sm:top-20 bg-[#141414]/92 backdrop-blur-xl border border-white/10 p-3 sm:p-3.5 rounded-2xl shadow-2xl flex items-center gap-3 z-[100] scale-90 sm:scale-100"
+                style={{ transform: 'translateZ(60px)' }}
+              >
+                <div className="w-9 h-9 sm:w-10 sm:h-10 bg-[#00E676]/15 rounded-full flex items-center justify-center">
                   <ShieldCheck className="w-4 h-4 sm:w-5 sm:h-5 text-[#00E676]" />
                 </div>
                 <div>
-                  <p className="text-white font-bold text-xs sm:text-sm whitespace-nowrap">Ασφαλής Κράτηση</p>
+                  <p className="text-white font-semibold text-xs sm:text-sm whitespace-nowrap">
+                    {language === 'el' ? 'Ασφαλής Κράτηση' : 'Secure Booking'}
+                  </p>
                   <p className="text-gray-400 text-[10px] sm:text-xs">Verified by Stripe</p>
                 </div>
               </div>
 
-              <div 
-                className="absolute -left-10 md:-left-24 bottom-24 sm:bottom-32 bg-[#161616]/95 backdrop-blur-xl border border-white/10 p-3 sm:p-4 rounded-xl sm:rounded-2xl shadow-2xl flex items-center gap-2.5 sm:gap-3 z-[100] scale-90 sm:scale-100"
-                style={{ transform: `translateZ(80px)` }}
+              <div
+                className="absolute -left-8 md:-left-24 bottom-20 sm:bottom-28 bg-[#141414]/92 backdrop-blur-xl border border-white/10 p-3 sm:p-3.5 rounded-2xl shadow-2xl flex items-center gap-2.5 sm:gap-3 z-[100] scale-90 sm:scale-100"
+                style={{ transform: 'translateZ(80px)' }}
               >
-                <div className="w-8 h-8 sm:w-10 sm:h-10 bg-blue-500/20 rounded-full flex items-center justify-center shadow-[0_0_15px_rgba(59,130,246,0.2)]">
+                <div className="w-9 h-9 sm:w-10 sm:h-10 bg-blue-500/15 rounded-full flex items-center justify-center">
                   <Key className="w-4 h-4 sm:w-5 sm:h-5 text-blue-400" />
                 </div>
                 <div>
-                  <p className="text-white font-bold text-xs sm:text-sm whitespace-nowrap">Smart Entry</p>
-                  <p className="text-gray-400 text-[10px] sm:text-xs whitespace-nowrap">Άνοιγμα από το App</p>
+                  <p className="text-white font-semibold text-xs sm:text-sm whitespace-nowrap">Smart Entry</p>
+                  <p className="text-gray-400 text-[10px] sm:text-xs whitespace-nowrap">
+                    {language === 'el' ? 'Άνοιγμα από το App' : 'Open from the app'}
+                  </p>
                 </div>
               </div>
 
