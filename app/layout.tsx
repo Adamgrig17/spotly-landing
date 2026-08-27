@@ -93,6 +93,7 @@ export default function RootLayout({
   function revealAll(els){ els.forEach(function(el){ el.classList.add('visible'); }); }
   function init(){
     var els = [].slice.call(document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-scale'));
+    if (!els.length) return;
     if (!('IntersectionObserver' in window) ||
         window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       revealAll(els); return;
@@ -102,10 +103,10 @@ export default function RootLayout({
         if (e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); }
       });
     }, { threshold: 0.15, rootMargin: '0px 0px -5% 0px' });
-    els.forEach(function(el){ io.observe(el); });
+    els.forEach(function(el){ if (!el.classList.contains('visible')) io.observe(el); });
   }
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
-  else init();
+  init();
+  document.addEventListener('DOMContentLoaded', init);
 })();
 `,
           }}
