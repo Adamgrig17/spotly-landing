@@ -612,6 +612,7 @@ export default function SpotlyLanding() {
             </div>
             <span className="text-2xl font-black tracking-tighter">Spotly<sup className="text-[10px] text-gray-400 font-bold ml-0.5">™</sup></span>
           </div>
+          <div className="flex items-center gap-3">
             <div className="hidden md:flex items-center gap-8 text-sm font-bold text-gray-400">
             <a href="#how-it-works" className="hover:text-white transition-colors">{t('nav', 'experience')}</a>
             <a href="https://spotlyparking.gr/" aria-label="Για ιδιοκτήτες, σελίδα εγγραφής Host" className="hover:text-white transition-colors font-black text-[#00E676]">
@@ -636,8 +637,8 @@ export default function SpotlyLanding() {
             >
               {t('nav', 'enterApp')}
             </button>
+            </div>
 
-            {/* === ΕΔΩ ΜΠΑΙΝΕΙ ΤΟ LANGUAGE TOGGLE === */}
             <button 
               type="button"
               onClick={toggleLanguage} 
