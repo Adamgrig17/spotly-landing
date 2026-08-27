@@ -32,13 +32,17 @@ export const metadata: Metadata = {
     siteName: 'Spotly',
     images: [
       {
-        url: '/logo.png', // Η εικόνα που φαίνεται στο WhatsApp/Facebook
-        width: 800,
-        height: 600,
+        url: '/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Spotly — κλείσε θέση σε ιδιωτικό γκαράζ σε όλη την Ελλάδα',
       },
     ],
     locale: 'el_GR',
     type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
   },
 };
 
