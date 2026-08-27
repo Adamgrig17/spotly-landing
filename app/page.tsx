@@ -4,7 +4,7 @@ import Image from 'next/image';
 import logoImg from '../public/logo.png';
 import spotMascotImg from '../public/spot-mascot.png';
 import { useLanguage } from './context/LanguageContext';
-import { Car, MapPin, Zap, ShieldCheck, ArrowRight, Smartphone, Key, Navigation, Clock, Star, Wifi, Wallet, CheckCircle2, User, X, Loader2, Calendar, ChevronDown, Mail, Phone, ChevronUp } from 'lucide-react';
+import { Car, MapPin, Zap, ShieldCheck, ArrowRight, Smartphone, Key, Clock, Star, Wifi, Wallet, CheckCircle2, User, X, Loader2, Calendar, ChevronDown, Mail, Phone, ChevronUp } from 'lucide-react';
 
 // ============================================================================
 // COMPONENTS (FAQ)
@@ -196,7 +196,7 @@ const SpotAISection = () => {
   return (
     <section id="support" className="py-32 relative bg-[#0A0A0A] border-t border-[#111] overflow-hidden">
       {/* Ambient glow πίσω από το mascot */}
-      <div className="absolute top-1/2 right-0 lg:right-32 -translate-y-1/2 w-[500px] h-[500px] bg-[#00E676]/10 blur-[150px] rounded-full pointer-events-none"></div>
+      <div className="absolute top-1/2 right-0 lg:right-32 -translate-y-1/2 w-[500px] h-[500px] bg-[#00E676]/10 blur-[150px] rounded-full pointer-events-none hidden lg:block"></div>
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="flex flex-col lg:flex-row items-center gap-16">
@@ -238,7 +238,7 @@ const SpotAISection = () => {
           {/* Mascot */}
           <div className="flex-1 flex justify-center relative">
             <div className="relative flex flex-col items-center">
-              <div className="absolute inset-0 bg-[#00E676]/20 blur-[80px] rounded-full scale-90 animate-pulse pointer-events-none"></div>
+              <div className="absolute inset-0 bg-[#00E676]/20 blur-[80px] rounded-full scale-90 animate-pulse pointer-events-none hidden lg:block"></div>
               <Image
                 src={spotMascotImg}
                 alt="Spot — ο AI βοηθός του Spotly"
@@ -521,7 +521,6 @@ export default function SpotlyLanding() {
 
         .magnetic-mockup {
           transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1); /* Very responsive */
-          will-change: transform;
         }
         .perspective-1000 { perspective: 1000px; }
         .preserve-3d { transform-style: preserve-3d; }
@@ -539,6 +538,21 @@ export default function SpotlyLanding() {
         .reveal.visible, .reveal-left.visible, .reveal-right.visible, .reveal-scale.visible {
           opacity: 1;
           transform: translate(0) scale(1);
+        }
+
+        /* iPhone/WebKit: skip 3D, huge blurs, and opacity-0 reveals until JS. */
+        @media (max-width: 1023px) {
+          .hero-glow { display: none; }
+          .magnetic-mockup { will-change: auto; }
+          .perspective-1000 { perspective: none; }
+          .preserve-3d { transform-style: flat; }
+          .reveal, .reveal-left, .reveal-right, .reveal-scale {
+            opacity: 1;
+            transform: none;
+          }
+        }
+        @media (min-width: 1024px) {
+          .magnetic-mockup { will-change: transform; }
         }
 
         /* Delays */
@@ -585,10 +599,19 @@ export default function SpotlyLanding() {
         .hero-glow {
           transform: translate(-50%, -50%) translateY(calc(var(--sy, 0) * 0.2px));
         }
+        .hero-phone-back {
+          transform: translateZ(-40px) rotateY(-10deg) rotateZ(-4deg);
+        }
+        .hero-float-card-right { transform: translateZ(60px); }
+        .hero-float-card-left { transform: translateZ(80px); }
+        @media (max-width: 1023px) {
+          .hero-phone-back { transform: rotate(-4deg); }
+          .hero-float-card-right, .hero-float-card-left { transform: none; }
+        }
       `}} />
 
-      {/* Αχνό Tech Πλέγμα στο παρασκήνιο */}
-      <div className="absolute inset-0 bg-grid z-0 pointer-events-none"></div>
+      {/* Αχνό Tech Πλέγμα στο παρασκήνιο — μόνο desktop, ακριβό mask στο iOS */}
+      <div className="absolute inset-0 bg-grid z-0 pointer-events-none hidden lg:block"></div>
 
       {/* Εμφάνιση μόνο σε μεγάλες οθόνες (lg) για αποφυγή lag */}
       <div className="hidden lg:block">
@@ -596,7 +619,7 @@ export default function SpotlyLanding() {
       </div>
 
       {/* --- HEADER --- */}
-      <nav className={`fixed w-full top-0 z-50 transition-all duration-500 ${isScrolled ? 'bg-[#0A0A0A]/90 backdrop-blur-xl border-b border-[#333]' : 'bg-transparent'}`}>
+      <nav className={`fixed w-full top-0 z-50 transition-all duration-500 ${isScrolled ? 'bg-[#0A0A0A]/90 lg:backdrop-blur-xl border-b border-[#333]' : 'bg-transparent'}`}>
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
           <div className="flex items-center gap-3 group cursor-pointer" onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}>
             {/* Λογότυπο Spotly σε στυλ App Icon */}
@@ -656,8 +679,8 @@ export default function SpotlyLanding() {
       <main>
       {/* --- HERO SECTION --- Responsive Padding */}
       <section className="pt-24 sm:pt-32 pb-16 px-6 relative min-h-[90vh] flex items-center">
-        {/* Dynamic Glow */}
-        <div className="hero-glow absolute top-1/2 left-1/2 w-[800px] h-[800px] bg-[#00E676] opacity-[0.06] blur-[150px] rounded-full pointer-events-none"></div>
+        {/* Dynamic Glow — desktop only; iOS rasterizes 800px blur slowly */}
+        <div className="hero-glow hidden lg:block absolute top-1/2 left-1/2 w-[800px] h-[800px] bg-[#00E676] opacity-[0.06] blur-[150px] rounded-full pointer-events-none"></div>
 
         {/* Container - Reduced gap on mobile */}
         <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-12 lg:gap-16 relative z-10 w-full">
@@ -754,14 +777,13 @@ export default function SpotlyLanding() {
 
           {/* Right Mockup — mix of live map + spot booking screenshots */}
           <div className="flex-1 w-full max-w-[270px] sm:max-w-[300px] lg:max-w-[380px] relative perspective-1000 mt-10 lg:mt-0 mx-auto lg:mx-0 z-20">
-            <div className="absolute top-[18%] left-1/2 -translate-x-1/2 w-[90%] h-[70%] bg-[#00E676]/[0.07] blur-[80px] rounded-full pointer-events-none" />
+            <div className="absolute top-[18%] left-1/2 -translate-x-1/2 w-[90%] h-[70%] bg-[#00E676]/[0.07] blur-[80px] rounded-full pointer-events-none hidden lg:block" />
 
-            <div className="magnetic-mockup relative mx-auto preserve-3d transition-transform duration-200 ease-out will-change-transform">
+            <div className="magnetic-mockup relative mx-auto preserve-3d transition-transform duration-200 ease-out">
 
               {/* Spot detail (Easy entry / Κράτηση τώρα) behind the map */}
               <div
-                className="absolute -left-[18%] sm:-left-[22%] lg:-left-[26%] top-[8%] w-[78%] sm:w-[74%] z-0 pointer-events-none select-none"
-                style={{ transform: 'translateZ(-40px) rotateY(-10deg) rotateZ(-4deg)' }}
+                className="hero-phone-back absolute -left-[18%] sm:-left-[22%] lg:-left-[26%] top-[8%] w-[78%] sm:w-[74%] z-0 pointer-events-none select-none"
               >
                 <div className="aspect-[503/1024] rounded-[2.2rem] bg-[#161616] p-[7px] sm:p-[8px] ring-1 ring-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
                   <div className="relative w-full h-full rounded-[1.75rem] overflow-hidden bg-black">
@@ -769,8 +791,7 @@ export default function SpotlyLanding() {
                       src="/app/hero-spot.jpg"
                       alt={language === 'el' ? 'Κράτηση θέσης Easy entry στο Spotly' : 'Booking Easy entry on Spotly'}
                       fill
-                      priority
-                      fetchPriority="high"
+                      loading="eager"
                       sizes="(min-width: 1024px) 281px, 356px"
                       className="object-cover object-top"
                     />
@@ -802,8 +823,7 @@ export default function SpotlyLanding() {
               </button>
 
               <div
-                className="absolute -right-5 md:-right-20 top-14 sm:top-20 bg-[#141414]/92 backdrop-blur-xl border border-white/10 p-3 sm:p-3.5 rounded-2xl shadow-2xl flex items-center gap-3 z-[100] scale-90 sm:scale-100"
-                style={{ transform: 'translateZ(60px)' }}
+                className="hero-float-card hero-float-card-right absolute -right-5 md:-right-20 top-14 sm:top-20 bg-[#141414] lg:bg-[#141414]/92 lg:backdrop-blur-xl border border-white/10 p-3 sm:p-3.5 rounded-2xl shadow-2xl flex items-center gap-3 z-[100] scale-90 sm:scale-100"
               >
                 <div className="w-9 h-9 sm:w-10 sm:h-10 bg-[#00E676]/15 rounded-full flex items-center justify-center">
                   <ShieldCheck className="w-4 h-4 sm:w-5 sm:h-5 text-[#00E676]" />
@@ -817,8 +837,7 @@ export default function SpotlyLanding() {
               </div>
 
               <div
-                className="absolute -left-8 md:-left-24 bottom-20 sm:bottom-28 bg-[#141414]/92 backdrop-blur-xl border border-white/10 p-3 sm:p-3.5 rounded-2xl shadow-2xl flex items-center gap-2.5 sm:gap-3 z-[100] scale-90 sm:scale-100"
-                style={{ transform: 'translateZ(80px)' }}
+                className="hero-float-card hero-float-card-left absolute -left-8 md:-left-24 bottom-20 sm:bottom-28 bg-[#141414] lg:bg-[#141414]/92 lg:backdrop-blur-xl border border-white/10 p-3 sm:p-3.5 rounded-2xl shadow-2xl flex items-center gap-2.5 sm:gap-3 z-[100] scale-90 sm:scale-100"
               >
                 <div className="w-9 h-9 sm:w-10 sm:h-10 bg-blue-500/15 rounded-full flex items-center justify-center">
                   <Key className="w-4 h-4 sm:w-5 sm:h-5 text-blue-400" />
@@ -897,7 +916,7 @@ export default function SpotlyLanding() {
 
       {/* --- HOST SECTION --- */}
       <section id="hosts" ref={hostSectionRef} className="py-32 bg-black border-t border-[#222] overflow-hidden relative">
-        <div className="absolute top-0 right-0 w-[1000px] h-[1000px] bg-[#00E676]/5 blur-[200px] rounded-full pointer-events-none"></div>
+        <div className="absolute top-0 right-0 w-[1000px] h-[1000px] bg-[#00E676]/5 blur-[200px] rounded-full pointer-events-none hidden lg:block"></div>
 
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           
@@ -969,7 +988,7 @@ export default function SpotlyLanding() {
                <div className="absolute -right-10 bottom-40 w-32 h-[1px] bg-gradient-to-l from-transparent to-[#00E676]"></div>
 
                <div className="bg-[#121212] border border-white/10 rounded-[40px] p-8 shadow-[0_0_80px_rgba(0,230,118,0.15)] relative overflow-hidden group hover:border-[#00E676]/30 transition-colors duration-500">
-                  <div className="absolute top-0 right-0 w-40 h-40 bg-[#00E676] opacity-10 rounded-full blur-3xl transition-opacity group-hover:opacity-20"></div>
+                  <div className="absolute top-0 right-0 w-40 h-40 bg-[#00E676] opacity-10 rounded-full blur-3xl transition-opacity group-hover:opacity-20 hidden lg:block"></div>
                   
                   <div className="flex justify-between items-center mb-8 relative z-10">
                     <span className="text-white font-bold tracking-tight text-xl">Το Ταμείο μου</span>
@@ -1055,7 +1074,7 @@ export default function SpotlyLanding() {
         </div>
         
         {/* Background Ambient Glow */}
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-2xl h-64 bg-[#00E676]/5 blur-[120px] pointer-events-none z-0"></div>
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-2xl h-64 bg-[#00E676]/5 blur-[120px] pointer-events-none z-0 hidden lg:block"></div>
         
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-8 mb-20">
