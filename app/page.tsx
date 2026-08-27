@@ -783,7 +783,9 @@ export default function SpotlyLanding() {
                       src="/app/hero-spot.jpg"
                       alt={language === 'el' ? 'Κράτηση θέσης Easy entry στο Spotly' : 'Booking Easy entry on Spotly'}
                       fill
-                      sizes="(max-width: 1024px) 220px, 260px"
+                      priority
+                      fetchPriority="high"
+                      sizes="(min-width: 1024px) 281px, 356px"
                       className="object-cover object-top"
                     />
                   </div>
