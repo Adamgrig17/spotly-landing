@@ -355,7 +355,8 @@ const NeonBackgroundLine = () => (
 
 export default function SpotlyLanding() {
   const [email, setEmail] = useState('');
-  const [scrollY, setScrollY] = useState(0);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [showBackToTop, setShowBackToTop] = useState(false);
   const [hostEarnings, setHostEarnings] = useState(0);
   const [isHoveringPhone, setIsHoveringPhone] = useState(false);
 
@@ -366,26 +367,8 @@ export default function SpotlyLanding() {
   
   // Refs για το Scroll Intersection
   const hostSectionRef = useRef<HTMLElement>(null);
-
-  // Παρακολούθηση Scroll 
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-      
-      // Όταν φτάσει στην ενότητα Host, ξεκινάει το μέτρημα!
-      if (hostSectionRef.current) {
-        const rect = hostSectionRef.current.getBoundingClientRect();
-        if (rect.top < window.innerHeight * 0.75 && hostEarnings === 0) {
-          animateValue(0, 145.50, 1500, setHostEarnings);
-        }
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [hostEarnings]);
+  const hostEarningsRef = useRef(0);
+  hostEarningsRef.current = hostEarnings;
 
   // ΝΕΟ: PREMIUM EXPERIENCE ENGINE (Mouse Spotlight & 3D Tilt)
   useEffect(() => {
@@ -445,23 +428,6 @@ export default function SpotlyLanding() {
     };
   }, []);
 
-  // Logic για το Back to Top κουμπί
-  const [showBackToTop, setShowBackToTop] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      // Εμφανίζεται αφού ο χρήστης σκρολάρει 600px
-      if (window.scrollY > 600) {
-        setShowBackToTop(true);
-      } else {
-        setShowBackToTop(false);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -477,6 +443,32 @@ export default function SpotlyLanding() {
     };
     window.requestAnimationFrame(step);
   };
+
+  useEffect(() => {
+    let raf = 0;
+    const onScroll = () => {
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        const y = window.scrollY;
+        document.documentElement.style.setProperty('--sy', String(y));
+        setIsScrolled(y > 50);
+        setShowBackToTop(y > 600);
+        if (hostSectionRef.current) {
+          const rect = hostSectionRef.current.getBoundingClientRect();
+          if (rect.top < window.innerHeight * 0.75 && hostEarningsRef.current === 0) {
+            animateValue(0, 145.50, 1500, setHostEarnings);
+          }
+        }
+        raf = 0;
+      });
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      cancelAnimationFrame(raf);
+    };
+  }, []);
 
   // ΝΕΟ STATE ΓΙΑ ΤΗΝ ΚΑΤΑΣΤΑΣΗ ΑΠΟΣΤΟΛΗΣ
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
@@ -503,13 +495,6 @@ export default function SpotlyLanding() {
       setStatus('error');
     }
   };
-
-  // 3D Υπολογισμοί: Ομαλό, ανεπαίσθητο κούνημα με βάση το scroll.
-  const phoneRotateX = Math.sin(scrollY * 0.003) * 8; 
-  const phoneRotateY = Math.cos(scrollY * 0.003) * 8;
-
-  
-
 
   return (
     <div className="min-h-screen bg-[#050505] text-white font-sans selection:bg-[#00E676] selection:text-black overflow-x-hidden relative">
@@ -597,6 +582,9 @@ export default function SpotlyLanding() {
         @media (prefers-reduced-motion: reduce) {
           .neon-cover { animation: none; transform: translateX(100%); }
         }
+        .hero-glow {
+          transform: translate(-50%, -50%) translateY(calc(var(--sy, 0) * 0.2px));
+        }
       `}} />
 
       {/* Αχνό Tech Πλέγμα στο παρασκήνιο */}
@@ -608,7 +596,7 @@ export default function SpotlyLanding() {
       </div>
 
       {/* --- HEADER --- */}
-      <nav className={`fixed w-full top-0 z-50 transition-all duration-500 ${scrollY > 50 ? 'bg-[#0A0A0A]/90 backdrop-blur-xl border-b border-[#333]' : 'bg-transparent'}`}>
+      <nav className={`fixed w-full top-0 z-50 transition-all duration-500 ${isScrolled ? 'bg-[#0A0A0A]/90 backdrop-blur-xl border-b border-[#333]' : 'bg-transparent'}`}>
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
           <div className="flex items-center gap-3 group cursor-pointer" onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}>
             {/* Λογότυπο Spotly σε στυλ App Icon */}
@@ -668,10 +656,7 @@ export default function SpotlyLanding() {
       {/* --- HERO SECTION --- Responsive Padding */}
       <section className="pt-24 sm:pt-32 pb-16 px-6 relative min-h-[90vh] flex items-center">
         {/* Dynamic Glow */}
-        <div 
-          className="absolute top-1/2 left-1/2 w-[800px] h-[800px] bg-[#00E676] opacity-[0.06] blur-[150px] rounded-full pointer-events-none"
-          style={{ transform: `translate(-50%, -50%) translateY(${scrollY * 0.2}px)` }}
-        ></div>
+        <div className="hero-glow absolute top-1/2 left-1/2 w-[800px] h-[800px] bg-[#00E676] opacity-[0.06] blur-[150px] rounded-full pointer-events-none"></div>
 
         {/* Container - Reduced gap on mobile */}
         <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-12 lg:gap-16 relative z-10 w-full">
