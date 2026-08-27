@@ -86,6 +86,30 @@ export default function RootLayout({
         <LanguageProvider>
           {children}
         </LanguageProvider>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+(function(){
+  function revealAll(els){ els.forEach(function(el){ el.classList.add('visible'); }); }
+  function init(){
+    var els = [].slice.call(document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-scale'));
+    if (!('IntersectionObserver' in window) ||
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      revealAll(els); return;
+    }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -5% 0px' });
+    els.forEach(function(el){ io.observe(el); });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+})();
+`,
+          }}
+        />
       </body>
     </html>
   );

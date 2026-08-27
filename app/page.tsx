@@ -387,30 +387,6 @@ export default function SpotlyLanding() {
     };
   }, [hostEarnings]);
 
-  // ΝΕΟ: Επαγγελματικό Scroll Reveal Animation Engine
-  useEffect(() => {
-    const observerOptions = {
-      root: null,
-      rootMargin: '0px',
-      threshold: 0.15 // Ενεργοποιείται όταν το 15% του στοιχείου μπει στην οθόνη
-    };
-
-    const observerCallback = (entries: IntersectionObserverEntry[], observer: IntersectionObserver) => {
-      entries.forEach((entry: IntersectionObserverEntry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target); // Το κάνει animate μόνο την πρώτη φορά
-        }
-      });
-    };
-
-    const observer = new IntersectionObserver(observerCallback, observerOptions);
-    const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
-    revealElements.forEach(el => observer.observe(el));
-
-    return () => observer.disconnect();
-  }, []);
-
   // ΝΕΟ: PREMIUM EXPERIENCE ENGINE (Mouse Spotlight & 3D Tilt)
   useEffect(() => {
     // Μην τρέχεις τα βαριά εφέ αν η οθόνη είναι κινητό (< 1024px)
@@ -568,8 +544,7 @@ export default function SpotlyLanding() {
         /* Premium Scroll Reveals */
         .reveal, .reveal-left, .reveal-right, .reveal-scale {
           opacity: 0;
-          will-change: transform, opacity;
-          transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+          transition: opacity .6s cubic-bezier(.16,1,.3,1), transform .6s cubic-bezier(.16,1,.3,1);
         }
         .reveal { transform: translateY(50px); }
         .reveal-left { transform: translateX(-50px); }
@@ -585,6 +560,12 @@ export default function SpotlyLanding() {
         .delay-100 { transition-delay: 100ms; }
         .delay-200 { transition-delay: 200ms; }
         .delay-300 { transition-delay: 300ms; }
+
+        @media (prefers-reduced-motion: reduce) {
+          .reveal, .reveal-left, .reveal-right, .reveal-scale {
+            opacity: 1 !important; transform: none !important; transition: none !important;
+          }
+        }
 
         @keyframes marquee { 0% { transform: translateX(0%); } 100% { transform: translateX(-50%); } }
         .animate-marquee { display: flex; width: 200%; animation: marquee 25s linear infinite; }
@@ -888,7 +869,7 @@ export default function SpotlyLanding() {
       {/* --- SCROLL REVEAL FEATURES --- */}
       <section id="how-it-works" className="py-32 relative bg-gradient-to-b from-[#050505] to-[#0A0A0A]">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-20" style={{ transform: `translateY(${Math.max(0, 100 - scrollY * 0.2)}px)`, opacity: Math.min(1, scrollY / 300) }}>
+          <div className="reveal text-center mb-20">
             <h2 className="text-4xl md:text-5xl font-black tracking-tight mb-4">{t('how', 'title1')} {t('how', 'title2')}</h2>
             <p className="text-gray-400 max-w-2xl mx-auto text-lg">{t('how', 'desc')}</p>
           </div>
