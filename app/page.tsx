@@ -4,7 +4,7 @@ import Image from 'next/image';
 import logoImg from '../public/logo.png';
 import spotMascotImg from '../public/spot-mascot.png';
 import { useLanguage } from './context/LanguageContext';
-import { Car, MapPin, Zap, ShieldCheck, ArrowRight, Smartphone, Key, Clock, Star, Wifi, Wallet, CheckCircle2, User, X, Loader2, Calendar, ChevronDown, Mail, Phone, ChevronUp } from 'lucide-react';
+import { Car, MapPin, Zap, ShieldCheck, ArrowRight, Smartphone, Key, Clock, Star, Wifi, Wallet, CheckCircle2, X, Calendar, ChevronDown, Mail, Phone, ChevronUp } from 'lucide-react';
 
 // ============================================================================
 // COMPONENTS (FAQ)
@@ -43,6 +43,90 @@ const FAQItem = ({ question, answer, isOpen, onClick }: FAQItemProps) => {
     </div>
   );
 };
+
+const APP_STORE_URL = 'https://apps.apple.com/gr/app/spotly/id6792035342';
+const PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=com.spotly.mobile';
+
+const STORE_BADGE_CLASS =
+  'relative flex items-center gap-3 bg-[#121212] border border-[#222] hover:border-[#00E676]/40 px-5 py-2.5 rounded-2xl transition-all hover:-translate-y-1 group shadow-lg';
+
+function detectStoreTarget(): 'ios' | 'android' | 'both' {
+  if (typeof navigator === 'undefined') return 'both';
+  const ua = navigator.userAgent || '';
+  if (/iPhone|iPad|iPod/i.test(ua)) return 'ios';
+  if (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1) return 'ios';
+  if (/Android/i.test(ua)) return 'android';
+  return 'both';
+}
+
+function AppStoreBadge({ ariaLabel }: { ariaLabel: string }) {
+  return (
+    <a
+      href={APP_STORE_URL}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={ariaLabel}
+      className={STORE_BADGE_CLASS}
+    >
+      <svg className="w-7 h-7 text-white group-hover:text-[#00E676] transition-colors" viewBox="0 0 384 512" fill="currentColor" aria-hidden="true">
+        <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/>
+      </svg>
+      <div className="text-left">
+        <div className="text-[9px] text-gray-400 uppercase tracking-widest font-bold">Download on the</div>
+        <div className="text-base font-black text-white leading-tight">App Store</div>
+      </div>
+    </a>
+  );
+}
+
+function PlayStoreBadge({ ariaLabel }: { ariaLabel: string }) {
+  return (
+    <a
+      href={PLAY_STORE_URL}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={ariaLabel}
+      className={STORE_BADGE_CLASS}
+    >
+      <svg className="w-7 h-7 text-white group-hover:text-[#00E676] transition-colors" viewBox="0 0 512 512" fill="currentColor" aria-hidden="true">
+        <path d="M325.3 234.3L104.6 13l280.8 161.2-60.1 60.1zM47 0C34 6.8 25.3 19.2 25.3 35.3v441.3c0 16.1 8.7 28.5 21.7 35.3l256.6-256L47 0zm425.2 225.6l-58.9-34.1-65.7 64.5 65.7 64.5 60.1-34.1c18-14.3 18-46.5-1.2-60.8zM104.6 499l280.8-161.2-60.1-60.1L104.6 499z"/>
+      </svg>
+      <div className="text-left">
+        <div className="text-[9px] text-gray-400 uppercase tracking-widest font-bold">GET IT ON</div>
+        <div className="text-base font-black text-white leading-tight">Google Play</div>
+      </div>
+    </a>
+  );
+}
+
+function StoreDownloadButtons({
+  appStoreAria,
+  playStoreAria,
+  detectDevice,
+  className,
+}: {
+  appStoreAria: string;
+  playStoreAria: string;
+  detectDevice?: boolean;
+  className?: string;
+}) {
+  const [target, setTarget] = useState<'ios' | 'android' | 'both'>('both');
+
+  useEffect(() => {
+    if (!detectDevice) return;
+    setTarget(detectStoreTarget());
+  }, [detectDevice]);
+
+  const showIos = !detectDevice || target === 'ios' || target === 'both';
+  const showAndroid = !detectDevice || target === 'android' || target === 'both';
+
+  return (
+    <div className={className ?? 'flex flex-wrap gap-3'}>
+      {showIos ? <AppStoreBadge ariaLabel={appStoreAria} /> : null}
+      {showAndroid ? <PlayStoreBadge ariaLabel={playStoreAria} /> : null}
+    </div>
+  );
+}
 
 const faqContent = {
   el: {
@@ -95,8 +179,8 @@ const faqContent = {
         answer: "Πολύ απλά! Πατώντας το κουμπί 'Ας Μιλήσουμε' στο πάνω μέρος της σελίδας, θα μεταφερθείτε στο περιβάλλον του Workspace μας για να διαλέξετε την ημέρα και ώρα που σας εξυπηρετεί για ένα απευθείας video call μαζί μας."
       },
       {
-        question: "Πότε θα κυκλοφορήσει επίσημα η εφαρμογή;",
-        answer: "Αυτή τη στιγμή βρισκόμαστε σε φάση κλειστής δοκιμής (Beta). Συμπληρώνοντας το email σας στην αρχική οθόνη (Early Access), θα είστε από τους πρώτους που θα αποκτήσουν πρόσβαση και αποκλειστικά προνόμια κατά το λανσάρισμα."
+        question: "Πού είναι διαθέσιμη η Spotly;",
+        answer: "Η εφαρμογή είναι διαθέσιμη στο App Store και στο Google Play. Μπορείτε να κατεβάσετε τη Spotly, να δημιουργήσετε λογαριασμό και να κλείσετε θέση αμέσως. Νέες περιοχές προστίθενται συνεχώς — αν δεν βλέπετε ακόμα θέσεις στη δική σας, ενεργοποιήστε τις ειδοποιήσεις και θα σας ενημερώσουμε μόλις ανοίξει."
       }
     ]
   },
@@ -150,8 +234,8 @@ const faqContent = {
         answer: "It's simple! By clicking the 'Let's Talk' button at the top of the page, you'll be taken to our Workspace environment to pick the day and time that suits you for a direct video call with us."
       },
       {
-        question: "When will the app officially launch?",
-        answer: "We are currently in a closed testing phase (Beta). By entering your email on the home screen (Early Access), you'll be among the first to get access and exclusive perks at launch."
+        question: "Where is Spotly available?",
+        answer: "The app is live on the App Store and Google Play. Download Spotly, create an account and book a space right away. New areas are added continuously — if you don't see spaces in yours yet, turn on notifications and we'll let you know as soon as it opens."
       }
     ]
   }
@@ -354,7 +438,6 @@ const NeonBackgroundLine = () => (
 );
 
 export default function SpotlyLanding() {
-  const [email, setEmail] = useState('');
   const [isScrolled, setIsScrolled] = useState(false);
   const [showBackToTop, setShowBackToTop] = useState(false);
   const [hostEarnings, setHostEarnings] = useState(0);
@@ -470,31 +553,10 @@ export default function SpotlyLanding() {
     };
   }, []);
 
-  // ΝΕΟ STATE ΓΙΑ ΤΗΝ ΚΑΤΑΣΤΑΣΗ ΑΠΟΣΤΟΛΗΣ
-  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
-
-  // Η ΣΥΝΑΡΤΗΣΗ ΠΟΥ ΚΑΛΕΙ ΤΟ API ΜΑΣ
-  const handleEarlyAccessSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setStatus('loading');
-
-    try {
-      const res = await fetch('/api/early-access', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email }),
-      });
-
-      if (res.ok) {
-        setStatus('success');
-        setEmail(''); // Καθαρίζουμε το πεδίο
-      } else {
-        setStatus('error');
-      }
-    } catch (error) {
-      setStatus('error');
-    }
-  };
+  const appStoreAria =
+    language === 'el' ? 'Κατέβασε το Spotly από το App Store' : 'Download Spotly on the App Store';
+  const playStoreAria =
+    language === 'el' ? 'Κατέβασε το Spotly από το Google Play' : 'Get Spotly on Google Play';
 
   return (
     <div className="min-h-screen bg-[#050505] text-white font-sans selection:bg-[#00E676] selection:text-black overflow-x-hidden relative">
@@ -687,9 +749,9 @@ export default function SpotlyLanding() {
           
           {/* Left Text */}
           <div className="flex-1 text-center lg:text-left z-20">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-white/[0.09] text-[11px] font-semibold tracking-[0.16em] uppercase mb-8 text-white/75 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]">
-              <Zap className="w-3.5 h-3.5 text-[#00E676] fill-current" />
-              Park Smart. Earn Easy.
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-white/[0.09] text-[11px] font-semibold tracking-[0.12em] uppercase mb-8 text-white/75 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]">
+              <ShieldCheck className="w-3.5 h-3.5 text-[#00E676]" />
+              {t('hero', 'eyebrow')}
             </div>
             
             <h1 className="text-6xl md:text-8xl font-black leading-[1.1] tracking-tighter mb-6">
@@ -701,78 +763,12 @@ export default function SpotlyLanding() {
               {t('hero', 'desc')}
             </p>
 
-            {/* ΝΕΑ ΦΟΡΜΑ ΠΟΥ ΚΑΛΕΙ ΤΗΝ API */}
-            <form onSubmit={handleEarlyAccessSubmit} className="flex flex-col gap-2 max-w-md mx-auto lg:mx-0 group">
-              <div className="flex flex-col sm:flex-row items-center gap-3 w-full">
-                <div className="relative w-full">
-                  <div className="absolute -inset-0.5 bg-gradient-to-r from-[#00E676] to-[#00b35c] rounded-2xl blur opacity-0 group-focus-within:opacity-30 transition duration-500"></div>
-                  <input 
-                    type="email" 
-                    required
-                    disabled={status === 'loading' || status === 'success'}
-                    placeholder={t('hero', 'placeholder')} 
-                    className="relative w-full bg-[#121212] border border-[#333] rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-[#00E676] transition-colors disabled:opacity-50"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
-                </div>
-                <button 
-                  type="submit"
-                  disabled={status === 'loading' || status === 'success'}
-                  className="w-full sm:w-auto bg-[#00E676] text-black px-8 py-4 rounded-2xl font-black whitespace-nowrap hover:bg-[#00c968] transition-all shadow-[0_0_20px_rgba(0,230,118,0.3)] hover:shadow-[0_0_40px_rgba(0,230,118,0.6)] active:scale-95 flex items-center justify-center gap-2 disabled:opacity-50 disabled:active:scale-100"
-                >
-                  {status === 'loading' ? (
-                    <Loader2 className="w-5 h-5 animate-spin" />
-                  ) : (
-                    <>{t('hero', 'earlyAccess')} <ArrowRight className="w-5 h-5" /></>
-                  )}
-                </button>
-              </div>
-
-              {/* --- ΝΕΟ PREMIUM ΜΗΝΥΜΑ ΕΠΙΤΥΧΙΑΣ (GLASSMORPHISM) --- */}
-              <div className="mt-5 h-16 w-full flex justify-center lg:justify-start">
-                {status === 'success' && (
-                  <div className="inline-flex items-center gap-4 bg-[#1A1A1A]/80 backdrop-blur-md border border-[#00E676]/30 p-3 pr-6 rounded-2xl shadow-[0_10px_30px_rgba(0,230,118,0.15)] animate-in fade-in slide-in-from-bottom-4 duration-500">
-                    <div className="relative w-10 h-10 flex items-center justify-center shrink-0">
-                      {/* Κύκλος που πάλλεται από πίσω (Ping Effect) */}
-                      <div className="absolute inset-0 bg-[#00E676] opacity-20 rounded-full animate-ping"></div>
-                      
-                      {/* Κεντρικό Icon με Λάμψη */}
-                      <div className="w-8 h-8 bg-gradient-to-tr from-[#00E676] to-[#00b35c] rounded-full flex items-center justify-center relative z-10 shadow-[0_0_15px_rgba(0,230,118,0.5)]">
-                        <CheckCircle2 className="w-5 h-5 text-black" />
-                      </div>
-                    </div>
-                    <div className="flex flex-col text-left">
-                      <span className="text-white font-black text-sm tracking-tight">{t('hero', 'successTitle')}</span>
-                      <span className="text-[#00E676] text-[10px] font-bold uppercase tracking-widest mt-0.5">{t('hero', 'successSub')}</span>
-                    </div>
-                  </div>
-                )}
-                
-                {/* ΝΕΟ ΜΗΝΥΜΑ ΣΦΑΛΜΑΤΟΣ */}
-                {status === 'error' && (
-                  <div className="inline-flex items-center gap-3 bg-red-500/10 border border-red-500/20 py-2 px-4 rounded-xl animate-in fade-in slide-in-from-bottom-2 duration-300">
-                    <X className="w-4 h-4 text-red-500" />
-                    <span className="text-red-500 text-sm font-bold">{t('hero', 'errorMsg')}</span>
-                  </div>
-                )}
-              </div>
-
-            </form>
-            
-            {/* Social Proof */}
-            <div className="flex items-center justify-center lg:justify-start gap-4 mt-8">
-              <div className="flex -space-x-3">
-                 {[1,2,3,4].map(i => (
-                   <div key={i} className={`w-8 h-8 rounded-full border-2 border-[#050505] bg-gray-800 flex items-center justify-center text-[10px] font-bold ${i===4 ? 'bg-[#1a1a1a] text-[#00E676] border-[#00E676]/30 z-10' : 'z-0'}`}>
-                     {i===4 ? '+2K' : <User className="w-4 h-4 text-gray-400" />}
-                   </div>
-                 ))}
-              </div>
-              <div className="text-xs text-gray-400 font-medium">
-                 {t('hero', 'socialProof')}
-              </div>
-            </div>
+            <StoreDownloadButtons
+              detectDevice
+              appStoreAria={appStoreAria}
+              playStoreAria={playStoreAria}
+              className="flex flex-wrap justify-center lg:justify-start gap-3 max-w-md mx-auto lg:mx-0"
+            />
           </div>
 
           {/* Right Mockup — mix of live map + spot booking screenshots */}
@@ -1091,29 +1087,12 @@ export default function SpotlyLanding() {
                 {t('footer', 'tagline')}
               </p>
               
-              {/* App Badges — Coming Soon (ανοίγουν το Early Access modal) */}
-              <div className="flex flex-wrap gap-3 mb-10">
-                <div onClick={() => setShowComingSoon(true)} className="relative flex items-center gap-3 bg-[#121212] border border-[#222] hover:border-[#00E676]/40 px-5 py-2.5 rounded-2xl cursor-pointer transition-all hover:-translate-y-1 group shadow-lg">
-                  <span className="absolute -top-2 -right-2 bg-[#00E676] text-black text-[8px] font-black uppercase tracking-widest px-2 py-0.5 rounded-full shadow-[0_0_10px_rgba(0,230,118,0.5)]">{t('footer', 'comingSoon')}</span>
-                  <svg className="w-7 h-7 text-white group-hover:text-[#00E676] transition-colors" viewBox="0 0 384 512" fill="currentColor">
-                    <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/>
-                  </svg>
-                  <div className="text-left">
-                    <div className="text-[9px] text-gray-400 uppercase tracking-widest font-bold">Download on the</div>
-                    <div className="text-base font-black text-white leading-tight">App Store</div>
-                  </div>
-                </div>
-                <div onClick={() => setShowComingSoon(true)} className="relative flex items-center gap-3 bg-[#121212] border border-[#222] hover:border-[#00E676]/40 px-5 py-2.5 rounded-2xl cursor-pointer transition-all hover:-translate-y-1 group shadow-lg">
-                  <span className="absolute -top-2 -right-2 bg-[#00E676] text-black text-[8px] font-black uppercase tracking-widest px-2 py-0.5 rounded-full shadow-[0_0_10px_rgba(0,230,118,0.5)]">{t('footer', 'comingSoon')}</span>
-                  <svg className="w-7 h-7 text-white group-hover:text-[#00E676] transition-colors" viewBox="0 0 512 512" fill="currentColor">
-                    <path d="M325.3 234.3L104.6 13l280.8 161.2-60.1 60.1zM47 0C34 6.8 25.3 19.2 25.3 35.3v441.3c0 16.1 8.7 28.5 21.7 35.3l256.6-256L47 0zm425.2 225.6l-58.9-34.1-65.7 64.5 65.7 64.5 60.1-34.1c18-14.3 18-46.5-1.2-60.8zM104.6 499l280.8-161.2-60.1-60.1L104.6 499z"/>
-                  </svg>
-                  <div className="text-left">
-                    <div className="text-[9px] text-gray-400 uppercase tracking-widest font-bold">GET IT ON</div>
-                    <div className="text-base font-black text-white leading-tight">Google Play</div>
-                  </div>
-                </div>
-              </div>
+              {/* App Badges — live store listings */}
+              <StoreDownloadButtons
+                appStoreAria={appStoreAria}
+                playStoreAria={playStoreAria}
+                className="flex flex-wrap gap-3 mb-10"
+              />
 
               {/* Social Links - Interactive & Connected */}
               <div className="flex items-center space-x-3">
