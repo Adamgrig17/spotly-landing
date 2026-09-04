@@ -59,6 +59,16 @@ function detectStoreTarget(): 'ios' | 'android' | 'both' {
   return 'both';
 }
 
+function storeUrlForDevice(): string {
+  const target = detectStoreTarget();
+  if (target === 'android') return PLAY_STORE_URL;
+  if (target === 'ios') return APP_STORE_URL;
+  if (typeof navigator !== 'undefined' && /Windows|Linux/i.test(navigator.userAgent)) {
+    return PLAY_STORE_URL;
+  }
+  return APP_STORE_URL;
+}
+
 function AppStoreBadge({ ariaLabel }: { ariaLabel: string }) {
   return (
     <a
@@ -553,10 +563,18 @@ export default function SpotlyLanding() {
     };
   }, []);
 
+  const [enterAppHref, setEnterAppHref] = useState(APP_STORE_URL);
+
+  useEffect(() => {
+    setEnterAppHref(storeUrlForDevice());
+  }, []);
+
   const appStoreAria =
     language === 'el' ? 'Κατέβασε το Spotly από το App Store' : 'Download Spotly on the App Store';
   const playStoreAria =
     language === 'el' ? 'Κατέβασε το Spotly από το Google Play' : 'Get Spotly on Google Play';
+  const enterAppAria =
+    language === 'el' ? 'Κατέβασε το Spotly' : 'Download Spotly';
 
   return (
     <div className="min-h-screen bg-[#050505] text-white font-sans selection:bg-[#00E676] selection:text-black overflow-x-hidden relative">
@@ -716,12 +734,15 @@ export default function SpotlyLanding() {
             </a>
 
             {/* Κουμπί Είσοδος στο App */}
-            <button 
-              onClick={() => setShowComingSoon(true)}
+            <a
+              href={enterAppHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={enterAppAria}
               className="bg-white/5 text-white px-6 py-2.5 rounded-full border border-white/10 hover:bg-white/10 hover:border-[#00E676]/50 transition-all active:scale-95 shadow-lg"
             >
               {t('nav', 'enterApp')}
-            </button>
+            </a>
             </div>
 
             <button 
@@ -795,11 +816,12 @@ export default function SpotlyLanding() {
                 </div>
               </div>
 
-              <button
-                type="button"
-                onClick={() => setShowComingSoon(true)}
+              <a
+                href={enterAppHref}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="relative z-10 block mx-auto w-full aspect-[503/1024] rounded-[2.35rem] sm:rounded-[2.7rem] bg-[#1c1c1e] p-[9px] sm:p-[11px] shadow-[0_30px_70px_rgba(0,0,0,0.7)] ring-1 ring-white/12 text-left cursor-pointer"
-                aria-label={language === 'el' ? 'Προεπισκόπηση εφαρμογής Spotly' : 'Spotly app preview'}
+                aria-label={enterAppAria}
               >
                 <span className="hidden sm:block absolute -left-[2px] top-[88px] w-[3px] h-7 rounded-l-full bg-[#3a3a3c]" />
                 <span className="hidden sm:block absolute -left-[2px] top-[122px] w-[3px] h-11 rounded-l-full bg-[#3a3a3c]" />
@@ -816,7 +838,7 @@ export default function SpotlyLanding() {
                     className="object-cover object-top"
                   />
                 </span>
-              </button>
+              </a>
 
               <div
                 className="hero-float-card hero-float-card-right absolute -right-5 md:-right-20 top-14 sm:top-20 bg-[#141414] lg:bg-[#141414]/92 lg:backdrop-blur-xl border border-white/10 p-3 sm:p-3.5 rounded-2xl shadow-2xl flex items-center gap-3 z-[100] scale-90 sm:scale-100"
