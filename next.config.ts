@@ -12,6 +12,11 @@ const nextConfig: NextConfig = {
         destination: "https://spotlyparking.gr/",
         permanent: true,
       },
+      {
+        source: "/host-guide/:code",
+        destination: "https://api.parkspotly.gr/host-guide/:code",
+        permanent: false,
+      },
     ];
   },
 };
