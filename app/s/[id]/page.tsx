@@ -23,7 +23,7 @@ export async function generateMetadata({
   const pageUrl = `${SITE}/s/${id}`;
   const image = card?.imageUrl
     ? {
-        url: `${pageUrl}/preview.jpg`,
+        url: `${pageUrl}/card.jpg`,
         width: 1200,
         height: 630,
         alt: SHARE_TITLE,
