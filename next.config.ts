@@ -1,6 +1,16 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  serverExternalPackages: ['sharp'],
+  outputFileTracingIncludes: {
+    '/s/[id]/preview.jpg': [
+      './node_modules/sharp/**/*',
+      './node_modules/@img/sharp-linux-x64/**/*',
+      './node_modules/@img/sharp-linux-arm64/**/*',
+      './node_modules/@img/sharp-libvips-linux-x64/**/*',
+      './node_modules/@img/sharp-libvips-linux-arm64/**/*',
+    ],
+  },
   experimental: {
     inlineCss: true,
     optimizePackageImports: ['lucide-react'],
