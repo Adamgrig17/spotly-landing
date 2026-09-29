@@ -1,0 +1,11 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appIDs": ["456G2JCK36.com.adamantios.spotly-mobile"],
+        "components": [{ "/": "/s/*" }]
+      }
+    ]
+  }
+}
