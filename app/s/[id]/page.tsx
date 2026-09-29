@@ -7,16 +7,11 @@ const APP_STORE = 'https://apps.apple.com/gr/app/spotly/id6792035342';
 const PLAY_STORE = 'https://play.google.com/store/apps/details?id=com.spotly.mobile';
 const SITE = 'https://www.parkspotly.gr';
 const FALLBACK_IMAGE = `${SITE}/logo.png`;
+const SHARE_TITLE = 'Κλείσε αυτή τη θέση σε 10 δευτερόλεπτα';
+const SHARE_DESCRIPTION =
+  'Ιδιωτικό πάρκινγκ, χωρίς ψάξιμο. Ανοίγεις την πόρτα από το κινητό και μπαίνεις κατευθείαν.';
 
 export const revalidate = 60;
-
-function imageType(url: string): string | undefined {
-  const path = url.split('?')[0]?.toLowerCase() ?? '';
-  if (path.endsWith('.png')) return 'image/png';
-  if (path.endsWith('.webp')) return 'image/webp';
-  if (path.endsWith('.jpg') || path.endsWith('.jpeg')) return 'image/jpeg';
-  return undefined;
-}
 
 export async function generateMetadata({
   params,
@@ -25,35 +20,35 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { id } = await params;
   const card = await loadSharedSpotCard(id);
-  const title = card?.name ? `${card.name} · Spotly` : 'Μια θέση στο Spotly';
-  const description = card?.address || 'Άνοιξε τη θέση στην εφαρμογή Spotly.';
-  const image = card?.imageUrl || FALLBACK_IMAGE;
   const pageUrl = `${SITE}/s/${id}`;
+  const image = card?.imageUrl
+    ? {
+        url: `${pageUrl}/preview.jpg`,
+        width: 1200,
+        height: 630,
+        alt: SHARE_TITLE,
+        type: 'image/jpeg' as const,
+      }
+    : { url: FALLBACK_IMAGE, alt: 'Spotly' };
 
   return {
-    title,
-    description,
+    title: SHARE_TITLE,
+    description: SHARE_DESCRIPTION,
     alternates: { canonical: pageUrl },
     openGraph: {
-      title,
-      description,
+      title: SHARE_TITLE,
+      description: SHARE_DESCRIPTION,
       url: pageUrl,
       siteName: 'Spotly',
       type: 'website',
       locale: 'el_GR',
-      images: [
-        {
-          url: image,
-          alt: card?.name || 'Spotly',
-          type: imageType(image),
-        },
-      ],
+      images: [image],
     },
     twitter: {
       card: 'summary_large_image',
-      title,
-      description,
-      images: [image],
+      title: SHARE_TITLE,
+      description: SHARE_DESCRIPTION,
+      images: [image.url],
     },
   };
 }
