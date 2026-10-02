@@ -7,7 +7,7 @@ export const privacyContent: Record<'el' | 'en', LegalDoc> = {
     badge: 'Προστασία Δεδομένων (GDPR)',
     title1: 'Πολιτική',
     title2: 'Απορρήτου',
-    updated: 'Τελευταία Ενημέρωση: 13 Αυγούστου 2026',
+    updated: 'Τελευταία Ενημέρωση: 2 Οκτωβρίου 2026',
     intro:
       'Η πλατφόρμα Spotly (parkspotly.gr και mobile εφαρμογή) λειτουργεί από την εταιρεία με νόμιμη επωνυμία «SPOTLY PARKING MANAGEMENT ΕΤΕΡΟΡΡΥΘΜΗ ΕΤΑΙΡΕΙΑ» (Spotly Parking Management L.P.), διακριτικό τίτλο «SPOTLY», ΑΦΜ 803339090, αριθμό ΓΕΜΗ 194898201000 και έδρα επί της οδού Ρίμινι 14, 122 43 Αιγάλεω (εφεξής "εμείς", "η Εταιρεία"). Σεβόμαστε τα προσωπικά σας δεδομένα και δεσμευόμαστε να τα προστατεύουμε σύμφωνα με τον Γενικό Κανονισμό για την Προστασία Δεδομένων (ΓΚΠΔ / GDPR).',
     sections: [
@@ -32,6 +32,7 @@ export const privacyContent: Record<'el' | 'en', LegalDoc> = {
           { text: 'Για την αποστολή ειδοποιήσεων σχετικών με τις κρατήσεις σας (email και push) — π.χ. υπενθυμίσεις λήξης, επιβεβαιώσεις, μηνύματα chat.' },
           { text: 'Για την πρόληψη κατάχρησης της πλατφόρμας (π.χ. έλεγχοι ασφαλείας κατά τη σύνδεση), την εφαρμογή πολιτικής μηδενικής ανοχής σε προσβλητικό περιεχόμενο και την επίλυση διαφορών.' },
           { text: 'Για τη βελτίωση της Πλατφόρμας μας.' },
+          { text: 'Για απαντήσεις του Spot AI, μόνο αφού δώσετε ρητή άδεια μέσα στην εφαρμογή να σταλεί η συνομιλία στην Google Gemini.' },
         ],
       },
       {
@@ -40,7 +41,7 @@ export const privacyContent: Record<'el' | 'en', LegalDoc> = {
         bullets: [
           { label: 'Μεταξύ Χρηστών', text: 'Ο Host βλέπει το όνομα και τον αριθμό κυκλοφορίας του Οδηγού για την ταυτοποίηση της κράτησης. Ο Οδηγός βλέπει την ακριβή διεύθυνση και τις οδηγίες πρόσβασης της θέσης μετά την κράτηση. Η σύμβαση παροχής υπηρεσίας στάθμευσης συνάπτεται με την Εταιρεία, όχι απευθείας με τον Host.' },
           { label: 'Παρόχους Υπηρεσιών', text: 'Stripe (πληρωμές), Supabase (φιλοξενία βάσης δεδομένων και ταυτοποίηση), Google (χάρτες, σύνδεση), Apple (σύνδεση), Resend (αποστολή email), Expo (push ειδοποιήσεις), Cloudflare (ασφάλεια), καθώς και παρόχους cloud hosting.' },
-          { label: 'Υποστήριξη AI (Google Gemini)', text: 'Τα ερωτήματα που υποβάλλετε στο σύστημα υποστήριξης εντός της εφαρμογής (Spot AI) επεξεργάζονται από την υπηρεσία τεχνητής νοημοσύνης Google Gemini, τρίτο πάροχο της Google. Μην συμπεριλαμβάνετε αριθμούς καρτών πληρωμής ή άλλα μη απαραίτητα προσωπικά δεδομένα σε αυτά τα μηνύματα.' },
+          { label: 'Υποστήριξη AI (Google Gemini)', text: 'Πριν σταλεί το πρώτο μήνυμα, η εφαρμογή ζητά τη ρητή άδειά σας. Αν τη δώσετε, προωθούμε στην Google LLC (υπηρεσία Google Gemini) το κείμενο που πληκτρολογείτε ή την απομαγνητοφώνηση φωνής, τα πρόσφατα μηνύματα της ίδιας συνομιλίας Spot, τη γλώσσα της εφαρμογής και ένα αναγνωριστικό συνεδρίας. Αν είστε συνδεδεμένοι, το αίτημα συνδέεται με τον λογαριασμό Spotly. Δεν στέλνουμε αριθμό κάρτας. Το αίτημα περνά πρώτα από τον server του Spotly και μετά στην Gemini, μόνο για να παραχθεί η απάντηση. Η Google επεξεργάζεται το περιεχόμενο αυτό σύμφωνα με τους όρους του Gemini API και τον ΓΚΠΔ για χρήστες στην Ευρωπαϊκή Ένωση. Δεν πουλάμε αυτά τα δεδομένα. Την άδεια την ανακαλείτε ανά πάσα στιγμή από Βοήθεια και Υποστήριξη → Κοινοποίηση δεδομένων Spot AI. Μην γράφετε αριθμούς καρτών ή άλλα μη απαραίτητα προσωπικά δεδομένα σε αυτά τα μηνύματα.' },
           { label: 'Φορολογικές Αρχές', text: 'Στοιχεία των συμφωνητικών μίσθωσης των Hosts δηλώνονται στην ΑΑΔΕ (myAADE/TAXISnet) όπως απαιτεί ο νόμος.' },
           { label: 'Αρχές Επιβολής του Νόμου', text: 'Εάν ζητηθεί νομίμως στο πλαίσιο διερεύνησης αδικημάτων.' },
         ],
@@ -58,7 +59,7 @@ export const privacyContent: Record<'el' | 'en', LegalDoc> = {
           { label: 'Δικαίωμα Πρόσβασης & Διόρθωσης', text: 'Να ζητήσετε αντίγραφο των δεδομένων σας και να τα διορθώσετε.' },
           { label: 'Δικαίωμα Διαγραφής', text: 'Να ζητήσετε τη διαγραφή του λογαριασμού σας — διατίθεται και απευθείας μέσα από την εφαρμογή.' },
           { label: 'Δικαίωμα Φορητότητας', text: 'Να λάβετε τα δεδομένα σας σε δομημένη, κοινώς χρησιμοποιούμενη μορφή.' },
-          { label: 'Δικαίωμα Εναντίωσης', text: 'Να ανακαλέσετε τη συγκατάθεσή σας (π.χ. για τοποθεσία ή ειδοποιήσεις) ανά πάσα στιγμή από τις ρυθμίσεις της συσκευής ή της εφαρμογής.' },
+          { label: 'Δικαίωμα Εναντίωσης', text: 'Να ανακαλέσετε τη συγκατάθεσή σας ανά πάσα στιγμή: για τοποθεσία ή ειδοποιήσεις από τις ρυθμίσεις της συσκευής, και για το Spot AI από Βοήθεια και Υποστήριξη μέσα στην εφαρμογή.' },
           { label: 'Δικαίωμα Καταγγελίας', text: 'Να υποβάλετε καταγγελία στην Αρχή Προστασίας Δεδομένων Προσωπικού Χαρακτήρα (www.dpa.gr).' },
         ],
       },
@@ -79,7 +80,7 @@ export const privacyContent: Record<'el' | 'en', LegalDoc> = {
     badge: 'Data Protection (GDPR)',
     title1: 'Privacy',
     title2: 'Policy',
-    updated: 'Last Updated: 13 August 2026',
+    updated: 'Last Updated: 2 October 2026',
     intro:
       'The Spotly platform (parkspotly.gr and the mobile app) is operated by the company with the registered name «SPOTLY PARKING MANAGEMENT ΕΤΕΡΟΡΡΥΘΜΗ ΕΤΑΙΡΕΙΑ» (Spotly Parking Management L.P.), trade name «SPOTLY», VAT No. EL803339090, General Commercial Registry (ΓΕΜΗ) No. 194898201000, with its registered seat at Rimini 14, 122 43 Egaleo, Greece (hereinafter "we", "the Company"). We respect your personal data and are committed to protecting it in accordance with the General Data Protection Regulation (GDPR).',
     sections: [
@@ -104,6 +105,7 @@ export const privacyContent: Record<'el' | 'en', LegalDoc> = {
           { text: 'To send you notifications related to your bookings (email and push) — e.g. expiry reminders, confirmations, chat messages.' },
           { text: 'To prevent abuse of the platform (e.g. security checks at sign-in), enforce our zero-tolerance policy for objectionable content, and resolve disputes.' },
           { text: 'To improve our Platform.' },
+          { text: 'To answer Spot AI questions, only after you explicitly allow the app to send that conversation to Google Gemini.' },
         ],
       },
       {
@@ -112,7 +114,7 @@ export const privacyContent: Record<'el' | 'en', LegalDoc> = {
         bullets: [
           { label: 'Between Users', text: "The Host sees the Driver's name and license plate for booking identification. The Driver sees the exact address and access instructions of the spot after booking. The parking service contract is formed with the Company, not directly with the Host." },
           { label: 'Service Providers', text: 'Stripe (payments), Supabase (database hosting and authentication), Google (maps, sign-in), Apple (sign-in), Resend (email delivery), Expo (push notifications), Cloudflare (security), and cloud hosting providers.' },
-          { label: 'AI support (Google Gemini)', text: 'Questions you send to in-app support (Spot AI) are processed by Google Gemini, a third-party artificial intelligence service operated by Google. Do not include payment card numbers or other unnecessary personal data in those messages.' },
+          { label: 'AI support (Google Gemini)', text: 'Before the first message is sent, the app asks for your explicit permission. If you allow it, we forward to Google LLC (Google Gemini) the text you type or the microphone transcript, the recent messages in that Spot conversation, the app language, and a session ID. If you are signed in, the request is linked to your Spotly account. We do not send your card number. The request goes first to Spotly’s server and then to Gemini, only so Gemini can write the reply. Google processes that content under the Gemini API terms and the GDPR for users in the European Union. We do not sell this data. You can withdraw permission at any time in the app under Help & Support → Spot AI data sharing. Do not include payment card numbers or other unnecessary personal data in those messages.' },
           { label: 'Tax Authorities', text: "Details of Hosts' lease agreements are declared to the Greek tax authority (myAADE/TAXISnet) as required by law." },
           { label: 'Law Enforcement', text: 'If lawfully requested in the context of criminal investigations.' },
         ],
@@ -130,7 +132,7 @@ export const privacyContent: Record<'el' | 'en', LegalDoc> = {
           { label: 'Right of Access & Rectification', text: 'To request a copy of your data and have it corrected.' },
           { label: 'Right to Erasure', text: 'To request deletion of your account — also available directly within the app.' },
           { label: 'Right to Portability', text: 'To receive your data in a structured, commonly used format.' },
-          { label: 'Right to Object', text: 'To withdraw your consent (e.g. for location or notifications) at any time via your device or app settings.' },
+          { label: 'Right to Object', text: 'To withdraw your consent at any time: for location or notifications via your device settings, and for Spot AI via Help & Support inside the app.' },
           { label: 'Right to Lodge a Complaint', text: 'To file a complaint with the Hellenic Data Protection Authority (www.dpa.gr).' },
         ],
       },
