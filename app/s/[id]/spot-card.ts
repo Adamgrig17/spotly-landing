@@ -1,5 +1,5 @@
 import { cache } from 'react';
-import { createClient } from '@supabase/supabase-js';
+import { createClient } from '@/lib/supabaseKeyFetch';
 
 const SPOT_ID =
   /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;

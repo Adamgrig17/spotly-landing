@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { createClient } from '@supabase/supabase-js';
+import { createClient } from '@/lib/supabaseKeyFetch';
 import { Resend } from 'resend';
 
 // Σύνδεση με το Supabase
