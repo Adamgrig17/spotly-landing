@@ -51,7 +51,7 @@ export const termsContent: Record<'el' | 'en', LegalDoc> = {
       {
         title: '3. Κρατήσεις, Ακυρώσεις & Χρεώσεις Καθυστέρησης',
         bullets: [
-          { label: 'Δωρεάν ακύρωση', text: 'Εκτός αν ορίζεται διαφορετικά για επαγγελματικούς χώρους, οι Οδηγοί μπορούν να ακυρώσουν δωρεάν μια κράτηση μόνο εντός των πρώτων 10 λεπτών από τη δημιουργία της. Μετά το διάστημα αυτό, η ακύρωση δεν είναι εφικτή.' },
+          { label: 'Δωρεάν ακύρωση', text: 'Για θέσεις Host, μπορείς να ακυρώσεις δωρεάν μια κράτηση μέσα σε 10 λεπτά από τη στιγμή που την έκανες. Επιπλέον, μια προγραμματισμένη κράτηση ακυρώνεται δωρεάν έως 1 ώρα πριν την ώρα έναρξης. Αν ακυρώσεις μέσα στην τελευταία ώρα πριν την έναρξη, χρεώνεται η τιμή της κράτησης· το επιπλέον ποσό που δεσμεύεται για πιθανή υπέρβαση χρόνου δεν χρεώνεται ποτέ σε ακύρωση. Μετά την έναρξη, η κράτηση μπορεί να ακυρωθεί δωρεάν μόνο μέσα στα πρώτα 10 λεπτά. Για επαγγελματικούς χώρους ισχύει η ενότητα 10.' },
           { label: 'Πρόωρη αποχώρηση', text: 'Αν ο Οδηγός αποχωρήσει πριν τη λήξη του χρόνου κράτησης, η κράτηση τερματίζεται και το υπόλοιπο ποσό πιστώνεται στο Spotly Wallet του για μελλοντικές κρατήσεις.' },
           { label: 'Υπέρβαση χρόνου', text: 'Σε περίπτωση παραμονής πέραν του συμφωνημένου χρόνου, επιβάλλεται αυτόματα χρέωση υπερημερίας ίση με το διπλάσιο της αρχικής τιμής για κάθε 30 λεπτά καθυστέρησης.' },
         ],
@@ -177,7 +177,7 @@ export const termsContent: Record<'el' | 'en', LegalDoc> = {
       {
         title: '3. Bookings, Cancellations & Overstay Charges',
         bullets: [
-          { label: 'Free cancellation', text: 'Unless a different rule applies to professional facilities, Drivers may cancel a booking free of charge only within the first 10 minutes after it is created. After that window, cancellation is no longer possible.' },
+          { label: 'Free cancellation', text: 'For Host spots, you can cancel a booking free of charge within 10 minutes of making it. In addition, a scheduled booking can be cancelled free of charge up to 1 hour before the start time. If you cancel within the last hour before the start, the booking price is charged; the extra amount held for a possible overrun is never charged on cancellation. After the start time, the booking can be cancelled free of charge only within the first 10 minutes. Section 10 applies to professional facilities.' },
           { label: 'Early departure', text: 'If the Driver leaves before the end of the booked time, the booking is ended and the remaining amount is credited to their Spotly Wallet for future bookings.' },
           { label: 'Overstay', text: 'If the Driver stays beyond the agreed time, an overstay charge equal to double the original rate is applied automatically for every 30 minutes of delay.' },
         ],
