@@ -7,15 +7,17 @@ export const privacyContent: Record<'el' | 'en', LegalDoc> = {
     badge: 'Προστασία Δεδομένων (GDPR)',
     title1: 'Πολιτική',
     title2: 'Απορρήτου',
-    updated: 'Τελευταία Ενημέρωση: 2 Οκτωβρίου 2026',
+    updated: 'Τελευταία Ενημέρωση: 18 Οκτωβρίου 2026',
     intro:
-      'Η πλατφόρμα Spotly (parkspotly.gr και mobile εφαρμογή) λειτουργεί από την εταιρεία με νόμιμη επωνυμία «SPOTLY PARKING MANAGEMENT ΕΤΕΡΟΡΡΥΘΜΗ ΕΤΑΙΡΕΙΑ» (Spotly Parking Management L.P.), διακριτικό τίτλο «SPOTLY», ΑΦΜ 803339090, αριθμό ΓΕΜΗ 194898201000 και έδρα επί της οδού Ρίμινι 14, 122 43 Αιγάλεω (εφεξής "εμείς", "η Εταιρεία"). Σεβόμαστε τα προσωπικά σας δεδομένα και δεσμευόμαστε να τα προστατεύουμε σύμφωνα με τον Γενικό Κανονισμό για την Προστασία Δεδομένων (ΓΚΠΔ / GDPR).',
+      'Η πλατφόρμα Spotly (parkspotly.gr, mobile εφαρμογή και web εφαρμογή στο app.parkspotly.gr) λειτουργεί από την εταιρεία με νόμιμη επωνυμία «SPOTLY PARKING MANAGEMENT ΕΤΕΡΟΡΡΥΘΜΗ ΕΤΑΙΡΕΙΑ» (Spotly Parking Management L.P.), διακριτικό τίτλο «SPOTLY», ΑΦΜ 803339090, αριθμό ΓΕΜΗ 194898201000 και έδρα επί της οδού Ρίμινι 14, 122 43 Αιγάλεω (εφεξής "εμείς", "η Εταιρεία"). Σεβόμαστε τα προσωπικά σας δεδομένα και δεσμευόμαστε να τα προστατεύουμε σύμφωνα με τον Γενικό Κανονισμό για την Προστασία Δεδομένων (ΓΚΠΔ / GDPR).',
     sections: [
       {
         title: '1. Ποια δεδομένα συλλέγουμε',
         bullets: [
           { label: 'Δεδομένα Ταυτοποίησης', text: 'Όνομα, Επώνυμο, Διεύθυνση Email, Αριθμός Τηλεφώνου. Η σύνδεση μπορεί να γίνει και μέσω λογαριασμού Google ή Apple.' },
-          { label: 'Δεδομένα Οχήματος (Οδηγοί)', text: 'Αριθμός Κυκλοφορίας (Πινακίδα), Μάρκα/Μοντέλο, Χρώμα.' },
+          { label: 'Δεδομένα Οχήματος (Οδηγοί)', text: 'Αριθμός Κυκλοφορίας (Πινακίδα), Μάρκα/Μοντέλο, Χρώμα και, όπου δηλώνεται, κατηγορία οχήματος (Μηχανή, Μικρό, Μεσαίο, Μεγάλο/SUV, Van).' },
+          { label: 'Πλατφόρμα εγγραφής και κράτησης', text: 'Καταγράφουμε την πλατφόρμα από την οποία δημιουργείτε λογαριασμό ή πραγματοποιείτε κράτηση: iOS, Android ή web.' },
+          { label: 'Ανώνυμα στατιστικά web', text: 'Στο web χρησιμοποιούμε το Vercel Analytics και το Vercel Speed Insights για ανώνυμα στατιστικά επισκεψιμότητας και απόδοσης. Τα εργαλεία αυτά δεν χρησιμοποιούνται για να σας ταυτοποιήσουμε.' },
           { label: 'Δεδομένα Hosts', text: 'Για τη σύναψη του συμφωνητικού μίσθωσης (Master Lease) και την καταβολή των μισθωμάτων, συλλέγουμε επιπλέον: ΑΦΜ, ΑΤΑΚ ή στοιχεία ακινήτου, διεύθυνση της θέσης και τραπεζικό λογαριασμό (IBAN).' },
           { label: 'Δεδομένα Τοποθεσίας (GPS)', text: 'Συλλέγουμε δεδομένα τοποθεσίας σε πραγματικό χρόνο (εφόσον μας δώσετε άδεια) για να σας εμφανίσουμε τους κοντινότερους διαθέσιμους χώρους και να σας πλοηγήσουμε σε αυτούς.' },
           { label: 'Οικονομικά Δεδομένα', text: 'Τα στοιχεία της κάρτας σας κρυπτογραφούνται και επεξεργάζονται απευθείας από τον συνεργάτη μας (Stripe). Το Spotly δεν αποθηκεύει τον αριθμό της κάρτας σας. Τηρούμε ιστορικό συναλλαγών, κρατήσεων και υπολοίπου Spotly Wallet.' },
@@ -32,6 +34,8 @@ export const privacyContent: Record<'el' | 'en', LegalDoc> = {
           { text: 'Για την αποστολή ειδοποιήσεων σχετικών με τις κρατήσεις σας (email και push) — π.χ. υπενθυμίσεις λήξης, επιβεβαιώσεις, μηνύματα chat.' },
           { text: 'Για την πρόληψη κατάχρησης της πλατφόρμας (π.χ. έλεγχοι ασφαλείας κατά τη σύνδεση), την εφαρμογή πολιτικής μηδενικής ανοχής σε προσβλητικό περιεχόμενο και την επίλυση διαφορών.' },
           { text: 'Για τη βελτίωση της Πλατφόρμας μας.' },
+          { text: 'Για την καταγραφή της πλατφόρμας εγγραφής και κράτησης (iOS, Android ή web), ώστε η κράτηση να εκτελεστεί στο κανάλι από το οποίο έγινε.' },
+          { text: 'Για ανώνυμα στατιστικά επισκεψιμότητας και απόδοσης του web, μέσω Vercel Analytics και Vercel Speed Insights.' },
           { text: 'Για απαντήσεις του Spot AI, μόνο αφού δώσετε ρητή άδεια μέσα στην εφαρμογή να σταλεί η συνομιλία στην Google Gemini.' },
         ],
       },
@@ -40,7 +44,8 @@ export const privacyContent: Record<'el' | 'en', LegalDoc> = {
         intro: 'Δεν πουλάμε τα προσωπικά σας δεδομένα. Ενδέχεται να τα μοιραστούμε με:',
         bullets: [
           { label: 'Μεταξύ Χρηστών', text: 'Ο Host βλέπει το όνομα και τον αριθμό κυκλοφορίας του Οδηγού για την ταυτοποίηση της κράτησης. Ο Οδηγός βλέπει την ακριβή διεύθυνση και τις οδηγίες πρόσβασης της θέσης μετά την κράτηση. Η σύμβαση παροχής υπηρεσίας στάθμευσης συνάπτεται με την Εταιρεία, όχι απευθείας με τον Host.' },
-          { label: 'Παρόχους Υπηρεσιών', text: 'Stripe (πληρωμές), Supabase (φιλοξενία βάσης δεδομένων και ταυτοποίηση), Google (χάρτες, σύνδεση), Apple (σύνδεση), Resend (αποστολή email), Expo (push ειδοποιήσεις), Cloudflare (ασφάλεια), καθώς και παρόχους cloud hosting.' },
+          { label: 'Φορέας και παρκαδόρος', text: 'Όταν η κράτηση αφορά επαγγελματικό χώρο στάθμευσης τρίτου, κοινοποιούμε το όνομα, την πινακίδα και την κατηγορία οχήματος στον Φορέα και στον παρκαδόρο του συγκεκριμένου χώρου, αποκλειστικά για την εκτέλεση της υπηρεσίας στάθμευσης.' },
+          { label: 'Παρόχους Υπηρεσιών', text: 'Stripe (πληρωμές), Supabase (φιλοξενία βάσης δεδομένων και ταυτοποίηση), Google (χάρτες, σύνδεση), Apple (σύνδεση), Resend (αποστολή email), Expo (push ειδοποιήσεις), Cloudflare (ασφάλεια), Vercel (Vercel Analytics και Speed Insights: ανώνυμα στατιστικά επισκεψιμότητας και απόδοσης του web), καθώς και παρόχους cloud hosting.' },
           { label: 'Υποστήριξη AI (Google Gemini)', text: 'Πριν σταλεί το πρώτο μήνυμα, η εφαρμογή ζητά τη ρητή άδειά σας. Αν τη δώσετε, προωθούμε στην Google LLC (υπηρεσία Google Gemini) το κείμενο που πληκτρολογείτε ή την απομαγνητοφώνηση φωνής, τα πρόσφατα μηνύματα της ίδιας συνομιλίας Spot, τη γλώσσα της εφαρμογής και ένα αναγνωριστικό συνεδρίας. Αν είστε συνδεδεμένοι, το αίτημα συνδέεται με τον λογαριασμό Spotly. Δεν στέλνουμε αριθμό κάρτας. Το αίτημα περνά πρώτα από τον server του Spotly και μετά στην Gemini, μόνο για να παραχθεί η απάντηση. Η Google επεξεργάζεται το περιεχόμενο αυτό σύμφωνα με τους όρους του Gemini API και τον ΓΚΠΔ για χρήστες στην Ευρωπαϊκή Ένωση. Δεν πουλάμε αυτά τα δεδομένα. Την άδεια την ανακαλείτε ανά πάσα στιγμή από Βοήθεια και Υποστήριξη → Κοινοποίηση δεδομένων Spot AI. Μην γράφετε αριθμούς καρτών ή άλλα μη απαραίτητα προσωπικά δεδομένα σε αυτά τα μηνύματα.' },
           { label: 'Φορολογικές Αρχές', text: 'Στοιχεία των συμφωνητικών μίσθωσης των Hosts δηλώνονται στην ΑΑΔΕ (myAADE/TAXISnet) όπως απαιτεί ο νόμος.' },
           { label: 'Αρχές Επιβολής του Νόμου', text: 'Εάν ζητηθεί νομίμως στο πλαίσιο διερεύνησης αδικημάτων.' },
@@ -80,15 +85,17 @@ export const privacyContent: Record<'el' | 'en', LegalDoc> = {
     badge: 'Data Protection (GDPR)',
     title1: 'Privacy',
     title2: 'Policy',
-    updated: 'Last Updated: 2 October 2026',
+    updated: 'Last Updated: 18 October 2026',
     intro:
-      'The Spotly platform (parkspotly.gr and the mobile app) is operated by the company with the registered name «SPOTLY PARKING MANAGEMENT ΕΤΕΡΟΡΡΥΘΜΗ ΕΤΑΙΡΕΙΑ» (Spotly Parking Management L.P.), trade name «SPOTLY», VAT No. EL803339090, General Commercial Registry (ΓΕΜΗ) No. 194898201000, with its registered seat at Rimini 14, 122 43 Egaleo, Greece (hereinafter "we", "the Company"). We respect your personal data and are committed to protecting it in accordance with the General Data Protection Regulation (GDPR).',
+      'The Spotly platform (parkspotly.gr, the mobile app, and the web app at app.parkspotly.gr) is operated by the company with the registered name «SPOTLY PARKING MANAGEMENT ΕΤΕΡΟΡΡΥΘΜΗ ΕΤΑΙΡΕΙΑ» (Spotly Parking Management L.P.), trade name «SPOTLY», VAT No. EL803339090, General Commercial Registry (ΓΕΜΗ) No. 194898201000, with its registered seat at Rimini 14, 122 43 Egaleo, Greece (hereinafter "we", "the Company"). We respect your personal data and are committed to protecting it in accordance with the General Data Protection Regulation (GDPR).',
     sections: [
       {
         title: '1. What data we collect',
         bullets: [
           { label: 'Identification Data', text: 'First name, last name, email address, phone number. Sign-in is also available via a Google or Apple account.' },
-          { label: 'Vehicle Data (Drivers)', text: 'License plate number, make/model, color.' },
+          { label: 'Vehicle Data (Drivers)', text: 'License plate number, make/model, color and, where declared, vehicle category (Motorcycle, Small, Medium, Large/SUV, Van).' },
+          { label: 'Sign-up and booking platform', text: 'We record the platform from which you create an account or make a booking: iOS, Android, or web.' },
+          { label: 'Anonymous web statistics', text: 'On the web we use Vercel Analytics and Vercel Speed Insights for anonymous traffic and performance statistics. These tools are not used to identify you.' },
           { label: 'Host Data', text: 'To conclude the lease agreement (Master Lease) and pay out rent, we additionally collect: tax ID (ΑΦΜ), property identification number (ΑΤΑΚ) or property details, the spot\'s address, and bank account (IBAN).' },
           { label: 'Location Data (GPS)', text: 'We collect real-time location data (with your permission) to show you the nearest available spots and navigate you to them.' },
           { label: 'Financial Data', text: 'Your card details are encrypted and processed directly by our partner (Stripe). Spotly does not store your card number. We keep a history of transactions, bookings, and your Spotly Wallet balance.' },
@@ -105,6 +112,8 @@ export const privacyContent: Record<'el' | 'en', LegalDoc> = {
           { text: 'To send you notifications related to your bookings (email and push) — e.g. expiry reminders, confirmations, chat messages.' },
           { text: 'To prevent abuse of the platform (e.g. security checks at sign-in), enforce our zero-tolerance policy for objectionable content, and resolve disputes.' },
           { text: 'To improve our Platform.' },
+          { text: 'To record the sign-up and booking platform (iOS, Android, or web), so the booking is carried out on the channel it was made from.' },
+          { text: 'For anonymous web traffic and performance statistics, through Vercel Analytics and Vercel Speed Insights.' },
           { text: 'To answer Spot AI questions, only after you explicitly allow the app to send that conversation to Google Gemini.' },
         ],
       },
@@ -113,7 +122,8 @@ export const privacyContent: Record<'el' | 'en', LegalDoc> = {
         intro: 'We do not sell your personal data. We may share it with:',
         bullets: [
           { label: 'Between Users', text: "The Host sees the Driver's name and license plate for booking identification. The Driver sees the exact address and access instructions of the spot after booking. The parking service contract is formed with the Company, not directly with the Host." },
-          { label: 'Service Providers', text: 'Stripe (payments), Supabase (database hosting and authentication), Google (maps, sign-in), Apple (sign-in), Resend (email delivery), Expo (push notifications), Cloudflare (security), and cloud hosting providers.' },
+          { label: 'Operator and valet', text: 'When the booking is for a third-party professional parking facility, we share your name, license plate, and vehicle category with the Operator and with the valet of that facility, solely to perform the parking service.' },
+          { label: 'Service Providers', text: 'Stripe (payments), Supabase (database hosting and authentication), Google (maps, sign-in), Apple (sign-in), Resend (email delivery), Expo (push notifications), Cloudflare (security), Vercel (Vercel Analytics and Speed Insights: anonymous web traffic and performance statistics), and cloud hosting providers.' },
           { label: 'AI support (Google Gemini)', text: 'Before the first message is sent, the app asks for your explicit permission. If you allow it, we forward to Google LLC (Google Gemini) the text you type or the microphone transcript, the recent messages in that Spot conversation, the app language, and a session ID. If you are signed in, the request is linked to your Spotly account. We do not send your card number. The request goes first to Spotly’s server and then to Gemini, only so Gemini can write the reply. Google processes that content under the Gemini API terms and the GDPR for users in the European Union. We do not sell this data. You can withdraw permission at any time in the app under Help & Support → Spot AI data sharing. Do not include payment card numbers or other unnecessary personal data in those messages.' },
           { label: 'Tax Authorities', text: "Details of Hosts' lease agreements are declared to the Greek tax authority (myAADE/TAXISnet) as required by law." },
           { label: 'Law Enforcement', text: 'If lawfully requested in the context of criminal investigations.' },
