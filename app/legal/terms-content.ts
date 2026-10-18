@@ -51,7 +51,7 @@ export const termsContent: Record<'el' | 'en', LegalDoc> = {
       {
         title: '3. Κρατήσεις, Ακυρώσεις & Χρεώσεις Καθυστέρησης',
         bullets: [
-          { label: 'Δωρεάν ακύρωση', text: 'Οι Οδηγοί μπορούν να ακυρώσουν δωρεάν μια κράτηση μόνο εντός των πρώτων 10 λεπτών από τη δημιουργία της. Μετά το διάστημα αυτό, η ακύρωση δεν είναι εφικτή.' },
+          { label: 'Δωρεάν ακύρωση', text: 'Εκτός αν ορίζεται διαφορετικά για επαγγελματικούς χώρους, οι Οδηγοί μπορούν να ακυρώσουν δωρεάν μια κράτηση μόνο εντός των πρώτων 10 λεπτών από τη δημιουργία της. Μετά το διάστημα αυτό, η ακύρωση δεν είναι εφικτή.' },
           { label: 'Πρόωρη αποχώρηση', text: 'Αν ο Οδηγός αποχωρήσει πριν τη λήξη του χρόνου κράτησης, η κράτηση τερματίζεται και το υπόλοιπο ποσό πιστώνεται στο Spotly Wallet του για μελλοντικές κρατήσεις.' },
           { label: 'Υπέρβαση χρόνου', text: 'Σε περίπτωση παραμονής πέραν του συμφωνημένου χρόνου, επιβάλλεται αυτόματα χρέωση υπερημερίας ίση με το διπλάσιο της αρχικής τιμής για κάθε 30 λεπτά καθυστέρησης.' },
         ],
@@ -107,10 +107,10 @@ export const termsContent: Record<'el' | 'en', LegalDoc> = {
         bullets: [
           { label: 'Ρόλος της Spotly', text: 'Στις κρατήσεις αυτές η Spotly ενεργεί ως διαμεσολαβητής μεταξύ του Οδηγού και του Φορέα. Η Spotly δεν εκμεταλλεύεται η ίδια το γκαράζ και δεν αναλαμβάνει τη φύλαξη του οχήματος, την υπηρεσία παρκαδόρου ή την κατοχή των κλειδιών.' },
           { label: 'Ευθύνη του Φορέα', text: 'Ο Φορέας είναι υπεύθυνος για τη λειτουργία του χώρου και, όπου οι υπηρεσίες αυτές προσφέρονται, για τη φύλαξη του οχήματος, την υπηρεσία παρκαδόρου και τη διαχείριση των κλειδιών.' },
-          { label: 'Αναφορά ζημιάς', text: 'Ο Οδηγός αναφέρει ζημιά που σχετίζεται με τη στάθμευση στον επαγγελματικό χώρο ως εξής: [ΣΥΜΠΛΗΡΩΣΕ: διαδικασία και προθεσμία αναφοράς ζημιάς].' },
-          { label: 'Όρια ευθύνης', text: 'Για τη φύλαξη, τον παρκαδόρο και τα κλειδιά ευθύνεται ο Φορέας. [ΣΥΜΠΛΗΡΩΣΕ: όρια ευθύνης της Spotly και του Φορέα]. Η ενότητα 7 εξακολουθεί να ισχύει για όσα δεν ρυθμίζονται ειδικά εδώ.' },
+          { label: 'Αναφορά ζημιάς', text: 'Ο χρήστης ελέγχει το όχημα κατά την παραλαβή. Αν διαπιστώσει ζημιά, την αναφέρει πριν αποχωρήσει στον παρκαδόρο του χώρου και γραπτώς μέσω της εφαρμογής (Αναφορά/Βοήθεια), με φωτογραφίες, εντός 24 ωρών από την παραλαβή. Η Spotly διαβιβάζει την αναφορά στον Φορέα και διευκολύνει την επικοινωνία. Η αποκατάσταση γίνεται από τον Φορέα και την ασφάλισή του.' },
+          { label: 'Όρια ευθύνης', text: 'Η Spotly ενεργεί ως διαμεσολαβητής και δεν αναλαμβάνει τη φύλαξη του οχήματος. Την ευθύνη για τη φύλαξη, τον παρκαδόρο και τα κλειδιά φέρει ο Φορέας, σύμφωνα με τον νόμο και την ασφάλισή του. Η ευθύνη της Spotly περιορίζεται στο ποσό της χρέωσης υπηρεσίας της συγκεκριμένης κράτησης, εκτός από περιπτώσεις δόλου ή βαριάς αμέλειας, όπου ο περιορισμός δεν ισχύει κατά τον νόμο.' },
           { label: 'Κανόνες του χώρου', text: 'Κάθε χώρος μπορεί να εφαρμόζει δικούς του κανόνες λειτουργίας. Ο Οδηγός οφείλει να τους τηρεί. Οι κανόνες που γνωστοποιούνται για τον συγκεκριμένο χώρο κατά την κράτηση αποτελούν μέρος της κράτησης.' },
-          { label: 'Ακύρωση', text: 'Η ακύρωση ακολουθεί την ενότητα 3, εκτός αν πριν την πληρωμή εμφανίζεται διαφορετικός όρος για τον συγκεκριμένο χώρο. [ΣΥΜΠΛΗΡΩΣΕ: προθεσμία ακύρωσης επαγγελματικού χώρου, αν διαφέρει από την ενότητα 3].' },
+          { label: 'Ακύρωση', text: 'Η κράτηση σε επαγγελματικό χώρο μπορεί να ακυρωθεί δωρεάν μέχρι την παραλαβή του οχήματος από τον Φορέα (check-in), και η δέσμευση στην κάρτα αποδεσμεύεται. Αν ο χρήστης δεν εμφανιστεί εντός 1 ώρας από την έναρξη, η κράτηση ακυρώνεται αυτόματα χωρίς χρέωση. Μετά την παραλαβή του οχήματος χρεώνεται ο πραγματικός χρόνος στάθμευσης.' },
         ],
       },
       {
@@ -123,7 +123,7 @@ export const termsContent: Record<'el' | 'en', LegalDoc> = {
       {
         title: '12. Δέσμευση ποσού για στάθμευση χωρίς προκαθορισμένη λήξη',
         paragraphs: [
-          'Σε στάθμευση χωρίς προκαθορισμένη ώρα λήξης, δεσμεύεται στην κάρτα σας το ανώτατο ποσό [ΣΥΜΠΛΗΡΩΣΕ: ανώτατο ποσό δέσμευσης]. Με τη λήξη της στάθμευσης χρεώνεται ο πραγματικός χρόνος και το υπόλοιπο της δέσμευσης αποδεσμεύεται. Ο χρόνος αποδέσμευσης εξαρτάται από την τράπεζα που εξέδωσε την κάρτα και δεν τον ορίζει η Spotly.',
+          'Σε θέσεις Host δεσμεύεται η τιμή της επιλεγμένης διάρκειας και επιπλέον έως δύο ώρες για πιθανή υπέρβαση. Σε επαγγελματικούς χώρους δεσμεύεται έως η τιμή 24 ωρών του χώρου για την κατηγορία του οχήματος, συν τη χρέωση υπηρεσίας. Το ακριβές ποσό εμφανίζεται πριν την πληρωμή. Χρεώνεται μόνο ο πραγματικός χρόνος και το υπόλοιπο αποδεσμεύεται. Ο χρόνος αποδέσμευσης εξαρτάται από την τράπεζα που εξέδωσε την κάρτα και δεν τον ορίζει η Spotly.',
           'Η διεκπεραίωση της πληρωμής γίνεται μέσω του παρόχου της ενότητας 6.',
         ],
       },
@@ -144,7 +144,7 @@ export const termsContent: Record<'el' | 'en', LegalDoc> = {
         title: '15. Ωράριο χώρου',
         paragraphs: [
           'Κάθε επαγγελματικός χώρος έχει ωράριο λειτουργίας, το οποίο εμφανίζεται στην Πλατφόρμα. Ο Οδηγός οφείλει να παραλάβει το όχημά του πριν το κλείσιμο του χώρου.',
-          'Αν το όχημα δεν παραληφθεί πριν το κλείσιμο: [ΣΥΜΠΛΗΡΩΣΕ: συνέπειες αν το όχημα παραμείνει μετά το κλείσιμο].',
+          'Ο χρήστης ειδοποιείται περίπου 30 λεπτά πριν το κλείσιμο του χώρου. Αν το όχημα παραμείνει μετά το κλείσιμο, η παραλαβή γίνεται στο επόμενο ωράριο λειτουργίας και η χρέωση συνεχίζεται με βάση τον πραγματικό χρόνο, με ανώτατο ποσό ανά 24ωρο. Ποσό που υπερβαίνει τη δέσμευση χρεώνεται στην αποθηκευμένη κάρτα. Μετά από 48 ώρες η στάθμευση κλείνει αυτόματα και χρεώνεται ο χρόνος έως τότε.',
         ],
       },
     ],
@@ -177,7 +177,7 @@ export const termsContent: Record<'el' | 'en', LegalDoc> = {
       {
         title: '3. Bookings, Cancellations & Overstay Charges',
         bullets: [
-          { label: 'Free cancellation', text: 'Drivers may cancel a booking free of charge only within the first 10 minutes after it is created. After that window, cancellation is no longer possible.' },
+          { label: 'Free cancellation', text: 'Unless a different rule applies to professional facilities, Drivers may cancel a booking free of charge only within the first 10 minutes after it is created. After that window, cancellation is no longer possible.' },
           { label: 'Early departure', text: 'If the Driver leaves before the end of the booked time, the booking is ended and the remaining amount is credited to their Spotly Wallet for future bookings.' },
           { label: 'Overstay', text: 'If the Driver stays beyond the agreed time, an overstay charge equal to double the original rate is applied automatically for every 30 minutes of delay.' },
         ],
@@ -233,10 +233,10 @@ export const termsContent: Record<'el' | 'en', LegalDoc> = {
         bullets: [
           { label: 'Spotly’s role', text: 'For these bookings Spotly acts as an intermediary between the Driver and the Operator. Spotly does not itself operate the garage and does not undertake custody of the vehicle, the valet service, or possession of the keys.' },
           { label: 'Operator’s responsibility', text: 'The Operator is responsible for running the facility and, where those services are offered, for custody of the vehicle, the valet service, and handling of the keys.' },
-          { label: 'Damage report', text: 'The Driver reports damage related to parking at the professional facility as follows: [ΣΥΜΠΛΗΡΩΣΕ: damage-report process and deadline].' },
-          { label: 'Liability limits', text: 'The Operator is responsible for custody, the valet, and the keys. [ΣΥΜΠΛΗΡΩΣΕ: liability limits of Spotly and the Operator]. Section 7 continues to apply to matters not specifically regulated here.' },
+          { label: 'Damage report', text: 'The user checks the vehicle when collecting it. If they find damage, they report it to the facility’s valet before leaving, and in writing through the app (Report/Help), with photographs, within 24 hours of collection. Spotly forwards the report to the Operator and helps the parties communicate. Repairs are carried out by the Operator and the Operator’s insurer.' },
+          { label: 'Liability limits', text: 'Spotly acts as an intermediary and does not take custody of the vehicle. The Operator is responsible for custody, the valet, and the keys, under the law and the Operator’s insurance. Spotly’s liability is limited to the service fee for that booking, except in cases of wilful misconduct or gross negligence, where the law does not allow that limit.' },
           { label: 'Facility rules', text: 'Each facility may apply its own operating rules. The Driver must follow them. The rules communicated for that facility at the time of booking form part of the booking.' },
-          { label: 'Cancellation', text: 'Cancellation follows section 3, unless a different term for that facility is shown before payment. [ΣΥΜΠΛΗΡΩΣΕ: professional-facility cancellation deadline, if it differs from section 3].' },
+          { label: 'Cancellation', text: 'A booking at a professional facility may be cancelled free of charge until the Operator takes the vehicle (check-in), and the card authorization is released. If the user does not arrive within 1 hour of the start time, the booking is cancelled automatically with no charge. After the vehicle is taken, the charge is for the actual parking time.' },
         ],
       },
       {
@@ -249,7 +249,7 @@ export const termsContent: Record<'el' | 'en', LegalDoc> = {
       {
         title: '12. Card hold for parking without a set end time',
         paragraphs: [
-          'For parking without a predetermined end time, a maximum amount is authorized on your card [ΣΥΜΠΛΗΡΩΣΕ: maximum authorization amount]. When parking ends, you are charged for the actual time and the remainder of the authorization is released. The time until the release appears depends on the bank that issued the card, and Spotly does not set that time.',
+          'For Host spots, the authorization is the price of the selected duration plus up to two extra hours for a possible overrun. For professional facilities, the authorization is up to the facility’s 24-hour price for the vehicle category, plus the service fee. The exact amount is shown before payment. Only the actual time is charged, and the remainder is released. How long the release takes depends on the bank that issued the card, and Spotly does not set that time.',
           'Payment is processed through the provider in section 6.',
         ],
       },
@@ -270,7 +270,7 @@ export const termsContent: Record<'el' | 'en', LegalDoc> = {
         title: '15. Facility hours',
         paragraphs: [
           'Each professional facility has opening hours, which are shown on the Platform. The Driver must collect the vehicle before the facility closes.',
-          'If the vehicle is not collected before closing: [ΣΥΜΠΛΗΡΩΣΕ: consequences if the vehicle remains after closing].',
+          'The user is notified about 30 minutes before the facility closes. If the vehicle remains after closing, it is collected during the next opening hours, and charging continues based on the actual time, subject to a maximum amount per 24 hours. Any amount above the authorization is charged to the saved card. After 48 hours, parking closes automatically and the time up to then is charged.',
         ],
       },
     ],
