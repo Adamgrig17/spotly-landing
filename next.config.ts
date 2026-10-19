@@ -11,6 +11,11 @@ const nextConfig: NextConfig = {
         source: "/.well-known/apple-app-site-association",
         headers: [{ key: "Content-Type", value: "application/json" }],
       },
+      {
+        // HTML differs by device (mobile redirects, desktop does not).
+        source: "/promo/:slug",
+        headers: [{ key: "Cache-Control", value: "private, no-store" }],
+      },
     ];
   },
   async redirects() {
