@@ -1,12 +1,12 @@
 import type { Metadata } from 'next';
 
+import { getSeason, seasonalMarkPath } from '@/lib/season';
 import { loadSharedSpotCard } from './spot-card';
 import { SharedSpotOpen } from './shared-spot-open';
 
 const APP_STORE = 'https://apps.apple.com/gr/app/spotly/id6792035342';
 const PLAY_STORE = 'https://play.google.com/store/apps/details?id=com.spotly.mobile';
 const SITE = 'https://www.parkspotly.gr';
-const FALLBACK_IMAGE = `${SITE}/logo.png`;
 const SHARE_TITLE = 'Κλείσε αυτή τη θέση σε 10 δευτερόλεπτα';
 const SHARE_DESCRIPTION =
   'Ιδιωτικό πάρκινγκ, χωρίς ψάξιμο. Ανοίγεις την πόρτα από το κινητό και μπαίνεις κατευθείαν.';
@@ -19,7 +19,8 @@ export async function generateMetadata({
   params: Promise<{ id: string }>;
 }): Promise<Metadata> {
   const { id } = await params;
-  const card = await loadSharedSpotCard(id);
+  const [card, season] = await Promise.all([loadSharedSpotCard(id), getSeason()]);
+  const fallbackImage = `${SITE}${seasonalMarkPath(season)}`;
   const pageUrl = `${SITE}/s/${id}`;
   const image = card?.imageUrl
     ? {
@@ -29,7 +30,7 @@ export async function generateMetadata({
         alt: SHARE_TITLE,
         type: 'image/jpeg' as const,
       }
-    : { url: FALLBACK_IMAGE, alt: 'Spotly' };
+    : { url: fallbackImage, alt: 'Spotly' };
 
   return {
     title: SHARE_TITLE,
@@ -59,7 +60,8 @@ export default async function SharedSpotPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const card = await loadSharedSpotCard(id);
+  const [card, season] = await Promise.all([loadSharedSpotCard(id), getSeason()]);
+  const mark = seasonalMarkPath(season);
   const play = `${PLAY_STORE}&referrer=${encodeURIComponent(`spot_id=${id}`)}`;
   const photo = card?.imageUrl ? `/s/${id}/card.jpg` : null;
 
@@ -81,7 +83,7 @@ export default async function SharedSpotPage({
           <div className="relative flex h-full flex-col justify-between p-5">
             <div className="flex w-fit items-center gap-2.5 rounded-full bg-black/45 py-1.5 pr-3 pl-1.5 backdrop-blur-md">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/logo.png" alt="" className="h-8 w-8 rounded-full" />
+              <img src={mark} alt="" width={32} height={32} className="h-8 w-8 rounded-full" />
               <span className="text-sm font-semibold tracking-[0.22em]">SPOTLY</span>
             </div>
             <p className="w-fit rounded-full border border-[#00E676]/40 bg-black/55 px-3 py-1.5 text-xs font-semibold tracking-wide text-[#00E676] backdrop-blur-md">

@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { headers } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { detectPlatform, getPromo, SITE } from '@/lib/promo';
+import { getSeason, seasonalMarkPath } from '@/lib/season';
 import { PromoScreen } from './promo-screen';
 
 export const dynamic = 'force-dynamic';
@@ -44,5 +45,6 @@ export default async function PromoPage({ params }: Props) {
 
   const headerList = await headers();
   const platform = detectPlatform(headerList.get('user-agent') ?? '');
-  return <PromoScreen promo={promo} platform={platform} />;
+  const logoSrc = seasonalMarkPath(await getSeason());
+  return <PromoScreen promo={promo} platform={platform} logoSrc={logoSrc} />;
 }

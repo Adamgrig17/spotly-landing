@@ -1,50 +1,60 @@
 import type { Metadata, Viewport } from "next";
+import { BrandMarkProvider } from '@/components/brand-mark';
+import { getSeason, seasonalFaviconPath, seasonalMarkPath } from '@/lib/season';
 import { LanguageProvider } from './context/LanguageContext';
 import "./globals.css";
-// --- ΠΡΟΗΓΜΕΝΑ METADATA ΓΙΑ GOOGLE & SOCIAL MEDIA ---
-export const metadata: Metadata = {
-  title: "Spotly | Βρες Πάρκινγκ Σε 10 Δευτερόλεπτα",
-  description: "Η πρώτη και μοναδική πλατφόρμα που μετατρέπει τα κλειστά ιδιωτικά γκαράζ σε δικές σου θέσεις στάθμευσης. Κλείσε θέση εύκολα και γρήγορα.",
-  metadataBase: new URL('https://www.parkspotly.gr'),
-  alternates: {
-    canonical: '/',
-  },
-  icons: {
+
+function iconsFor(href: string): Metadata['icons'] {
+  return {
     icon: [
-      { url: '/icon.png', sizes: '32x32' },
-      { url: '/icon.png', sizes: '192x192', type: 'image/png' },
-      { url: '/icon.png', sizes: '512x512', type: 'image/png' },
+      { url: href, sizes: '32x32' },
+      { url: href, sizes: '192x192', type: 'image/png' },
+      { url: href, sizes: '512x512', type: 'image/png' },
     ],
     apple: [
-      { url: '/icon.png', sizes: '180x180', type: 'image/png' },
+      { url: href, sizes: '180x180', type: 'image/png' },
     ],
-  },
-  // Αυτό βοηθάει τη Google να καταλάβει ότι το site είναι App
-  appleWebApp: {
-    capable: true,
-    statusBarStyle: "default",
-    title: "Spotly",
-  },
-  openGraph: {
-    title: 'Spotly | Park Smart. Earn Easy.',
-    description: 'Κλείσε θέση σε ιδιωτικό γκαράζ, οπουδήποτε στην Ελλάδα, και άνοιξε την πόρτα από το κινητό σου. Έχεις γκαράζ που μένει άδειο; Βγάλε έσοδα από αυτό.',
-    url: 'https://www.parkspotly.gr',
-    siteName: 'Spotly',
-    images: [
-      {
-        url: '/og-image.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'Spotly — κλείσε θέση σε ιδιωτικό γκαράζ σε όλη την Ελλάδα',
-      },
-    ],
-    locale: 'el_GR',
-    type: 'website',
-  },
-  twitter: {
-    card: 'summary_large_image',
-  },
-};
+  };
+}
+
+// --- ΠΡΟΗΓΜΕΝΑ METADATA ΓΙΑ GOOGLE & SOCIAL MEDIA ---
+export async function generateMetadata(): Promise<Metadata> {
+  const icon = seasonalFaviconPath(await getSeason());
+  return {
+    title: "Spotly | Βρες Πάρκινγκ Σε 10 Δευτερόλεπτα",
+    description: "Η πρώτη και μοναδική πλατφόρμα που μετατρέπει τα κλειστά ιδιωτικά γκαράζ σε δικές σου θέσεις στάθμευσης. Κλείσε θέση εύκολα και γρήγορα.",
+    metadataBase: new URL('https://www.parkspotly.gr'),
+    alternates: {
+      canonical: '/',
+    },
+    icons: iconsFor(icon),
+    // Αυτό βοηθάει τη Google να καταλάβει ότι το site είναι App
+    appleWebApp: {
+      capable: true,
+      statusBarStyle: "default",
+      title: "Spotly",
+    },
+    openGraph: {
+      title: 'Spotly | Park Smart. Earn Easy.',
+      description: 'Κλείσε θέση σε ιδιωτικό γκαράζ, οπουδήποτε στην Ελλάδα, και άνοιξε την πόρτα από το κινητό σου. Έχεις γκαράζ που μένει άδειο; Βγάλε έσοδα από αυτό.',
+      url: 'https://www.parkspotly.gr',
+      siteName: 'Spotly',
+      images: [
+        {
+          url: '/og-image.jpg',
+          width: 1200,
+          height: 630,
+          alt: 'Spotly — κλείσε θέση σε ιδιωτικό γκαράζ σε όλη την Ελλάδα',
+        },
+      ],
+      locale: 'el_GR',
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+    },
+  };
+}
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -52,11 +62,12 @@ export const viewport: Viewport = {
   themeColor: "#121212",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const mark = seasonalMarkPath(await getSeason());
   return (
     <html lang="el">
       <head>
@@ -83,9 +94,11 @@ export default function RootLayout({
       </head>
       <body className="antialiased bg-[#121212]">
         {/* ΕΔΩ ΜΠΑΙΝΕΙ Ο LANGUAGE PROVIDER */}
-        <LanguageProvider>
-          {children}
-        </LanguageProvider>
+        <BrandMarkProvider src={mark}>
+          <LanguageProvider>
+            {children}
+          </LanguageProvider>
+        </BrandMarkProvider>
         <script
           dangerouslySetInnerHTML={{
             __html: `

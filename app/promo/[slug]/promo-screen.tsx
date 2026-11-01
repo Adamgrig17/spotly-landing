@@ -46,7 +46,15 @@ async function copyText(value: string): Promise<boolean> {
   }
 }
 
-export function PromoScreen({ promo, platform }: { promo: Promo; platform: Platform }) {
+export function PromoScreen({
+  promo,
+  platform,
+  logoSrc = '/logo.png',
+}: {
+  promo: Promo;
+  platform: Platform;
+  logoSrc?: string;
+}) {
   const target = promo.figure.value;
   const [shown, setShown] = useState(target);
   const countRef = useRef<HTMLSpanElement>(null);
@@ -136,7 +144,7 @@ export function PromoScreen({ promo, platform }: { promo: Promo; platform: Platf
     <main className="promo-stage">
       <Confetti />
       <Image
-        src="/logo.png"
+        src={logoSrc}
         alt="Spotly"
         width={64}
         height={64}
