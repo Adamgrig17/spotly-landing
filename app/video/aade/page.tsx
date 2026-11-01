@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { getSeason, seasonalMarkPath } from "@/lib/season";
 
 export const metadata: Metadata = {
   title: "Spotly — Η νέα καταχώριση θέσης",
@@ -6,7 +7,8 @@ export const metadata: Metadata = {
     "Δες ολόκληρη τη νέα ροή καταχώρισης θέσης στη Spotly, από τη διεύθυνση μέχρι την ψηφιακή υπογραφή.",
 };
 
-export default function UpdateVideoPage() {
+export default async function UpdateVideoPage() {
+  const mark = seasonalMarkPath(await getSeason());
   return (
     <main
       style={{
@@ -32,7 +34,7 @@ export default function UpdateVideoPage() {
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/logo.png"
+            src={mark}
             alt=""
             width={34}
             height={34}

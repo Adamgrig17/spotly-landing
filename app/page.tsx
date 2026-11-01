@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import logoImg from '../public/logo.png';
 import spotMascotImg from '../public/spot-mascot.png';
+import { useBrandMark } from '@/components/brand-mark';
 import { useLanguage } from './context/LanguageContext';
 import { Car, MapPin, Zap, ShieldCheck, ArrowRight, Smartphone, Key, Clock, Star, Wifi, Wallet, CheckCircle2, X, Calendar, ChevronDown, Mail, Phone, ChevronUp } from 'lucide-react';
 
@@ -448,6 +449,8 @@ const NeonBackgroundLine = () => (
 );
 
 export default function SpotlyLanding() {
+  const brandMark = useBrandMark();
+  const logo = brandMark === '/logo.png' ? logoImg : brandMark;
   const [isScrolled, setIsScrolled] = useState(false);
   const [showBackToTop, setShowBackToTop] = useState(false);
   const [hostEarnings, setHostEarnings] = useState(0);
@@ -705,7 +708,7 @@ export default function SpotlyLanding() {
             {/* Λογότυπο Spotly σε στυλ App Icon */}
             <div className="w-10 h-10 rounded-[10px] overflow-hidden border border-white/10 bg-[#0a0a0a] shadow-[0_0_15px_rgba(0,230,118,0.3)] group-hover:shadow-[0_0_25px_rgba(0,230,118,0.6)] transition-all duration-300 shrink-0">
               <Image 
-                src={logoImg} 
+                src={logo} 
                 alt="Spotly App Icon" 
                 width={40}
                 height={40}
@@ -1101,7 +1104,7 @@ export default function SpotlyLanding() {
             <div className="md:col-span-5 lg:col-span-5">
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-12 h-12 rounded-xl overflow-hidden border border-white/10 bg-[#0a0a0a] shadow-[0_0_20px_rgba(0,230,118,0.2)] shrink-0">
-                  <Image src={logoImg} alt="Spotly App Icon" width={48} height={48} sizes="48px" className="w-full h-full object-cover scale-[1.02]" />
+                  <Image src={logo} alt="Spotly App Icon" width={48} height={48} sizes="48px" className="w-full h-full object-cover scale-[1.02]" />
                 </div>
                 <span className="font-black tracking-tighter text-3xl text-white">Spotly<sup className="text-sm text-[#00E676] font-bold ml-1">™</sup></span>
               </div>
@@ -1240,7 +1243,7 @@ export default function SpotlyLanding() {
               <div className="absolute inset-0 bg-[#00E676] opacity-20 blur-[30px] rounded-full animate-pulse"></div>
               <div className="relative z-10 w-full h-full rounded-[28px] overflow-hidden border border-white/10 bg-[#0a0a0a] shadow-[0_0_30px_rgba(0,230,118,0.4)]">
                 <Image 
-                  src={logoImg} 
+                  src={logo} 
                   alt="Spotly App Icon" 
                   width={112}
                   height={112}

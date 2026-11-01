@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { getSeason, seasonalMarkPath } from "@/lib/season";
 
 export const metadata: Metadata = {
   title: "Spotly 1.0.5 — Η νέα καταχώριση",
@@ -7,7 +8,8 @@ export const metadata: Metadata = {
   openGraph: { images: ["/email/v105-video-poster.png"] },
 };
 
-export default function Page() {
+export default async function Page() {
+  const mark = seasonalMarkPath(await getSeason());
   return (
     <main
       style={{
@@ -27,7 +29,7 @@ export default function Page() {
       <div style={{ display: "flex", alignItems: "center", gap: 11 }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="/logo.png"
+          src={mark}
           alt=""
           width={34}
           height={34}
