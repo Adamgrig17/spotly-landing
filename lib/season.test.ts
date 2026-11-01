@@ -1,3 +1,4 @@
+// @ts-nocheck — Node's runner needs a .ts import, which this tsconfig rejects.
 import assert from 'node:assert/strict';
 import { afterEach, describe, it } from 'node:test';
 
