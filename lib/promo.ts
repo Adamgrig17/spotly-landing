@@ -37,9 +37,9 @@ const PROMOS: Record<Promo['slug'], Promo> = {
   },
   spartak: {
     slug: 'spartak',
-    title: 'Συγχαρητήρια! −20% στο Spartak Parking',
-    subtitle: 'χαμηλότερη τιμή μόνο μέσα από το app',
-    figure: { kind: 'percent', value: 20 },
+    title: '−10% στο Spartak Parking',
+    subtitle: '−10% στο app · −5% στο web',
+    figure: { kind: 'percent', value: 10 },
   },
 };
 
