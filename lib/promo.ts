@@ -2,7 +2,7 @@
 //   https://www.parkspotly.gr/promo/welcome3
 //   https://www.parkspotly.gr/promo/spartak
 // Slugs are matched case-insensitively. parkspotly.gr (no www) 307s to www
-// at the Vercel domain layer and keeps the path.
+// and keeps the path, except /.well-known (see middleware.ts).
 
 export const SITE = 'https://www.parkspotly.gr';
 
