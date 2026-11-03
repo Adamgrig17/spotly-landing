@@ -12,6 +12,10 @@ const nextConfig: NextConfig = {
         headers: [{ key: "Content-Type", value: "application/json" }],
       },
       {
+        source: "/.well-known/assetlinks.json",
+        headers: [{ key: "Content-Type", value: "application/json" }],
+      },
+      {
         // HTML differs by device (mobile redirects, desktop does not).
         source: "/promo/:slug",
         headers: [{ key: "Cache-Control", value: "private, no-store" }],

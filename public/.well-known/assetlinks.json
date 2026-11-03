@@ -1,0 +1,13 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.spotly.mobile",
+      "sha256_cert_fingerprints": [
+        "BD:57:5F:39:21:FC:1B:48:44:26:C9:78:8A:B6:57:DD:F3:77:C0:F5:41:14:4C:96:32:64:61:95:B5:48:14:4D",
+        "97:79:B2:7D:B9:40:61:31:6E:A6:15:C4:BA:87:D4:98:D0:1F:53:25:8C:07:05:58:CD:64:3D:9B:1B:BD:27:DF"
+      ]
+    }
+  }
+]
