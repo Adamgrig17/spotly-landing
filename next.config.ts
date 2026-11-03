@@ -1,6 +1,11 @@
 import type { NextConfig } from "next";
 
+import { APEX_REDIRECT_SOURCE } from "./lib/apexRedirect";
+
 const nextConfig: NextConfig = {
+  // The built-in slash redirect is a relative 308, so /promo/spartak/ on the
+  // apex would stay on parkspotly.gr. The host redirect below handles it.
+  skipTrailingSlashRedirect: true,
   experimental: {
     inlineCss: true,
     optimizePackageImports: ['lucide-react'],
@@ -32,6 +37,19 @@ const nextConfig: NextConfig = {
       {
         source: "/host-guide/:code",
         destination: "https://api.parkspotly.gr/host-guide/:code",
+        permanent: false,
+      },
+      {
+        // /.well-known stays on the apex for app links.
+        source: APEX_REDIRECT_SOURCE,
+        has: [{ type: "host", value: "parkspotly.gr" }],
+        destination: "https://www.parkspotly.gr/:path",
+        permanent: false,
+      },
+      {
+        source: "/",
+        has: [{ type: "host", value: "parkspotly.gr" }],
+        destination: "https://www.parkspotly.gr/",
         permanent: false,
       },
     ];

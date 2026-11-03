@@ -2,7 +2,7 @@
 import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
 
-import { apexRedirectUrl, isWellKnownPath } from './apexRedirect.ts';
+import { apexRedirectUrl, isWellKnownPath, redirectHost, slashlessRedirect } from './apexRedirect.ts';
 
 describe('apexRedirectUrl', () => {
   it('sends the apex site to www and keeps the query', () => {
@@ -24,6 +24,31 @@ describe('apexRedirectUrl', () => {
     assert.equal(
       apexRedirectUrl('parkspotly.gr', '/.well-known/apple-app-site-association', ''),
       null,
+    );
+  });
+
+  it('sends a trailing slash straight to the www URL without the slash', () => {
+    assert.equal(
+      apexRedirectUrl('parkspotly.gr', '/promo/spartak/', '?x=1'),
+      'https://www.parkspotly.gr/promo/spartak?x=1',
+    );
+    assert.equal(
+      slashlessRedirect('www.parkspotly.gr', '/promo/spartak/', '?x=1'),
+      'https://www.parkspotly.gr/promo/spartak?x=1',
+    );
+    assert.equal(slashlessRedirect('www.parkspotly.gr', '/promo/spartak'), null);
+    assert.equal(slashlessRedirect('parkspotly.gr', '/.well-known/assetlinks.json/'), null);
+  });
+
+  it('uses the apex when the platform host is the deployment and the forwarded host is apex', () => {
+    assert.equal(
+      redirectHost('spotly-landing.vercel.app', 'parkspotly.gr'),
+      'parkspotly.gr',
+    );
+    assert.equal(redirectHost('www.parkspotly.gr', 'parkspotly.gr'), 'www.parkspotly.gr');
+    assert.equal(
+      apexRedirectUrl(redirectHost('spotly-landing.vercel.app', 'parkspotly.gr'), '/promo/spartak'),
+      'https://www.parkspotly.gr/promo/spartak',
     );
   });
 
