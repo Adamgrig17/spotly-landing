@@ -31,7 +31,7 @@ export const termsContent: Record<'el' | 'en', LegalDoc> = {
     badge: 'Νομικά Έγγραφα',
     title1: 'Όροι',
     title2: 'Χρήσης',
-    updated: 'Τελευταία Ενημέρωση: 18 Οκτωβρίου 2026',
+    updated: 'Τελευταία Ενημέρωση: 20 Νοεμβρίου 2026',
     sections: [
       {
         title: '1. Η Εταιρεία & Περιγραφή της Υπηρεσίας',
@@ -51,10 +51,10 @@ export const termsContent: Record<'el' | 'en', LegalDoc> = {
       {
         title: '3. Κρατήσεις, Ακυρώσεις & Χρεώσεις Καθυστέρησης',
         bullets: [
-          { label: 'Δωρεάν ακύρωση', text: 'Για θέσεις Host, μπορείς να ακυρώσεις δωρεάν μια κράτηση μέσα σε 10 λεπτά από τη στιγμή που την έκανες. Επιπλέον, μια προγραμματισμένη κράτηση ακυρώνεται δωρεάν έως 1 ώρα πριν την ώρα έναρξης. Αν ακυρώσεις μέσα στην τελευταία ώρα πριν την έναρξη, χρεώνεται η τιμή της κράτησης· το επιπλέον ποσό που δεσμεύεται για πιθανή υπέρβαση χρόνου δεν χρεώνεται ποτέ σε ακύρωση. Μετά την έναρξη, η κράτηση μπορεί να ακυρωθεί δωρεάν μόνο μέσα στα πρώτα 10 λεπτά. Για επαγγελματικούς χώρους ισχύει η ενότητα 10.' },
+          { label: 'Δωρεάν ακύρωση', text: 'Για θέσεις Host, μπορείς να ακυρώσεις δωρεάν μια κράτηση μέσα σε 10 λεπτά από τη στιγμή που την έκανες. Επιπλέον, μια προγραμματισμένη κράτηση ακυρώνεται δωρεάν έως 1 ώρα πριν την ώρα έναρξης. Αν ακυρώσεις μέσα στην τελευταία ώρα πριν την έναρξη, χρεώνεται η τιμή της κράτησης. Κατά την κράτηση δεν δεσμεύεται επιπλέον ποσό για υπέρβαση. Μετά την έναρξη, η κράτηση μπορεί να ακυρωθεί δωρεάν μόνο μέσα στα πρώτα 10 λεπτά. Για επαγγελματικούς χώρους ισχύει η ενότητα 10.' },
           { label: 'Πακέτα', text: 'Για πακέτα ημέρας, εβδομάδας ή μήνα, η δωρεάν ακύρωση ισχύει όταν απομένουν πάνω από 48 ώρες πριν την έναρξη και γίνεται πλήρης επιστροφή (100%). Στις 48 ώρες πριν την έναρξη και πιο κοντά, δεν παρέχεται επιστροφή (0%) και χρεώνεται η τιμή της κράτησης. Ισχύει επίσης η δωρεάν ακύρωση μέσα σε 10 λεπτά από τη στιγμή της κράτησης.' },
-          { label: 'Πρόωρη αποχώρηση', text: 'Αν ο Οδηγός αποχωρήσει πριν τη λήξη του χρόνου κράτησης, η κράτηση τερματίζεται και το υπόλοιπο ποσό πιστώνεται στο Spotly Wallet του για μελλοντικές κρατήσεις.' },
-          { label: 'Υπέρβαση χρόνου', text: 'Σε περίπτωση παραμονής πέραν του συμφωνημένου χρόνου, επιβάλλεται αυτόματα χρέωση υπερημερίας ίση με το διπλάσιο της αρχικής τιμής για κάθε 30 λεπτά καθυστέρησης.' },
+          { label: 'Πρόωρη αποχώρηση', text: 'Αν ο Οδηγός τερματίσει την κράτηση πριν τη λήξη, χρεώνεται η τιμή της κράτησης. Το διάστημα που δεν χρησιμοποιήθηκε δεν επιστρέφεται.' },
+          { label: 'Υπέρβαση χρόνου', text: 'Μετά τη λήξη υπάρχει περίοδος χάριτος: 10 λεπτά για ωριαία κράτηση, 30 λεπτά για πακέτο ημέρας και 60 λεπτά για πακέτο εβδομάδας ή μήνα. Μετά τη χάρη, κάθε ξεκινημένο μισάωρο χρεώνεται με την ωριαία τιμή της θέσης, μαζί με τον ΦΠΑ. Το πρώτο μισάωρο δεσμεύεται στον ίδιο τρόπο πληρωμής. Η υπόλοιπη υπέρβαση χρεώνεται στον ίδιο τρόπο όταν η κράτηση κλείσει. Οι χρεώσεις υπέρβασης σταματούν στις 24 ώρες, και η κράτηση μένει ανοιχτή ώσπου να την κλείσει ο Οδηγός ή η Spotly. Αν μια χρέωση δεν ολοκληρωθεί, το ποσό μένει οφειλή του Οδηγού και δεν μπορεί να κάνει νέα κράτηση μέχρι να το πληρώσει ή να διαγραφεί. Ο Host πληρώνεται το μερίδιό του μόνο αφού το ποσό εισπραχθεί.' },
         ],
       },
       {
@@ -124,7 +124,7 @@ export const termsContent: Record<'el' | 'en', LegalDoc> = {
       {
         title: '12. Δέσμευση ποσού για στάθμευση χωρίς προκαθορισμένη λήξη',
         paragraphs: [
-          'Σε θέσεις Host δεσμεύεται η τιμή της επιλεγμένης διάρκειας και επιπλέον έως δύο ώρες για πιθανή υπέρβαση. Σε επαγγελματικούς χώρους δεσμεύεται έως η τιμή 24 ωρών του χώρου για την κατηγορία του οχήματος, συν τη χρέωση υπηρεσίας. Το ακριβές ποσό εμφανίζεται πριν την πληρωμή. Χρεώνεται μόνο ο πραγματικός χρόνος και το υπόλοιπο αποδεσμεύεται. Ο χρόνος αποδέσμευσης εξαρτάται από την τράπεζα που εξέδωσε την κάρτα και δεν τον ορίζει η Spotly.',
+          'Σε θέση Host, για κράτηση έως 120 ώρες, δεσμεύεται μόνο η τιμή της κράτησης. Για μεγαλύτερη διάρκεια η τιμή εισπράττεται κατά την κράτηση. Η υπέρβαση δεν δεσμεύεται κατά την κράτηση και χρεώνεται όπως ορίζει η ενότητα 3. Σε επαγγελματικούς χώρους δεσμεύεται έως η τιμή 24 ωρών του χώρου για την κατηγορία του οχήματος, συν τη χρέωση υπηρεσίας. Το ακριβές ποσό εμφανίζεται πριν την πληρωμή. Χρεώνεται μόνο ο πραγματικός χρόνος και το υπόλοιπο αποδεσμεύεται. Ο χρόνος αποδέσμευσης εξαρτάται από την τράπεζα που εξέδωσε την κάρτα και δεν τον ορίζει η Spotly.',
           'Η διεκπεραίωση της πληρωμής γίνεται μέσω του παρόχου της ενότητας 6.',
         ],
       },
@@ -158,7 +158,7 @@ export const termsContent: Record<'el' | 'en', LegalDoc> = {
     badge: 'Legal Documents',
     title1: 'Terms of',
     title2: 'Use',
-    updated: 'Last Updated: 18 October 2026',
+    updated: 'Last Updated: 20 November 2026',
     sections: [
       {
         title: '1. The Company & Service Description',
@@ -178,10 +178,10 @@ export const termsContent: Record<'el' | 'en', LegalDoc> = {
       {
         title: '3. Bookings, Cancellations & Overstay Charges',
         bullets: [
-          { label: 'Free cancellation', text: 'For Host spots, you can cancel a booking free of charge within 10 minutes of making it. In addition, a scheduled booking can be cancelled free of charge up to 1 hour before the start time. If you cancel within the last hour before the start, the booking price is charged; the extra amount held for a possible overrun is never charged on cancellation. After the start time, the booking can be cancelled free of charge only within the first 10 minutes. Section 10 applies to professional facilities.' },
+          { label: 'Free cancellation', text: 'For Host spots, you can cancel a booking free of charge within 10 minutes of making it. In addition, a scheduled booking can be cancelled free of charge up to 1 hour before the start time. If you cancel within the last hour before the start, the booking price is charged. No extra amount is authorized at booking for overtime. After the start time, the booking can be cancelled free of charge only within the first 10 minutes. Section 10 applies to professional facilities.' },
           { label: 'Packages', text: 'For day, week, or month packages, free cancellation applies when more than 48 hours remain before the start time, and the refund is full (100%). At 48 hours before the start and closer, there is no refund (0%) and the booking price is charged. Free cancellation within 10 minutes of making the booking also applies.' },
-          { label: 'Early departure', text: 'If the Driver leaves before the end of the booked time, the booking is ended and the remaining amount is credited to their Spotly Wallet for future bookings.' },
-          { label: 'Overstay', text: 'If the Driver stays beyond the agreed time, an overstay charge equal to double the original rate is applied automatically for every 30 minutes of delay.' },
+          { label: 'Early departure', text: 'If the Driver ends the booking before the booked time ends, the booking price is charged. Unused time is not refunded.' },
+          { label: 'Overstay', text: 'After the booked time ends there is a grace period: 10 minutes for an hourly booking, 30 minutes for a day package, and 60 minutes for a week or month package. After grace, each started half hour is charged at the spot’s hourly price, including VAT. The first half hour is authorized on the same payment method. Any further overtime is charged to that method when the booking ends. Overtime charges stop after 24 hours, and the booking stays open until the Driver or Spotly ends it. If a charge does not go through, the amount stays owed by the Driver, who cannot make a new booking until it is paid or written off. The Host is paid their share only after the amount is collected.' },
         ],
       },
       {
@@ -251,7 +251,7 @@ export const termsContent: Record<'el' | 'en', LegalDoc> = {
       {
         title: '12. Card hold for parking without a set end time',
         paragraphs: [
-          'For Host spots, the authorization is the price of the selected duration plus up to two extra hours for a possible overrun. For professional facilities, the authorization is up to the facility’s 24-hour price for the vehicle category, plus the service fee. The exact amount is shown before payment. Only the actual time is charged, and the remainder is released. How long the release takes depends on the bank that issued the card, and Spotly does not set that time.',
+          'For a Host spot, a booking of up to 120 hours authorizes only the booking price. A longer booking is charged at the time of booking. Overtime is not authorized at booking and is charged as section 3 describes. For professional facilities, the authorization is up to the facility’s 24-hour price for the vehicle category, plus the service fee. The exact amount is shown before payment. Only the actual time is charged, and the remainder is released. How long the release takes depends on the bank that issued the card, and Spotly does not set that time.',
           'Payment is processed through the provider in section 6.',
         ],
       },
